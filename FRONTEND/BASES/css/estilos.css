@@ -1,0 +1,96 @@
+:root {
+    --color-oscuro: black;
+    --color-claro: white;
+    --color-enlace: rgb(79, 79, 218);
+
+    --fuente: Verdana, Geneva, Tahoma, sans-serif;
+    --fuente-titulo: Arial, Helvetica, sans-serif;
+
+    --margen: 0.5rem;
+
+    --tamano-letra-menu: 1.2rem;
+}
+
+html {
+    font-size: 20px;
+}
+
+body {
+    font-family: var(--fuente);
+
+    margin: 0;
+}
+
+header {
+    background-color: var(--color-oscuro);
+    color: var(--color-claro);
+    
+    padding: var(--margen);
+    text-align: center;
+    
+    & h1 {
+        margin: 0;
+    }
+}
+
+body>nav {
+    background-color: var(--color-oscuro);
+    
+    padding: var(--margen);
+    text-align: center;
+    
+    & ul {
+        list-style: none;
+
+        padding: 0;
+    }
+    
+    & a {
+        display: inline-block;
+
+        color: var(--color-claro);
+        margin: 0 var(--margen);
+
+        padding: var(--margen);
+
+        font-size: var(--tamano-letra-menu);
+
+        &:hover {
+            text-decoration: none;
+
+            background-color: var(--color-claro);
+            color: var(--color-oscuro);
+
+        }
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fuente-titulo);
+}
+
+a {
+    color: var(--color-enlace);
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+pre {
+    overflow: auto;
+}
+
+img, audio, video, iframe {
+    border: 0;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
+
+main {
+    padding: var(--margen);
+}
