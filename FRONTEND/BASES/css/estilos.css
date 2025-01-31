@@ -2,7 +2,11 @@
 
 /* TIPOS DE LETRA */
 
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Space+Mono:wght@300..700&display=swap');
+@import url('fonts.css');
+
+/* ICONOS FONTAWESOME */
+
+@import url('all.min.css');
 
 /* VARIABLES */
 
@@ -23,7 +27,7 @@
 
     --fuente: "Roboto Flex", Verdana, Geneva, Tahoma, sans-serif;
     --fuente-titulo: "Anonymous Pro", Verdana, Geneva, Tahoma, sans-serif;
-    --fuente-codigo: "Space Grotesk", 'Consolas', monospace;
+    --fuente-codigo: "Space Mono", 'Consolas', monospace;
 
     --margen: 0.5rem;
     --margen-grande: calc(var(--margen) * 2);
@@ -101,6 +105,7 @@ h4,
 h5,
 h6 {
     font-family: var(--fuente-titulo);
+    width: 100%;
 }
 
 p {
@@ -234,7 +239,10 @@ dd {
     margin: 0 0 var(--margen-grande);
 }
 
-fieldset, input, button, select {
+fieldset,
+input:not([type=image]),
+button,
+select {
     border: var(--borde);
     border-radius: var(--redondeado);
 
@@ -320,27 +328,53 @@ footer {
 
     padding: var(--margen);
     text-align: center;
+
+    & #redes-sociales {
+        list-style: none;
+
+        padding: 0;
+
+        display: flex;
+
+        justify-content: center;
+
+        & a {
+            color: var(--color-claro);
+
+            padding: var(--margen);
+
+            &:hover {
+                color: var(--color-secundario);
+            }
+        }
+    }
 }
 
 #arriba {
     position: fixed;
 
-    bottom: var(--margen-grande);
+    bottom: calc(var(--margen-grande) * 4);
     right: var(--margen-grande);
 
     & a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         background-color: var(--color-secundario-claro);
         color: var(--color-oscuro);
 
         padding: var(--margen);
 
-        border-radius: var(--redondeado);
+        width: 2rem;
+        height: 2rem;
+
+        border-radius: 50%;
         border: var(--borde);
         box-shadow: .25rem .25rem .5rem rgba(0, 0, 0, 0.436);
 
-        display: block;
-
-        &::before, &::after {
+        &::before,
+        &::after {
             content: '';
         }
 
@@ -348,5 +382,99 @@ footer {
             background-color: var(--color-secundario);
             text-decoration: none;
         }
+    }
+}
+
+@media (min-width: 768px) {
+    body>nav {
+        position: sticky;
+        top: 0;
+
+        z-index: 10000;
+
+        & ul {
+            display: flex;
+            flex-wrap: wrap;
+
+            justify-content: center;
+        }
+    }
+
+    main {
+        padding: var(--margen-grande) calc(var(--margen-grande) * 2);
+    }
+
+    article {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    section {
+        scroll-margin-top: 9rem;
+
+        width: 100%;
+    }
+
+    #parrafos {
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: var(--margen);
+
+        &>*:not(h3) {
+            width: calc(50% - var(--margen)/2);
+        }
+
+        & pre {
+            &:first-of-type {
+                width: calc(75% - var(--margen)/2);
+
+                font-size: 90%;
+            }
+            
+            &:last-of-type {
+                width: calc(25% - var(--margen)/2);
+            }
+        }
+    }
+
+    #enlaces {
+        width: 30%;
+    }
+
+    #listas {
+        width: 70%;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: var(--margen);
+    }
+
+    #formularios {
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: var(--margen);
+
+        & form {
+            width: calc(50% - var(--margen)/2);
+        }
+    }
+
+    aside ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    footer {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #arriba {
+        display: none;
     }
 }
