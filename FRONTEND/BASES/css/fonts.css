@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Roboto Flex';
+    src: url('../fonts/Roboto_Flex/RobotoFlex-VariableFont_GRAD\,XOPQ\,XTRA\,YOPQ\,YTAS\,YTDE\,YTFI\,YTLC\,YTUC\,opsz\,slnt\,wdth\,wght.ttf');
+}
+
+@font-face {
+    font-family: 'Anonymous Pro';
+    src: url('../fonts/Anonymous_Pro/AnonymousPro-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    src: url('../fonts/Space_Mono/SpaceMono-Regular.ttf');
+}

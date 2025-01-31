@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+/* TIPOS DE LETRA */
+
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Space+Mono:wght@300..700&display=swap');
+
 /* VARIABLES */
 
 :root {
@@ -17,9 +21,9 @@
     --color-secundario-claro: hsl(var(--tono-secundario), var(--saturacion-secundario), calc(var(--luminosidad-secundario) + var(--separacion-secundario)));
     --color-secundario-oscuro: hsl(var(--tono-secundario), var(--saturacion-secundario), calc(var(--luminosidad-secundario) - var(--separacion-secundario)));
 
-    --fuente: Verdana, Geneva, Tahoma, sans-serif;
-    --fuente-titulo: Arial, Helvetica, sans-serif;
-    --fuente-codigo: 'Consolas', monospace;
+    --fuente: "Roboto Flex", Verdana, Geneva, Tahoma, sans-serif;
+    --fuente-titulo: "Anonymous Pro", Verdana, Geneva, Tahoma, sans-serif;
+    --fuente-codigo: "Space Grotesk", 'Consolas', monospace;
 
     --margen: 0.5rem;
     --margen-grande: calc(var(--margen) * 2);
