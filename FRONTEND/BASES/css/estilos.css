@@ -680,3 +680,72 @@ footer {
         }
     }
 }
+
+@media (min-width: 2560px) {
+    article:first-of-type {
+        grid-template-columns: 2fr 1fr 1.5fr;
+
+        grid-template-areas:
+        "titulo-html titulo-html titulo-html"
+        "enlaces     enlaces     enlaces    "
+        "parrafos    parrafos    listas     "
+        "parrafos    parrafos    tablas     "
+        "formularios multimedia  multimedia "
+        ;
+    }
+
+    #enlaces ul {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    #multimedia {
+        display: grid;
+        gap: var(--margen-grande);
+
+        grid-template-columns: repeat(6, 1fr);
+
+        grid-template-areas:
+        "titulo-multimedia titulo-multimedia titulo-multimedia titulo-multimedia titulo-multimedia titulo-multimedia      "
+        "audio             audio             audio             audio             audio             audio                  "
+        "video             video             video             youtube           youtube           youtube                "
+        "mapa              mapa              soundcloud        soundcloud        imagen            imagen                 "
+        ;
+
+        & h3 {
+            grid-area: titulo-multimedia;
+        }
+
+        & img {
+            grid-area: imagen;
+        }
+
+        & audio {
+            grid-area: audio;
+        }
+
+        & video {
+            grid-area: video;
+        }
+
+        & .proporcion:nth-of-type(1) {
+            grid-area: mapa;
+        }
+
+        & .proporcion:nth-of-type(2) {
+            grid-area: soundcloud;
+        }
+
+        & .proporcion:nth-of-type(3) {
+            grid-area: youtube;
+        }
+    }
+
+    #formularios {
+        flex-direction: row;
+
+        & form {
+            width: calc(50% - var(--margen) / 2);
+        }
+    }
+}
