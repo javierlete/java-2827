@@ -232,7 +232,7 @@ main {
 
 dt {
     font-weight: bold;
-    margin: var(--margen) 0;
+    margin: 0 0 var(--margen);
 }
 
 dd {
@@ -431,7 +431,7 @@ footer {
 
                 font-size: 90%;
             }
-            
+
             &:last-of-type {
                 width: calc(25% - var(--margen)/2);
             }
@@ -447,6 +447,8 @@ footer {
 
         display: flex;
         flex-wrap: wrap;
+
+        justify-content: space-between;
 
         gap: var(--margen);
     }
@@ -476,5 +478,147 @@ footer {
 
     #arriba {
         display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    body {
+        display: flex;
+        flex-wrap: wrap;
+
+        align-items: stretch;
+
+        &>* {
+            width: 100%;
+        }
+
+        &>header {
+            position: sticky;
+            top: 0;
+
+            width: auto;
+        }
+
+        &>nav {
+            flex-grow: 1;
+
+            width: auto;
+
+            padding: 0;
+            
+            & ul {
+                justify-content: end;
+            }
+
+            & a {
+                padding: 0;
+                margin: 0;
+            }
+        }
+    }
+
+    article:first-of-type {
+        display: grid;
+        gap: var(--margen-grande);
+
+        align-items: start;
+
+        grid-template-columns: 1.5fr 1.5fr 3fr 3fr;
+
+        grid-template-areas:
+            "titulo-html  titulo-html  titulo-html  titulo-html  "
+            "parrafos     parrafos     parrafos     parrafos     "
+            "enlaces      listas       listas       tablas       "
+            "enlaces      listas       listas       tablas       "
+            "formularios  formularios  multimedia   multimedia   "
+        ;
+
+        &>section {
+            width: 100% !important;
+        }
+
+        & h2 {
+            grid-area: titulo-html;
+        }
+
+        & #parrafos {
+            grid-area: parrafos;
+        }
+
+        & #enlaces {
+            grid-area: enlaces;
+        }
+
+        & #listas {
+            grid-area: listas;
+        }
+
+        & #tablas {
+            grid-area: tablas;
+        }
+
+        & #multimedia {
+            grid-area: multimedia;
+        }
+
+        & #formularios {
+            grid-area: formularios;
+        }
+    }
+
+    #parrafos {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        &>*:not(h3),
+        &>pre:first-of-type,
+        &>pre:last-of-type {
+            width: 100%;
+        }
+
+        & h3 {
+            grid-column-end: span 3;
+        }
+
+        & p:nth-of-type(2) {
+            grid-row-start: 3;
+        }
+
+        & p:nth-of-type(3),
+        & p:nth-of-type(4) {
+            grid-row-end: span 2;
+        }
+
+        & pre:last-of-type {
+            grid-row-start: 4;
+            grid-column-start: 3;
+        }
+
+        & pre:first-of-type {
+            grid-column-end: span 3;
+        }
+    }
+
+    #listas {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        & h3 {
+            grid-column-end: span 2;
+        }
+
+        & ol {
+            grid-row-start: 3;
+        }
+
+        & dl {
+            grid-row-end: span 2;
+        }
+    }
+
+    #formularios form {
+        width: 100%;
     }
 }
