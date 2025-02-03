@@ -505,7 +505,7 @@ footer {
             width: auto;
 
             padding: 0;
-            
+
             & ul {
                 justify-content: end;
             }
@@ -523,14 +523,14 @@ footer {
 
         align-items: start;
 
-        grid-template-columns: 1.5fr 1.5fr 3fr 3fr;
+        grid-template-columns: 1.5fr 4.5fr 3fr;
 
         grid-template-areas:
-            "titulo-html  titulo-html  titulo-html  titulo-html  "
-            "parrafos     parrafos     parrafos     parrafos     "
-            "enlaces      listas       listas       tablas       "
-            "enlaces      listas       listas       tablas       "
-            "formularios  formularios  multimedia   multimedia   "
+            "titulo-html  titulo-html  titulo-html  "
+            "parrafos     parrafos     parrafos     "
+            "enlaces      listas       tablas       "
+            "enlaces      listas       tablas       "
+            "formularios  multimedia   multimedia   "
         ;
 
         &>section {
@@ -620,5 +620,63 @@ footer {
 
     #formularios form {
         width: 100%;
+    }
+}
+
+@media (min-width: 1440px) {
+    main {
+        width: 90%;
+    }
+
+    article:first-of-type {
+        grid-template-columns: 9fr 5fr;
+
+        grid-template-areas:
+            "titulo-html  titulo-html  "
+            "parrafos     enlaces      "
+            "parrafos     listas       "
+            "formularios  multimedia   "
+            "tablas       multimedia   "
+        ;
+    }
+
+    #formularios {
+        & form div {
+            display: flex;
+
+            align-items: baseline;
+
+            gap: var(--margen);
+        }
+
+        & .textareas {
+            flex-wrap: wrap;
+        }
+
+        & form:first-of-type label {
+            width: 16rem;
+        }
+
+        & form:last-of-type label {
+            width: 8rem;
+        }
+
+        & .opciones {
+            & label {
+                width: auto !important;
+            }
+
+            & input {
+                width: auto !important;
+            }
+        }
+    }
+
+    aside {
+        width: 10%;
+
+        & ul {
+            flex-direction: column;
+        }
     }
 }
