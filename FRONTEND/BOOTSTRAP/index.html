@@ -81,7 +81,7 @@
             <section id="enlaces">
                 <h3>Enlaces</h3>
 
-                <ul class="list-unstyled">
+                <ul class="list-unstyled d-sm-flex justify-content-between">
                     <li><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="https://www.google.es">Enlace absoluto</a></li>
                     <li><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="pagina2.html">Enlace relativo</a></li>
                     <li><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="#parrafos">Interno</a></li>
@@ -93,35 +93,35 @@
             <section id="listas">
                 <h3>Listas</h3>
 
-                <ul>
-                    <li>Elemento 1</li>
-                    <li>Elemento 2</li>
-                    <li>Elemento 3</li>
-                    <li>Elemento 4</li>
-                </ul>
-
-                <ol>
-                    <li>Elemento 1</li>
-                    <li>Elemento 2
-                        <ol>
-                            <li>Elemento 2.1</li>
-                            <li>Elemento 2.2</li>
-                        </ol>
-                    </li>
-                    <li>Elemento 3</li>
-                    <li>Elemento 4</li>
-                </ol>
-
-                <dl>
-                    <dt>Elemento 1</dt>
-                    <dd>Descripción 1</dd>
-                    <dt>Elemento 2</dt>
-                    <dd>Descripción 2</dd>
-                    <dt>Elemento 3</dt>
-                    <dd>Descripción 3</dd>
-                    <dt>Elemento 4</dt>
-                    <dd>Descripción 4</dd>
-                </dl>
+                <div class="d-sm-flex justify-content-between">
+                    <ul>
+                        <li>Elemento 1</li>
+                        <li>Elemento 2</li>
+                        <li>Elemento 3</li>
+                        <li>Elemento 4</li>
+                    </ul>
+                    <ol>
+                        <li>Elemento 1</li>
+                        <li>Elemento 2
+                            <ol>
+                                <li>Elemento 2.1</li>
+                                <li>Elemento 2.2</li>
+                            </ol>
+                        </li>
+                        <li>Elemento 3</li>
+                        <li>Elemento 4</li>
+                    </ol>
+                    <dl>
+                        <dt>Elemento 1</dt>
+                        <dd>Descripción 1</dd>
+                        <dt>Elemento 2</dt>
+                        <dd>Descripción 2</dd>
+                        <dt>Elemento 3</dt>
+                        <dd>Descripción 3</dd>
+                        <dt>Elemento 4</dt>
+                        <dd>Descripción 4</dd>
+                    </dl>
+                </div>
             </section>
 
             <section id="tablas">
@@ -166,41 +166,51 @@
                 </table>
             </section>
 
-            <section id="multimedia">
-                <h3>Multimedia</h3>
+            <section class="row" id="multimedia">
+                <h3 class="col-12 order-first">Multimedia</h3>
 
-                <img class="my-3 w-100 img-thumbnail" src="https://picsum.photos/300/200" alt="Ejemplo">
-
-                <audio class="my-3 w-100" src="https://www.w3schools.com/html/horse.mp3" controls></audio>
-
-                <video class="my-3 w-100 img-thumbnail" src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
-
-                <div class="my-3 ratio ratio-1x1">
-                    <iframe class="img-thumbnail" title="Mapa Ipartek"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2905.762268580204!2d-2.9161669244612214!3d43.2564039711237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4e4fb46238d865%3A0xb671edfb1120ab06!2sIpartek%20Servicios%20Inform%C3%A1ticos!5e0!3m2!1ses-419!2ses!4v1737983537611!5m2!1ses-419!2ses"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="col-sm-4">
+                    <img class="my-3 w-100 img-thumbnail" src="https://picsum.photos/300/200" alt="Ejemplo">
                 </div>
 
-                <div class="my-3 ratio ratio-4x3">
-                    <iframe class="img-thumbnail" title="Selección Rock" allow="autoplay"
-                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/890773231&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-                    <div class="img-thumbnail"
-                        style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
-                        <a href="https://soundcloud.com/playlistsmusic" title="#PlaylistsMusic" target="_blank"
-                            style="color: #cccccc; text-decoration: none;">#PlaylistsMusic</a> · <a
-                            href="https://soundcloud.com/playlistsmusic/sets/hits-of-the-80s-classic-pop"
-                            title="Hits of the 80&#x27;s: Classic Pop &amp; Rock Songs of the 1980&#x27;s (Music Playlist Updated in 2023)"
-                            target="_blank" style="color: #cccccc; text-decoration: none;">Hits of the 80&#x27;s:
-                            Classic
-                            Pop &amp; Rock Songs of the 1980&#x27;s (Music Playlist Updated in 2023)</a>
+                <audio class="my-3 col-12 order-sm-first" src="https://www.w3schools.com/html/horse.mp3" controls></audio>
+
+                <div class="col-sm-6 order-sm-first">
+                    <video class="my-3 w-100 img-thumbnail" src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="my-3 ratio ratio-1x1">
+                        <iframe class="img-thumbnail" title="Mapa Ipartek"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2905.762268580204!2d-2.9161669244612214!3d43.2564039711237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4e4fb46238d865%3A0xb671edfb1120ab06!2sIpartek%20Servicios%20Inform%C3%A1ticos!5e0!3m2!1ses-419!2ses!4v1737983537611!5m2!1ses-419!2ses"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
 
-                <div class="my-3 ratio ratio-16x9">
-                    <iframe class="img-thumbnail" src="https://www.youtube.com/embed/Iw4vXFDniZs?si=1v8ADqyU1MH4CUdu"
-                        title="YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="col-sm-4">
+                    <div class="my-3 ratio ratio-4x3">
+                        <iframe class="img-thumbnail" title="Selección Rock" allow="autoplay"
+                            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/890773231&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                        <div class="img-thumbnail"
+                            style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
+                            <a href="https://soundcloud.com/playlistsmusic" title="#PlaylistsMusic" target="_blank"
+                                style="color: #cccccc; text-decoration: none;">#PlaylistsMusic</a> · <a
+                                href="https://soundcloud.com/playlistsmusic/sets/hits-of-the-80s-classic-pop"
+                                title="Hits of the 80&#x27;s: Classic Pop &amp; Rock Songs of the 1980&#x27;s (Music Playlist Updated in 2023)"
+                                target="_blank" style="color: #cccccc; text-decoration: none;">Hits of the 80&#x27;s:
+                                Classic
+                                Pop &amp; Rock Songs of the 1980&#x27;s (Music Playlist Updated in 2023)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 order-sm-first">
+                    <div class="my-3 ratio ratio-16x9">
+                        <iframe class="img-thumbnail" src="https://www.youtube.com/embed/Iw4vXFDniZs?si=1v8ADqyU1MH4CUdu"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
                 </div>
             </section>
 
@@ -342,7 +352,7 @@
 
     <aside class="bg-secondary-subtle text-center p-2">
         <nav aria-label="Anuncios">
-            <ul class="nav flex-column">
+            <ul class="nav flex-column flex-sm-row justify-content-center">
                 <li class="nav-item"><a class="nav-link" href="#">Enlace 1</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Enlace 2</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Enlace 3</a></li>
@@ -351,7 +361,7 @@
         </nav>
     </aside>
 
-    <footer class="text-bg-dark p-2 text-center">
+    <footer class="text-bg-dark p-2 text-center d-sm-flex justify-content-between">
         <p>&copy;2025 Javier Lete</p>
 
         <ul class="list-unstyled d-flex justify-content-center" id="redes-sociales">
