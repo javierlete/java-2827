@@ -1,3 +1,4 @@
-# Visualización del ejemplo
+# Visualización de los ejemplos
 
-- https://javierlete.github.io/java-2827/FRONTEND/BASES/index.html
+- HTML y CSS: https://javierlete.github.io/java-2827/FRONTEND/BASES/index.html
+- Bootstrap: https://javierlete.github.io/java-2827/FRONTEND/BOOTSTRAP/index.html 
