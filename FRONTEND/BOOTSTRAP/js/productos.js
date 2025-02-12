@@ -1,5 +1,7 @@
 'use strict';
 
+const URL_PRODUCTOS = 'json/productos.json';
+
 addEventListener('DOMContentLoaded', async () => {
     fichas();
 });
@@ -49,8 +51,9 @@ async function fichas() {
     ver('fichas');
 }
 
+
 async function admin() {
-    const respuesta = await fetch('json/productos.json');
+    const respuesta = await fetch(URL_PRODUCTOS);
 
     console.log(respuesta);
 
@@ -75,7 +78,7 @@ async function admin() {
                 <td>${producto.precio}</td>
                 <td>${producto.stock}</td>
                 <td>
-                    <button class="btn btn-primary">Editar</button>
+                    <a href="javascript:formulario(${producto.id})" class="btn btn-primary">Editar</a>
                     <button class="btn btn-danger">Eliminar</button>
                 </td>
             `;
@@ -84,4 +87,27 @@ async function admin() {
     });
 
     ver('admin');
+}
+
+async function formulario(id) {
+    const form = document.querySelector('#formulario form');
+    
+    if(id) {
+        const respuesta = await fetch(URL_PRODUCTOS);
+        const productos = await respuesta.json();
+
+        const producto = productos.find(p => p.id === id);
+
+        console.log(producto);
+
+        form.idproducto.value = producto.id;
+        form.nombre.value = producto.nombre;
+        form.precio.value = producto.precio;
+        form.descripcion.value = producto.descripcion;
+        form.stock.value = producto.stock;
+    } else {
+        form.reset();
+    }
+
+    ver('formulario');
 }

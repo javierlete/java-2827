@@ -56,11 +56,79 @@
                     <tr>
                         <td colspan="5">Total: 3 productos</td>
                         <td>
-                            <a href="#" class="btn btn-primary">Añadir</a>
+                            <a href="javascript:formulario()" class="btn btn-primary">Añadir</a>
                         </td>
                     </tr>
                 </tfoot>
             </table>
+        </section>
+
+        <section id="formulario">
+            <form class="needs-validation" novalidate>
+                <div class="row mb-3">
+                    <label for="id" class="col-sm-2 col-form-label">Id</label>
+                    <div class="col-sm">
+                        <input type="number" readonly class="form-control" id="idproducto">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                    <div class="col-sm">
+                        <input type="text" required minlength="3" class="form-control" id="nombre">
+                        <div class="invalid-feedback">
+                            El nombre es obligatorio y debe tener al menos 3 caracteres
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="precio" class="col-sm-2 col-form-label">Precio</label>
+                    <div class="col-sm">
+                        <input type="number" step=".01" required min="0" class="form-control" id="precio">
+                        <div class="invalid-feedback">
+                            El precio es obligatorio y debe ser mayor que 0
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+                    <div class="col-sm">
+                        <textarea class="form-control" id="descripcion"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="stock" class="col-sm-2 col-form-label">Stock</label>
+                    <div class="col-sm">
+                        <input type="number" required min="0" class="form-control" id="stock">
+                        <div class="invalid-feedback">
+                            El stock es obligatorio y debe ser mayor que 0
+                        </div>
+                    </div>
+                </div>
+    
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+    
+            <script>
+                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                (() => {
+                    'use strict'
+    
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    const forms = document.querySelectorAll('.needs-validation')
+    
+                    // Loop over them and prevent submission
+                    Array.from(forms).forEach(form => {
+                        form.addEventListener('submit', event => {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+    
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+                })()
+            </script>
         </section>
     </main>
 
