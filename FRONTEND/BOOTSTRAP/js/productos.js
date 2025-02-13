@@ -1,6 +1,6 @@
 'use strict';
 
-const URL_PRODUCTOS = 'json/productos.json';
+const URL_PRODUCTOS = 'http://localhost:3000/productos/';
 
 addEventListener('DOMContentLoaded', async () => {
     fichas();
@@ -12,7 +12,7 @@ function ver(seccion) {
 }
 
 async function fichas() {
-    const respuesta = await fetch('json/productos.json');
+    const respuesta = await fetch(URL_PRODUCTOS);
 
     console.log(respuesta);
 
@@ -93,10 +93,8 @@ async function formulario(id) {
     const form = document.querySelector('#formulario form');
     
     if(id) {
-        const respuesta = await fetch(URL_PRODUCTOS);
-        const productos = await respuesta.json();
-
-        const producto = productos.find(p => p.id === id);
+        const respuesta = await fetch(URL_PRODUCTOS + id);
+        const producto = await respuesta.json();
 
         console.log(producto);
 
