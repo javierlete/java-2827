@@ -8,8 +8,8 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://127.0.0.1:3000/FRONTEND/BOOTSTRAP/productos.html",
-            "webRoot": "${workspaceFolder}"
+            "url": "http://localhost/productos.html",
+            "webRoot": "${workspaceFolder}/FRONTEND/BOOTSTRAP"
         }
     ]
 }

@@ -1,9 +1,11 @@
 'use strict';
 
-const URL_PRODUCTOS = 'http://localhost:3000/productos/';
+const URL_PRODUCTOS = '/productos/';
 
 addEventListener('DOMContentLoaded', async () => {
     fichas();
+
+    document.querySelector('#formulario form').addEventListener('submit', guardar);
 });
 
 function ver(seccion) {
@@ -63,6 +65,8 @@ async function admin() {
 
     const tbody = document.querySelector('#admin tbody');
 
+    tbody.nextElementSibling.querySelector('td:first-of-type').innerText = `Total: ${productos.length} productos`;
+
     tbody.innerHTML = '';
 
     productos.forEach(producto => {
@@ -79,7 +83,7 @@ async function admin() {
                 <td>${producto.stock}</td>
                 <td>
                     <a href="javascript:formulario(${producto.id})" class="btn btn-primary">Editar</a>
-                    <button class="btn btn-danger">Eliminar</button>
+                    <a href="javascript:borrar(${producto.id})" class="btn btn-danger">Eliminar</a>
                 </td>
             `;
 
@@ -108,4 +112,46 @@ async function formulario(id) {
     }
 
     ver('formulario');
+}
+async function borrar(id) {
+    const respuesta = await fetch(URL_PRODUCTOS + id, {
+        method: 'DELETE'
+    });
+
+    if(respuesta.ok) {
+        admin();
+    } else {
+        alert('Error');
+    }
+}
+
+async function guardar(evento) {
+    evento.preventDefault();
+
+    const form = document.querySelector('#formulario form');
+
+    const producto = {
+        nombre: form.nombre.value,
+        precio: form.precio.value,
+        descripcion: form.descripcion.value,
+        stock: form.stock.value
+    };
+
+    form.idproducto.value && (producto.id = form.idproducto.value);
+
+    console.log(producto);
+
+    const respuesta = await fetch(URL_PRODUCTOS + form.idproducto.value, {
+        method: producto.id ? 'PUT' : 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(producto)
+    });
+
+    if(respuesta.ok) {
+        admin();
+    } else {
+        alert('Error');
+    }
 }
