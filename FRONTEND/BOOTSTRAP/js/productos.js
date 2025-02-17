@@ -130,6 +130,11 @@ async function guardar(evento) {
 
     const form = document.querySelector('#formulario form');
 
+    if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        return;
+    }
+
     const producto = {
         nombre: form.nombre.value,
         precio: form.precio.value,

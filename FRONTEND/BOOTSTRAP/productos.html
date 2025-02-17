@@ -8,6 +8,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script defer src="js/bootstrap.bundle.min.js"></script>
 
+    <script src="js/labelinput.js"></script>
     <script src="js/productos.js"></script>
 </head>
 
@@ -64,71 +65,16 @@
         </section>
 
         <section id="formulario">
-            <form class="needs-validation" novalidate>
-                <div class="row mb-3">
-                    <label for="id" class="col-sm-2 col-form-label">Id</label>
-                    <div class="col-sm">
-                        <input type="number" readonly class="form-control" id="idproducto">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                    <div class="col-sm">
-                        <input type="text" required minlength="3" class="form-control" id="nombre">
-                        <div class="invalid-feedback">
-                            El nombre es obligatorio y debe tener al menos 3 caracteres
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="precio" class="col-sm-2 col-form-label">Precio</label>
-                    <div class="col-sm">
-                        <input type="number" step=".01" required min="0" class="form-control" id="precio">
-                        <div class="invalid-feedback">
-                            El precio es obligatorio y debe ser mayor que 0
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
-                    <div class="col-sm">
-                        <textarea class="form-control" id="descripcion"></textarea>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="stock" class="col-sm-2 col-form-label">Stock</label>
-                    <div class="col-sm">
-                        <input type="number" required min="0" class="form-control" id="stock">
-                        <div class="invalid-feedback">
-                            El stock es obligatorio y debe ser mayor que 0
-                        </div>
-                    </div>
-                </div>
-    
+            <form novalidate>
+                <jl-labelinput id="idproducto" etiqueta="Id" tipo="number" soloLectura="true"></jl-labelinput>
+                <jl-labelinput id="nombre" etiqueta="Nombre" tipo="text" requerido="true" longitudMinima="3" mensajeError="El nombre es obligatorio y debe tener al menos 3 caracteres"></jl-labelinput>
+                <jl-labelinput id="precio" etiqueta="Precio" tipo="number" requerido="true" unidades=".01" minimo="0" mensajeError="El precio es obligatorio y debe ser mayor que 0"></jl-labelinput>
+                <jl-labelinput id="stock" etiqueta="Stock" tipo="number" requerido="true" minimo="0" mensajeError="El stock debe ser mayor que 0"></jl-labelinput>
+                <jl-labelinput id="descripcion" etiqueta="Descripción" tipo="textarea"></jl-labelinput>
+               
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
     
-            <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (() => {
-                    'use strict'
-    
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    const forms = document.querySelectorAll('.needs-validation')
-    
-                    // Loop over them and prevent submission
-                    Array.from(forms).forEach(form => {
-                        form.addEventListener('submit', event => {
-                            if (!form.checkValidity()) {
-                                event.preventDefault()
-                                event.stopPropagation()
-                            }
-    
-                            form.classList.add('was-validated')
-                        }, false)
-                    })
-                })()
-            </script>
         </section>
     </main>
 

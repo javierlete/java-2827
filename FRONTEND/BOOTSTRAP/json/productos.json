@@ -8,11 +8,11 @@
       "stock": 10
     },
     {
-      "id": 2,
       "nombre": "Producto MODIFICADO",
+      "precio": "300.99",
       "descripcion": "Este es el producto MODIFICADO",
-      "precio": 300.99,
-      "stock": 5
+      "stock": "5",
+      "id": 2
     },
     {
       "id": 3,
@@ -27,6 +27,13 @@
       "precio": 300.99,
       "stock": 5,
       "id": 4
+    },
+    {
+      "nombre": "asdf",
+      "precio": "1234",
+      "descripcion": "adfsgsdfhsdfhsdfh",
+      "stock": "6",
+      "id": 5
     }
   ]
 }
