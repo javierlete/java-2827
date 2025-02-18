@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 function ProductCategoryRow(props) {
   return (
     <tr>
@@ -40,6 +41,18 @@ function ProductTable(props) {
   let lastCategory = null;
 
   props.products.forEach(product => {
+    if (
+      product.name.toLowerCase().indexOf(
+        props.filterText.toLowerCase()
+      ) === -1
+    ) {
+      return;
+    }
+
+    if (props.inStockOnly && !product.stocked) {
+      return;
+    }
+
     if (product.category !== lastCategory) {
       rows.push(
         <ProductCategoryRow
@@ -73,15 +86,22 @@ function ProductTable(props) {
 }
 
 ProductTable.propTypes = {
-  products: PropTypes.array
+  products: PropTypes.array,
+  filterText: PropTypes.string,
+  inStockOnly: PropTypes.bool
 };
 
-function SearchBar() {
+function SearchBar(props) {
   return (
     <form>
-      <input type="text" placeholder="Search..." />
+      <input 
+        type="text" 
+        placeholder="Search..."
+        value={props.filterText} />
       <label>
-        <input type="checkbox" />
+        <input 
+          type="checkbox"
+          checked={props.inStockOnly} />
         {' '}
         Only show products in stock
       </label>
@@ -89,12 +109,24 @@ function SearchBar() {
   );
 }
 
+SearchBar.propTypes = {
+  filterText: PropTypes.string,
+  inStockOnly: PropTypes.bool
+};
+
 function FilterableProductTable(props) {
+  const [filterText, setFilterText] = useState('');
+  const [inStockOnly, setInStockOnly] = useState(false);
 
   return (
     <div>
-      <SearchBar />
-      <ProductTable products={props.products} />
+      <SearchBar 
+        filterText={filterText} 
+        inStockOnly={inStockOnly} />
+      <ProductTable 
+        products={props.products}
+        filterText={filterText}
+        inStockOnly={inStockOnly} />
     </div>
   );
 }
