@@ -1,27 +1,62 @@
-function ProductCategoryRow() {
+import PropTypes from 'prop-types';
+function ProductCategoryRow(props) {
   return (
     <tr>
       <th colSpan="2">
-        La categoría
+        {props.category}
       </th>
     </tr>
   );
 }
 
-function ProductRow() {
+ProductCategoryRow.propTypes = {
+  category: PropTypes.string
+};
+
+function ProductRow(props) {
+  const name = props.product.stocked ? props.product.name :
+    <span style={{ color: 'red' }}>
+      {props.product.name}
+    </span>;
+
   return (
     <tr>
       <td>
-        <span style={{ color: 'red' }}>
-          El producto
-        </span>
+        {name}
       </td>
-      <td>1234,56€</td>
+      <td>
+        {props.product.price}
+      </td>
     </tr>
   );
 }
 
-function ProductTable() {
+ProductRow.propTypes = {
+  product: PropTypes.object
+};
+
+function ProductTable(props) {
+  const rows = [];
+  let lastCategory = null;
+
+  props.products.forEach(product => {
+    if (product.category !== lastCategory) {
+      rows.push(
+        <ProductCategoryRow
+          category={product.category}
+          key={product.category} />
+      );
+    }
+
+    rows.push(
+      <ProductRow
+        product={product}
+        key={product.name} />
+    );
+
+    lastCategory = product.category;
+  });
+
   return (
     <table>
       <thead>
@@ -31,17 +66,15 @@ function ProductTable() {
         </tr>
       </thead>
       <tbody>
-        <ProductCategoryRow />
-        <ProductRow />
-        <ProductRow />
-        <ProductRow />
-        <ProductCategoryRow />
-        <ProductRow />
-        <ProductRow />
+        {rows}
       </tbody>
     </table>
   );
 }
+
+ProductTable.propTypes = {
+  products: PropTypes.array
+};
 
 function SearchBar() {
   return (
@@ -56,15 +89,29 @@ function SearchBar() {
   );
 }
 
-function FilterableProductTable() {
+function FilterableProductTable(props) {
+
   return (
     <div>
       <SearchBar />
-      <ProductTable />
+      <ProductTable products={props.products} />
     </div>
   );
 }
 
+FilterableProductTable.propTypes = {
+  products: PropTypes.array
+};
+
+const PRODUCTS = [
+  { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
+  { category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit" },
+  { category: "Fruits", price: "$2", stocked: false, name: "Passionfruit" },
+  { category: "Vegetables", price: "$2", stocked: true, name: "Spinach" },
+  { category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin" },
+  { category: "Vegetables", price: "$1", stocked: true, name: "Peas" }
+];
+
 export default function App() {
-  return <FilterableProductTable />;
+  return <FilterableProductTable products={PRODUCTS} />
 }
