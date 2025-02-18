@@ -97,11 +97,13 @@ function SearchBar(props) {
       <input 
         type="text" 
         placeholder="Search..."
-        value={props.filterText} />
+        value={props.filterText}
+        onChange={e => props.onFilterTextChange(e.target.value)} />
       <label>
         <input 
           type="checkbox"
-          checked={props.inStockOnly} />
+          checked={props.inStockOnly}
+          onChange={e => props.onInStockOnlyChange(e.target.checked)} />
         {' '}
         Only show products in stock
       </label>
@@ -111,7 +113,9 @@ function SearchBar(props) {
 
 SearchBar.propTypes = {
   filterText: PropTypes.string,
-  inStockOnly: PropTypes.bool
+  inStockOnly: PropTypes.bool,
+  onFilterTextChange: PropTypes.func,
+  onInStockOnlyChange: PropTypes.func
 };
 
 function FilterableProductTable(props) {
@@ -122,7 +126,9 @@ function FilterableProductTable(props) {
     <div>
       <SearchBar 
         filterText={filterText} 
-        inStockOnly={inStockOnly} />
+        inStockOnly={inStockOnly}
+        onFilterTextChange={setFilterText}
+        onInStockOnlyChange={setInStockOnly} />
       <ProductTable 
         products={props.products}
         filterText={filterText}
