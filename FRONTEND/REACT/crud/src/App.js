@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Routes } from 'react-router';
 import './App.css';
 import Cabecera from './componentes/Cabecera';
 import Formulario from './componentes/Formulario';
@@ -7,15 +8,17 @@ import Principal from './componentes/Principal';
 
 function App() {
   return (
-    <>
-    <Cabecera />
-    <main className="container my-3">
-      <Principal />
-      <Listado />
-      <Formulario />
-    </main>
-    <Pie />
-    </>
+    <BrowserRouter>
+      <Cabecera />
+      <main className="container my-3">
+        <Routes>
+          <Route path="/" element={<Principal />} />
+          <Route path="/listado" element={<Listado />} />
+          <Route path="/formulario" element={<Formulario />} />
+        </Routes>
+      </main>
+      <Pie />
+    </BrowserRouter>
   );
 }
 
