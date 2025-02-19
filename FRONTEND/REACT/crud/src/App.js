@@ -1,8 +1,21 @@
 import './App.css';
+import Cabecera from './componentes/Cabecera';
+import Formulario from './componentes/Formulario';
+import Listado from './componentes/Listado';
+import Pie from './componentes/Pie';
+import Principal from './componentes/Principal';
 
 function App() {
   return (
-    <h1>CRUD</h1>
+    <>
+    <Cabecera />
+    <main className="container my-3">
+      <Principal />
+      <Listado />
+      <Formulario />
+    </main>
+    <Pie />
+    </>
   );
 }
 
