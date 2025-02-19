@@ -27,7 +27,7 @@ export default function Listado() {
                 <tr>
                     <td colSpan="5">Total: 3 productos</td>
                     <td>
-                        <Boton etiqueta="Añadir" />
+                        <Boton etiqueta="Añadir" ruta="/formulario" />
                     </td>
                 </tr>
             </tfoot>

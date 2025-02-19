@@ -1,11 +1,12 @@
 
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router';
 
 export default function Boton({ etiqueta, tipo = 'a', aspecto = 'primary', ruta = '#' }) {
     return (
         <>
             {tipo === 'a' ?
-                <a href={ruta} className={'btn btn-sm btn-' + aspecto}>{etiqueta}</a> :
+                <NavLink to={ruta} className={'btn btn-sm btn-' + aspecto}>{etiqueta}</NavLink> :
                 <button className={'btn btn-' + aspecto}>{etiqueta}</button>
             }
         </>
