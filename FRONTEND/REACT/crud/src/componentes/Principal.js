@@ -1,10 +1,11 @@
+import { servicio } from "../servicios/ProductoServicio";
 import Ficha from "./Ficha";
 
-export default function Principal() {
+export default function Principal({ productos }) {
     const fichas = [];
 
-    for (let i = 0; i < 10; i++) {
-        fichas.push(<Ficha key={i} />);
+    for (const producto of productos) {
+        fichas.push(<Ficha key={producto.id} producto={producto} />);
     }
 
     return (
@@ -13,3 +14,7 @@ export default function Principal() {
         </div>
     );
 }
+
+Principal.propTypes = {
+    productos: servicio.tipoProductos
+};
