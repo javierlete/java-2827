@@ -16,8 +16,9 @@ function App() {
       <main className="container my-3">
         <Routes>
           <Route path="/" element={<Principal productos={productos} />} />
-          <Route path="/listado" element={<Listado />} />
+          <Route path="/listado" element={<Listado productos={productos} />} />
           <Route path="/formulario" element={<Formulario />} />
+          <Route path="/formulario/:id" element={<Formulario />} />
         </Routes>
       </main>
       <Pie />

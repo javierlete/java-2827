@@ -1,13 +1,8 @@
+import { servicio } from "../servicios/ProductoServicio";
 import Boton from "./Boton";
 import Fila from "./Fila";
 
-export default function Listado() {
-    const filas = [];
-
-    for (let i = 0; i < 3; i++) {
-        filas.push(<Fila key={i} />);
-    }
-
+export default function Listado({ productos }) {
     return (
         <table className="table table-hover table-bordered table-striped">
             <thead className="table-secondary">
@@ -21,7 +16,9 @@ export default function Listado() {
                 </tr>
             </thead>
             <tbody>
-                {filas}
+                {productos.map(producto => 
+                    <Fila key={producto.id} producto={producto} />
+                )}
             </tbody>
             <tfoot className="table-secondary">
                 <tr>
@@ -34,3 +31,7 @@ export default function Listado() {
         </table>
     );
 }
+
+Listado.propTypes = {
+    productos: servicio.tipoProductos
+};

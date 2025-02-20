@@ -20,6 +20,10 @@ class ProductoServicio {
     obtenerProductos() {
         return this.PRODUCTOS;
     }
+
+    obtenerProductoPorId(id) {
+        return this.PRODUCTOS.find(producto => producto.id === id);
+    }
 }
 
 export const servicio = new ProductoServicio();
