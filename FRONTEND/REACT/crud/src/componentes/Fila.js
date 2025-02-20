@@ -1,7 +1,15 @@
 import { servicio } from "../servicios/ProductoServicio";
 import Boton from "./Boton";
+import PropTypes from "prop-types";
 
-export default function Fila({ producto }) {
+export default function Fila({ producto, onProductoBorrado }) {
+    function borrarProducto() {
+        if (window.confirm(`¿Estás seguro de borrar el producto ${producto.id}?`)) {
+            servicio.borrarProducto(producto.id);
+            onProductoBorrado(producto.id);
+        }
+    }
+
     return (
         <tr>
             <td>{producto.id}</td>
@@ -11,12 +19,13 @@ export default function Fila({ producto }) {
             <td>{producto.stock}</td>
             <td>
                 <Boton etiqueta="Editar" ruta={'/formulario/' + producto.id} />
-                <Boton etiqueta="Borrar" aspecto="danger" />
+                <Boton etiqueta="Borrar" tipo="button" aspecto="danger" onPulsacion={borrarProducto} />
             </td>
         </tr>
     );
 }
 
 Fila.propTypes = {
-    producto: servicio.tipoProducto
+    producto: servicio.tipoProducto,
+    onProductoBorrado: PropTypes.func
 };

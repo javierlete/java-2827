@@ -1,8 +1,16 @@
 import { servicio } from "../servicios/ProductoServicio";
 import Boton from "./Boton";
 import Fila from "./Fila";
+import PropTypes from "prop-types";
 
-export default function Listado({ productos }) {
+export default function Listado({ productos, onProductosCambio }) {
+    
+    function refrescarListado(id) {
+        console.log(`Refrescar listado sin el producto ${id}`);
+
+        onProductosCambio();
+    }
+
     return (
         <table className="table table-hover table-bordered table-striped">
             <thead className="table-secondary">
@@ -16,8 +24,8 @@ export default function Listado({ productos }) {
                 </tr>
             </thead>
             <tbody>
-                {productos.map(producto => 
-                    <Fila key={producto.id} producto={producto} />
+                {productos.map(producto =>
+                    <Fila key={producto.id} producto={producto} onProductoBorrado={refrescarListado} />
                 )}
             </tbody>
             <tfoot className="table-secondary">
@@ -33,5 +41,6 @@ export default function Listado({ productos }) {
 }
 
 Listado.propTypes = {
-    productos: servicio.tipoProductos
+    productos: servicio.tipoProductos,
+    onProductosCambio: PropTypes.func
 };

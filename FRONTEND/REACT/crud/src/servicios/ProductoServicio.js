@@ -24,6 +24,10 @@ class ProductoServicio {
     obtenerProductoPorId(id) {
         return this.PRODUCTOS.find(producto => producto.id === id);
     }
+
+    borrarProducto(id) {
+        this.PRODUCTOS = this.PRODUCTOS.filter(producto => producto.id !== id);
+    }
 }
 
 export const servicio = new ProductoServicio();
