@@ -7,7 +7,7 @@ export default function Boton({ etiqueta, tipo = 'a', aspecto = 'primary', ruta 
         <>
             {tipo === 'a' ?
                 <NavLink to={ruta} className={'btn btn-sm btn-' + aspecto}>{etiqueta}</NavLink> :
-                <button className={'btn btn-sm btn-' + aspecto} onClick={onPulsacion}>{etiqueta}</button>
+                <button type="button" className={'btn btn-sm btn-' + aspecto} onClick={onPulsacion}>{etiqueta}</button>
             }
         </>
     );

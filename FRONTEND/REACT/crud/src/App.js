@@ -22,8 +22,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Principal productos={productos} />} />
           <Route path="/listado" element={<Listado productos={productos} onProductosCambio={refrescarListado} />} />
-          <Route path="/formulario" element={<Formulario />} />
-          <Route path="/formulario/:id" element={<Formulario />} />
+          <Route path="/formulario" element={<Formulario onProductosCambio={refrescarListado} />} />
+          <Route path="/formulario/:id" element={<Formulario onProductosCambio={refrescarListado} />} />
         </Routes>
       </main>
       <Pie />

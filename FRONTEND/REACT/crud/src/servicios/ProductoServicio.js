@@ -25,6 +25,16 @@ class ProductoServicio {
         return this.PRODUCTOS.find(producto => producto.id === id);
     }
 
+    agregarProducto(producto) {
+        producto.id = this.PRODUCTOS.map(producto => producto.id).reduce((acumulado, cadaUno) => acumulado > cadaUno ? acumulado : cadaUno, 0) + 1;
+        this.PRODUCTOS.push(producto);
+    }
+
+    actualizarProducto(producto) {
+        const indice = this.PRODUCTOS.findIndex(p => p.id === producto.id);
+        this.PRODUCTOS[indice] = producto;
+    }
+
     borrarProducto(id) {
         this.PRODUCTOS = this.PRODUCTOS.filter(producto => producto.id !== id);
     }
