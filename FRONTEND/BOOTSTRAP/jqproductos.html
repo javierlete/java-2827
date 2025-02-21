@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Productos</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script defer src="js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/labelinput.js"></script>
+    <script src="js/jqproductos.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:fichas()">Productos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:admin()">Administración</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-3">
+        <section id="fichas">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4">
+
+            </div>
+        </section>
+
+        <section id="admin">
+            <table class="table table-hover table-bordered table-striped">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+                <tfoot class="table-secondary">
+                    <tr>
+                        <td colspan="5">Total: 3 productos</td>
+                        <td>
+                            <a href="javascript:formulario()" class="btn btn-primary">Añadir</a>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <section id="formulario">
+            <form novalidate>
+                <jl-labelinput id="idproducto" etiqueta="Id" tipo="number" soloLectura="true"></jl-labelinput>
+                <jl-labelinput id="nombre" etiqueta="Nombre" tipo="text" requerido="true" longitudMinima="3" mensajeError="El nombre es obligatorio y debe tener al menos 3 caracteres"></jl-labelinput>
+                <jl-labelinput id="precio" etiqueta="Precio" tipo="number" requerido="true" unidades=".01" minimo="0" mensajeError="El precio es obligatorio y debe ser mayor que 0"></jl-labelinput>
+                <jl-labelinput id="stock" etiqueta="Stock" tipo="number" requerido="true" minimo="0" mensajeError="El stock debe ser mayor que 0"></jl-labelinput>
+                <jl-labelinput id="descripcion" etiqueta="Descripción" tipo="textarea"></jl-labelinput>
+               
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+    
+        </section>
+    </main>
+
+    <footer class="p-2 text-bg-dark">
+        <p>&copy;2025 Javier Lete</p>
+    </footer>
+</body>
+
+</html>
