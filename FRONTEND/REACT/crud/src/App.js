@@ -6,13 +6,17 @@ import Listado from './componentes/Listado';
 import Pie from './componentes/Pie';
 import Principal from './componentes/Principal';
 import { servicio } from './servicios/ProductoServicio';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [ productos, setProductos ] = useState(servicio.obtenerProductos());
+  const [ productos, setProductos ] = useState([]);
 
-  function refrescarListado() {
-    setProductos(servicio.obtenerProductos());
+  useEffect(() => {
+    refrescarListado();
+  }, []);
+
+  async function refrescarListado() {
+    setProductos(await servicio.obtenerProductos());
   }
 
   return (

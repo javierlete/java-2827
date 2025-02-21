@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 export default function Fila({ producto, onProductoBorrado }) {
     function borrarProducto() {
         if (window.confirm(`¿Estás seguro de borrar el producto ${producto.id}?`)) {
-            servicio.borrarProducto(producto.id);
-            onProductoBorrado(producto.id);
+            servicio.borrarProducto(producto.id).then(
+                () => onProductoBorrado(producto.id)
+            );
         }
     }
 

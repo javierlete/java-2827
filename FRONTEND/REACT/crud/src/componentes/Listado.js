@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 export default function Listado({ productos, onProductosCambio }) {
     
     function refrescarListado(id) {
-        console.log(`Refrescar listado sin el producto ${id}`);
-
         onProductosCambio();
     }
 

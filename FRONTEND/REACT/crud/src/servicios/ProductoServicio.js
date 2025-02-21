@@ -1,11 +1,8 @@
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 class ProductoServicio {
-    PRODUCTOS = [
-        { id: 1, nombre: 'Producto 1', precio: 100, stock: 10, descripcion: 'Descripción del producto 1' },
-        { id: 2, nombre: 'Producto 2', precio: 200, stock: 20, descripcion: 'Descripción del producto 2' },
-        { id: 3, nombre: 'Producto 3', precio: 300, stock: 30, descripcion: 'Descripción del producto 3' },
-    ];
+    URL = 'http://localhost:3001/productos/';
 
     tipoProducto = PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -17,26 +14,26 @@ class ProductoServicio {
 
     tipoProductos = PropTypes.arrayOf(this.tipoProducto).isRequired;
 
-    obtenerProductos() {
-        return this.PRODUCTOS;
+    async obtenerProductos() {
+        const { data } = await axios.get(this.URL);
+
+        return data;
     }
 
-    obtenerProductoPorId(id) {
-        return this.PRODUCTOS.find(producto => producto.id === id);
+    async obtenerProductoPorId(id) {
+        return (await axios.get(this.URL + id)).data;
     }
 
-    agregarProducto(producto) {
-        producto.id = this.PRODUCTOS.map(producto => producto.id).reduce((acumulado, cadaUno) => acumulado > cadaUno ? acumulado : cadaUno, 0) + 1;
-        this.PRODUCTOS.push(producto);
+    async agregarProducto(producto) {
+        return (await axios.post(this.URL, producto)).data;
     }
 
-    actualizarProducto(producto) {
-        const indice = this.PRODUCTOS.findIndex(p => p.id === producto.id);
-        this.PRODUCTOS[indice] = producto;
+    async actualizarProducto(producto) {
+        return (await axios.put(this.URL + producto.id, producto)).data;
     }
 
-    borrarProducto(id) {
-        this.PRODUCTOS = this.PRODUCTOS.filter(producto => producto.id !== id);
+    async borrarProducto(id) {
+        await axios.delete(this.URL + id);
     }
 }
 

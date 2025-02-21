@@ -2,28 +2,32 @@ import { useNavigate, useParams } from "react-router";
 import Boton from "./Boton";
 import LabelInput from "./LabelInput";
 import { servicio } from "../servicios/ProductoServicio";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 
+const PRODUCTO_VACIO = { id: '', nombre: '', precio: '', stock: '', descripcion: '' };
+
 export default function Formulario({ onProductosCambio }) {
+    const [producto, setProducto] = useState(PRODUCTO_VACIO);
+
     const { id } = useParams();
     const navegar = useNavigate();
 
     const idNumber = +id;
 
-    let productoInicial = {};
-
-    if (idNumber) {
-        productoInicial = servicio.obtenerProductoPorId(idNumber);
-    }
-
-    const [producto, setProducto] = useState(productoInicial);
-
-    function guardar(e) {
+    useEffect(() => {
         if (idNumber) {
-            servicio.actualizarProducto(producto);
+            (async () => setProducto(await servicio.obtenerProductoPorId(idNumber)))();
         } else {
-            servicio.agregarProducto(producto);
+            setProducto(PRODUCTO_VACIO);
+        }
+    }, [idNumber]);
+
+    async function guardar() {
+        if (idNumber) {
+            await servicio.actualizarProducto(producto);
+        } else {
+            await servicio.agregarProducto(producto);
         }
 
         onProductosCambio();
