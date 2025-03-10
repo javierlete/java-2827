@@ -1,154 +1,252 @@
--- MySQL Workbench Forward Engineering
+CREATE DATABASE  IF NOT EXISTS `2827_tienda` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `2827_tienda`;
+-- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+--
+-- Host: localhost    Database: 2827_tienda
+-- ------------------------------------------------------
+-- Server version	8.0.41
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- -----------------------------------------------------
--- Schema 2827_tienda
--- -----------------------------------------------------
+--
+-- Table structure for table `clientes`
+--
 
--- -----------------------------------------------------
--- Schema 2827_tienda
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `2827_tienda` DEFAULT CHARACTER SET utf8mb4 ;
-USE `2827_tienda` ;
-
--- -----------------------------------------------------
--- Table `2827_tienda`.`productos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `2827_tienda`.`productos` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `precio` DECIMAL(19,2) NOT NULL,
-  `caducidad` DATE NULL,
-  `descripcion` TEXT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `2827_tienda`.`clientes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `2827_tienda`.`clientes` (
-  `id` BIGINT NOT NULL,
-  `nombre` VARCHAR(50) NOT NULL,
-  `nif` CHAR(9) NOT NULL,
-  `nif_diferencial` TINYINT NULL,
+DROP TABLE IF EXISTS `clientes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `clientes` (
+  `id` bigint NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `nif` char(9) NOT NULL,
+  `nif_diferencial` tinyint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `nif_con_diferencial` (`nif` ASC, `nif_diferencial` ASC) INVISIBLE)
-ENGINE = InnoDB;
+  UNIQUE KEY `nif_con_diferencial` (`nif`,`nif_diferencial`) /*!80000 INVISIBLE */
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `clientes`
+--
 
--- -----------------------------------------------------
--- Table `2827_tienda`.`empleados`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `2827_tienda`.`empleados` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(50) NOT NULL,
-  `jefe_id` BIGINT NULL,
+LOCK TABLES `clientes` WRITE;
+/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleados`
+--
+
+DROP TABLE IF EXISTS `empleados`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `empleados` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  `jefe_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_empleados_empleados1_idx` (`jefe_id` ASC) VISIBLE,
-  CONSTRAINT `fk_empleados_empleados1`
-    FOREIGN KEY (`jefe_id`)
-    REFERENCES `2827_tienda`.`empleados` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  KEY `fk_empleados_empleados1_idx` (`jefe_id`),
+  CONSTRAINT `fk_empleados_empleados1` FOREIGN KEY (`jefe_id`) REFERENCES `empleados` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `empleados`
+--
 
--- -----------------------------------------------------
--- Table `2827_tienda`.`facturas`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `2827_tienda`.`facturas` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `numero` CHAR(14) NOT NULL COMMENT 'numero: SERV-2025-0001',
-  `fecha` DATE NOT NULL,
-  `clientes_id` BIGINT NOT NULL,
-  `empleados_id` BIGINT NOT NULL,
+LOCK TABLES `empleados` WRITE;
+/*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `facturas`
+--
+
+DROP TABLE IF EXISTS `facturas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `facturas` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `numero` char(14) NOT NULL COMMENT 'numero: SERV-2025-0001',
+  `fecha` date NOT NULL,
+  `clientes_id` bigint NOT NULL,
+  `empleados_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `numero_UNIQUE` (`numero` ASC) VISIBLE,
-  INDEX `fk_facturas_clientes_idx` (`clientes_id` ASC) VISIBLE,
-  INDEX `fk_facturas_empleados1_idx` (`empleados_id` ASC) VISIBLE,
-  CONSTRAINT `fk_facturas_clientes`
-    FOREIGN KEY (`clientes_id`)
-    REFERENCES `2827_tienda`.`clientes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_facturas_empleados1`
-    FOREIGN KEY (`empleados_id`)
-    REFERENCES `2827_tienda`.`empleados` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  UNIQUE KEY `numero_UNIQUE` (`numero`),
+  KEY `fk_facturas_clientes_idx` (`clientes_id`),
+  KEY `fk_facturas_empleados1_idx` (`empleados_id`),
+  CONSTRAINT `fk_facturas_clientes` FOREIGN KEY (`clientes_id`) REFERENCES `clientes` (`id`),
+  CONSTRAINT `fk_facturas_empleados1` FOREIGN KEY (`empleados_id`) REFERENCES `empleados` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `facturas`
+--
 
--- -----------------------------------------------------
--- Table `2827_tienda`.`facturas_tienen_productos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `2827_tienda`.`facturas_tienen_productos` (
-  `facturas_id` BIGINT NOT NULL,
-  `productos_id` BIGINT NOT NULL,
-  `cantidad` INT NOT NULL,
-  PRIMARY KEY (`facturas_id`, `productos_id`),
-  INDEX `fk_facturas_tiene_productos_productos1_idx` (`productos_id` ASC) VISIBLE,
-  INDEX `fk_facturas_tiene_productos_facturas1_idx` (`facturas_id` ASC) VISIBLE,
-  CONSTRAINT `fk_facturas_tiene_productos_facturas1`
-    FOREIGN KEY (`facturas_id`)
-    REFERENCES `2827_tienda`.`facturas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_facturas_tiene_productos_productos1`
-    FOREIGN KEY (`productos_id`)
-    REFERENCES `2827_tienda`.`productos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+LOCK TABLES `facturas` WRITE;
+/*!40000 ALTER TABLE `facturas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `facturas` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Table structure for table `facturas_tienen_productos`
+--
 
--- -----------------------------------------------------
--- Table `2827_tienda`.`usuarios`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `2827_tienda`.`usuarios` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(50) NOT NULL,
-  `password` VARCHAR(50) NOT NULL,
-  `clientes_id` BIGINT NULL,
+DROP TABLE IF EXISTS `facturas_tienen_productos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `facturas_tienen_productos` (
+  `facturas_id` bigint NOT NULL,
+  `productos_id` bigint NOT NULL,
+  `cantidad` int NOT NULL,
+  PRIMARY KEY (`facturas_id`,`productos_id`),
+  KEY `fk_facturas_tiene_productos_productos1_idx` (`productos_id`),
+  KEY `fk_facturas_tiene_productos_facturas1_idx` (`facturas_id`),
+  CONSTRAINT `fk_facturas_tiene_productos_facturas1` FOREIGN KEY (`facturas_id`) REFERENCES `facturas` (`id`),
+  CONSTRAINT `fk_facturas_tiene_productos_productos1` FOREIGN KEY (`productos_id`) REFERENCES `productos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `facturas_tienen_productos`
+--
+
+LOCK TABLES `facturas_tienen_productos` WRITE;
+/*!40000 ALTER TABLE `facturas_tienen_productos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `facturas_tienen_productos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `habitaciones`
+--
+
+DROP TABLE IF EXISTS `habitaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `habitaciones` (
+  `hoteles_id` bigint NOT NULL,
+  `numero` char(3) NOT NULL,
+  PRIMARY KEY (`numero`,`hoteles_id`),
+  KEY `fk_habitaciones_hoteles1` (`hoteles_id`),
+  CONSTRAINT `fk_habitaciones_hoteles1` FOREIGN KEY (`hoteles_id`) REFERENCES `hoteles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `habitaciones`
+--
+
+LOCK TABLES `habitaciones` WRITE;
+/*!40000 ALTER TABLE `habitaciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `habitaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hoteles`
+--
+
+DROP TABLE IF EXISTS `hoteles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hoteles` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hoteles`
+--
+
+LOCK TABLES `hoteles` WRITE;
+/*!40000 ALTER TABLE `hoteles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hoteles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `productos`
+--
+
+DROP TABLE IF EXISTS `productos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `productos` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `precio` decimal(19,2) NOT NULL,
+  `caducidad` date DEFAULT NULL,
+  `descripcion` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `productos`
+--
+
+LOCK TABLES `productos` WRITE;
+/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES (1,'Portátil',1234.00,'2027-01-02','El portátil más superchuli'),(2,'Teclado',21.00,NULL,NULL),(3,'Ratón',12.00,NULL,NULL),(4,'Cable USB',5.00,'2026-02-01','Un cable chuperchuli');
+/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `clientes_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_usuarios_clientes1_idx` (`clientes_id` ASC) VISIBLE,
-  CONSTRAINT `fk_usuarios_clientes1`
-    FOREIGN KEY (`clientes_id`)
-    REFERENCES `2827_tienda`.`clientes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  UNIQUE KEY `clientes_id_UNIQUE` (`clientes_id`),
+  KEY `fk_usuarios_clientes1_idx` (`clientes_id`),
+  CONSTRAINT `fk_usuarios_clientes1` FOREIGN KEY (`clientes_id`) REFERENCES `clientes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `usuarios`
+--
 
--- -----------------------------------------------------
--- Table `2827_tienda`.`hoteles`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `2827_tienda`.`hoteles` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'asdf@asdf','1234',NULL),(2,'dgfhdfgh@adfgadfg','2345',NULL),(3,'asdfa@asdfa','12342',NULL);
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Dumping events for database '2827_tienda'
+--
 
--- -----------------------------------------------------
--- Table `2827_tienda`.`habitaciones`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `2827_tienda`.`habitaciones` (
-  `hoteles_id` BIGINT NOT NULL,
-  `numero` CHAR(3) NOT NULL,
-  PRIMARY KEY (`numero`, `hoteles_id`),
-  CONSTRAINT `fk_habitaciones_hoteles1`
-    FOREIGN KEY (`hoteles_id`)
-    REFERENCES `2827_tienda`.`hoteles` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Dumping routines for database '2827_tienda'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- Dump completed on 2025-03-10 13:20:13
