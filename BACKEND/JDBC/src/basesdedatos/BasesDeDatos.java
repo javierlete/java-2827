@@ -44,10 +44,10 @@ public class BasesDeDatos {
 				System.out.println("=====");
 
 				while (rs.next()) {
-					System.out.println(rs.getString("id"));
+					System.out.println(rs.getLong("id"));
 					System.out.println(rs.getString("nombre"));
-					System.out.println(rs.getString("precio"));
-					System.out.println(rs.getString("caducidad"));
+					System.out.println(rs.getBigDecimal("precio"));
+					System.out.println(rs.getDate("caducidad"));
 					System.out.println(rs.getString("descripcion"));
 				}
 			}
@@ -65,10 +65,10 @@ public class BasesDeDatos {
 				System.out.println("===");
 
 				while (rs.next()) {
-					System.out.println(rs.getString("id"));
+					System.out.println(rs.getLong("id"));
 					System.out.println(rs.getString("nombre"));
-					System.out.println(rs.getString("precio"));
-					System.out.println(rs.getString("caducidad"));
+					System.out.println(rs.getBigDecimal("precio"));
+					System.out.println(rs.getDate("caducidad"));
 					System.out.println(rs.getString("descripcion"));
 				}
 
@@ -99,6 +99,7 @@ public class BasesDeDatos {
 			}
 		} catch (NumberFormatException | SQLException e) {
 			System.out.println("Ha habido un error en la conexión a la base de datos");
+			e.printStackTrace();
 		}
 
 		System.out.println(numeroRegistrosModificados);
