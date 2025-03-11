@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class BasesDeDatos {
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		Scanner sc = new Scanner(System.in);
 		
 		String url = "jdbc:mysql://localhost:3306/2827_tienda";
@@ -30,6 +30,8 @@ public class BasesDeDatos {
 
 		System.out.println("Conectando a la base de datos");
 
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
 		Connection con = DriverManager.getConnection(url, user, pass);
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(sqlSelect);
