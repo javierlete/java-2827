@@ -5,26 +5,48 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Producto {
+	// VARIABLES DE INSTANCIA
 	private Long id;
 	private String nombre;
 	private BigDecimal precio;
 	private LocalDate caducidad;
 	private String descripcion;
-
+	
+	// CONSTRUCTORES
 	public Producto(Long id, String nombre, BigDecimal precio, LocalDate caducidad, String descripcion) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.precio = precio;
-		this.caducidad = caducidad;
-		this.descripcion = descripcion;
+		setId(id);
+		setNombre(nombre);
+		setPrecio(precio);
+		setCaducidad(caducidad);
+		setDescripcion(descripcion);
 	}
 
+	public Producto(String nombre, BigDecimal precio, LocalDate caducidad, String descripcion) {
+		this(null, nombre, precio, caducidad, descripcion);
+	}
+
+	public Producto(String nombre, BigDecimal precio, LocalDate caducidad) {
+		this(null, nombre, precio, caducidad, null);
+	}
+
+	public Producto(String nombre, BigDecimal precio) {
+		this(null, nombre, precio, null, null);
+	}
+
+	public Producto() {
+
+	}
+
+	// GETTERS Y SETTERS
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
+		if (id != null && id < 0) {
+			throw new RuntimeException("No se admiten valores negativos");
+		}
+
 		this.id = id;
 	}
 
@@ -49,6 +71,10 @@ public class Producto {
 	}
 
 	public void setCaducidad(LocalDate caducidad) {
+		if (caducidad != null && caducidad.isBefore(LocalDate.now())) {
+			throw new RuntimeException("No se pueden crear productos caducados");
+		}
+
 		this.caducidad = caducidad;
 	}
 
@@ -58,6 +84,14 @@ public class Producto {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	public boolean isCaducado() {
+		if(caducidad == null) {
+			throw new RuntimeException("No hay caducidad");
+		}
+		
+		return caducidad.isBefore(LocalDate.now());
 	}
 
 	@Override
