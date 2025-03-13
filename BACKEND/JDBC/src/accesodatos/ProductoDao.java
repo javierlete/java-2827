@@ -1,13 +1,11 @@
 package accesodatos;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import entidades.Producto;
 
@@ -29,20 +27,20 @@ public class ProductoDao {
 		this.jdbcPassword = jdbcPassword;
 	}
 
-	public ArrayList<Producto> obtenerProductos() {
-		try (Connection con = DriverManager.getConnection(jdbcUrl, jdbcUsuario, jdbcPassword);
-				PreparedStatement pst = con.prepareStatement(SQL_SELECT);
-				ResultSet rs = pst.executeQuery()) {
-			ArrayList<Producto> productos = new ArrayList<Producto>();
+	public Iterable<Producto> obtenerProductos() {
+		try (var con = DriverManager.getConnection(jdbcUrl, jdbcUsuario, jdbcPassword);
+				var pst = con.prepareStatement(SQL_SELECT);
+				var rs = pst.executeQuery()) {
+			var productos = new ArrayList<Producto>();
 			
 			while(rs.next()) {
-				Long id = rs.getLong("id");
-				String nombre = rs.getString("nombre");
-				BigDecimal precio = rs.getBigDecimal("precio");
-				LocalDate caducidad = rs.getDate("caducidad").toLocalDate();
-				String descripcion = rs.getString("descripcion");
+				var id = rs.getLong("id");
+				var nombre = rs.getString("nombre");
+				var precio = rs.getBigDecimal("precio");
+				var caducidad = rs.getDate("caducidad").toLocalDate();
+				var descripcion = rs.getString("descripcion");
 				
-				Producto producto = new Producto(id, nombre, precio, caducidad, descripcion);
+				var producto = new Producto(id, nombre, precio, caducidad, descripcion);
 				
 				productos.add(producto);
 			}
