@@ -5,8 +5,10 @@ import java.time.LocalDate;
 
 public class ProductoPrueba {
 	public static void main(String[] args) {
+		Producto.setMaximoNombre(10);
+		
 		Producto p = new Producto();
-
+		
 		p.setId(12341234L);
 		p.setNombre("Portátil");
 

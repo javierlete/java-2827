@@ -5,13 +5,21 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Producto {
-	// VARIABLES DE INSTANCIA
+	// VARIABLES ESTÁTICAS / "DE CLASE" / "COMPARTIDAS"
+	private static int maximoNombre;
+
+	// BLOQUE ESTÁTICO / "CONSTRUCTOR ESTÁTICO" / "CONSTRUCTOR DE CLASE"
+	static {
+		maximoNombre = 5;
+	}
+
+	// VARIABLES DE INSTANCIA / ATRIBUTOS / CAMPOS / FIELDS
 	private Long id;
 	private String nombre;
 	private BigDecimal precio;
 	private LocalDate caducidad;
 	private String descripcion;
-	
+
 	// CONSTRUCTORES
 	public Producto(Long id, String nombre, BigDecimal precio, LocalDate caducidad, String descripcion) {
 		setId(id);
@@ -37,14 +45,14 @@ public class Producto {
 
 	}
 
-	// GETTERS Y SETTERS
+	// GETTERS Y SETTERS / PROPIEDADES
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		if (id != null && id < 0) {
-			throw new RuntimeException("No se admiten valores negativos");
+			throw new EntidadesException("No se admiten valores negativos");
 		}
 
 		this.id = id;
@@ -55,6 +63,10 @@ public class Producto {
 	}
 
 	public void setNombre(String nombre) {
+		if (nombre != null && nombre.length() > maximoNombre) {
+			throw new EntidadesException("No se admiten valores superiores a " + maximoNombre + " caracteres");
+		}
+
 		this.nombre = nombre;
 	}
 
@@ -72,7 +84,7 @@ public class Producto {
 
 	public void setCaducidad(LocalDate caducidad) {
 		if (caducidad != null && caducidad.isBefore(LocalDate.now())) {
-			throw new RuntimeException("No se pueden crear productos caducados");
+			throw new EntidadesException("No se pueden crear productos caducados");
 		}
 
 		this.caducidad = caducidad;
@@ -85,20 +97,31 @@ public class Producto {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
+
+	public static int getMaximoNombre() {
+		return maximoNombre;
+	}
+
+	public static void setMaximoNombre(int maximoNombre) {
+		Producto.maximoNombre = maximoNombre;
+	}
+
+	// MÉTODOS DE INSTANCIA
 	public boolean isCaducado() {
-		if(caducidad == null) {
-			throw new RuntimeException("No hay caducidad");
+		if (caducidad == null) {
+			throw new EntidadesException("No hay caducidad");
 		}
-		
+
 		return caducidad.isBefore(LocalDate.now());
 	}
 
+	// HASHCODE
 	@Override
 	public int hashCode() {
 		return Objects.hash(caducidad, descripcion, id, nombre, precio);
 	}
 
+	// EQUALS
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -113,6 +136,7 @@ public class Producto {
 				&& Objects.equals(precio, other.precio);
 	}
 
+	// TOSTRING
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", caducidad=" + caducidad
