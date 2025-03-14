@@ -1,11 +1,8 @@
 package accesodatos;
 
-import java.math.BigDecimal;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import entidades.Producto;
 
@@ -19,6 +16,14 @@ public class ProductoDao {
 	private static final String SQL_INSERT = "INSERT INTO productos (nombre, precio, caducidad, descripcion) VALUES (?,?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE productos SET nombre=?, precio=?, caducidad=?, descripcion=? WHERE id=?";
 	private static final String SQL_DELETE = "DELETE FROM productos WHERE id=?";
+	
+	static {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			throw new AccesoDatosException("No se ha encontrado el driver de MySQL");
+		}
+	}
 	
 	public ProductoDao(String jdbcUrl, String jdbcUsuario, String jdbcPassword) {
 		super();
@@ -47,7 +52,7 @@ public class ProductoDao {
 			
 			return productos;
 		} catch (SQLException e) {
-			throw new RuntimeException("Ha habido un error en la consulta", e);
+			throw new AccesoDatosException("Ha habido un error en la consulta", e);
 		}
 	}
 
