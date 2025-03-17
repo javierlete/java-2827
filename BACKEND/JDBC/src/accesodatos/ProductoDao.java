@@ -1,6 +1,9 @@
 package accesodatos;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -33,33 +36,23 @@ public class ProductoDao {
 	}
 
 	public Iterable<Producto> obtenerProductos() {
-		try (var con = DriverManager.getConnection(jdbcUrl, jdbcUsuario, jdbcPassword);
-				var pst = con.prepareStatement(SQL_SELECT);
-				var rs = pst.executeQuery()) {
+		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_SELECT); var rs = pst.executeQuery()) {
 			var productos = new ArrayList<Producto>();
 
 			while (rs.next()) {
-				var id = rs.getLong("id");
-				var nombre = rs.getString("nombre");
-				var precio = rs.getBigDecimal("precio");
-				var caducidadDate = rs.getDate("caducidad");
-				var caducidad = caducidadDate == null ? null : caducidadDate.toLocalDate();
-				var descripcion = rs.getString("descripcion");
-
-				var producto = new Producto(id, nombre, precio, caducidad, descripcion);
+				var producto = filaAProducto(rs);
 
 				productos.add(producto);
 			}
 
 			return productos;
 		} catch (SQLException e) {
-			throw new AccesoDatosException("Ha habido un error en la consulta de todos los productos", e);
+			throw new AccesoDatosException("Error en la consulta de todos los productos", e);
 		}
 	}
 
 	public Producto obtenerPorId(Long id) {
-		try (var con = DriverManager.getConnection(jdbcUrl, jdbcUsuario, jdbcPassword);
-				var pst = con.prepareStatement(SQL_SELECT_ID);) {
+		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_SELECT_ID);) {
 			pst.setLong(1, id);
 
 			var rs = pst.executeQuery();
@@ -67,62 +60,77 @@ public class ProductoDao {
 			Producto producto = null;
 
 			if (rs.next()) {
-				var nombre = rs.getString("nombre");
-				var precio = rs.getBigDecimal("precio");
-				var caducidadDate = rs.getDate("caducidad");
-				var caducidad = caducidadDate == null ? null : caducidadDate.toLocalDate();
-				var descripcion = rs.getString("descripcion");
-
-				producto = new Producto(id, nombre, precio, caducidad, descripcion);
+				producto = filaAProducto(rs);
 			}
 
 			return producto;
 		} catch (SQLException e) {
-			throw new AccesoDatosException("Ha habido un error en la consulta del producto por id " + id, e);
+			throw new AccesoDatosException("Error en la consulta del producto por id " + id, e);
 		}
 	}
 
 	public Producto insertar(Producto producto) {
-		try (var con = DriverManager.getConnection(jdbcUrl, jdbcUsuario, jdbcPassword);
-				var pst = con.prepareStatement(SQL_INSERT);) {
-			pst.setString(1, producto.getNombre());
-			pst.setBigDecimal(2, producto.getPrecio());
-			pst.setDate(3, producto.getCaducidad() == null ? null: java.sql.Date.valueOf(producto.getCaducidad()));
-			pst.setString(4, producto.getDescripcion());
+		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_INSERT);) {
+			productoAFila(producto, pst);
 
 			pst.executeUpdate();
 
 			return producto;
 		} catch (SQLException e) {
-			throw new AccesoDatosException("Ha habido un error en la inserción de producto " + producto, e);
+			throw new AccesoDatosException("Error en la inserción de producto " + producto, e);
 		}
 	}
 
 	public Producto modificar(Producto producto) {
-		try (var con = DriverManager.getConnection(jdbcUrl, jdbcUsuario, jdbcPassword);
-				var pst = con.prepareStatement(SQL_UPDATE);) {
-			pst.setString(1, producto.getNombre());
-			pst.setBigDecimal(2, producto.getPrecio());
-			pst.setDate(3, producto.getCaducidad() == null ? null: java.sql.Date.valueOf(producto.getCaducidad()));
-			pst.setString(4, producto.getDescripcion());
-			pst.setLong(5, producto.getId());
+		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_UPDATE);) {
+			productoAFila(producto, pst);
 
 			pst.executeUpdate();
 
 			return producto;
 		} catch (SQLException e) {
-			throw new AccesoDatosException("Ha habido un error en la modificación del producto " + producto, e);
+			throw new AccesoDatosException("Error en la modificación del producto " + producto, e);
 		}
 	}
 
 	public void borrar(Long id) {
-		try (var con = DriverManager.getConnection(jdbcUrl, jdbcUsuario, jdbcPassword);
-				var pst = con.prepareStatement(SQL_DELETE);) {
+		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_DELETE);) {
 			pst.setLong(1, id);
 
 			pst.executeUpdate();
 		} catch (SQLException e) {
-			throw new AccesoDatosException("Ha habido un error en el borrado del producto id " + id, e);
+			throw new AccesoDatosException("Error en el borrado del producto id " + id, e);
+		}
+	}
+
+	private Connection obtenerConexion() throws SQLException {
+		try {
+			return DriverManager.getConnection(jdbcUrl, jdbcUsuario, jdbcPassword);
+		} catch (SQLException e) {
+			throw new AccesoDatosException("No se ha podido conectar a la base de datos", e);
+		}
+	}
+
+	private Producto filaAProducto(ResultSet rs) throws SQLException {
+		var id = rs.getLong("id");
+		var nombre = rs.getString("nombre");
+		var precio = rs.getBigDecimal("precio");
+		var caducidadDate = rs.getDate("caducidad");
+		var caducidad = caducidadDate == null ? null : caducidadDate.toLocalDate();
+		var descripcion = rs.getString("descripcion");
+
+		var producto = new Producto(id, nombre, precio, caducidad, descripcion); // TODO NOSONAR
+		return producto;
+	}
+
+	private void productoAFila(Producto producto, PreparedStatement pst) throws SQLException {
+		pst.setString(1, producto.getNombre());
+		pst.setBigDecimal(2, producto.getPrecio());
+		pst.setDate(3, producto.getCaducidad() == null ? null : java.sql.Date.valueOf(producto.getCaducidad()));
+		pst.setString(4, producto.getDescripcion());
+
+		if (producto.getId() != null) {
+			pst.setLong(5, producto.getId());
 		}
 	}
 }
