@@ -10,7 +10,7 @@ public class Producto {
 
 	// BLOQUE ESTÁTICO / "CONSTRUCTOR ESTÁTICO" / "CONSTRUCTOR DE CLASE"
 	static {
-		maximoNombre = 5;
+		maximoNombre = 20;
 	}
 
 	// VARIABLES DE INSTANCIA / ATRIBUTOS / CAMPOS / FIELDS
