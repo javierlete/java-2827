@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class ProductoPrueba {
 	public static void main(String[] args) {
-		Producto.setMaximoNombre(10);
+		Producto.setMaximoNombre(15);
 		
 		Producto p = new Producto();
 		
