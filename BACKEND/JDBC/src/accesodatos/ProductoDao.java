@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import entidades.Categoria;
 import entidades.Producto;
 
 public class ProductoDao {
@@ -14,10 +15,17 @@ public class ProductoDao {
 	private String jdbcUsuario;
 	private String jdbcPassword;
 
-	private static final String SQL_SELECT = "SELECT id, nombre, precio, caducidad, descripcion FROM productos";
-	private static final String SQL_SELECT_ID = SQL_SELECT + " WHERE id=?";
-	private static final String SQL_INSERT = "INSERT INTO productos (nombre, precio, caducidad, descripcion) VALUES (?,?,?,?)";
-	private static final String SQL_UPDATE = "UPDATE productos SET nombre=?, precio=?, caducidad=?, descripcion=? WHERE id=?";
+	private static final String SQL_SELECT = """
+        SELECT 
+            p.id, p.nombre, p.precio, p.caducidad, p.descripcion, p.categorias_id, 
+            c.id, c.nombre, c.descripcion 
+        FROM productos p
+        JOIN categorias c ON categorias_id = c.id
+        """;
+	private static final String SQL_SELECT_ID = SQL_SELECT + " WHERE p.id=?";
+	
+	private static final String SQL_INSERT = "INSERT INTO productos (nombre, precio, caducidad, descripcion, categorias_id) VALUES (?,?,?,?,?)";
+	private static final String SQL_UPDATE = "UPDATE productos SET nombre=?, precio=?, caducidad=?, descripcion=?, categorias_id=? WHERE id=?";
 	private static final String SQL_DELETE = "DELETE FROM productos WHERE id=?";
 
 	static {
@@ -112,14 +120,20 @@ public class ProductoDao {
 	}
 
 	private Producto filaAProducto(ResultSet rs) throws SQLException {
-		var id = rs.getLong("id");
-		var nombre = rs.getString("nombre");
-		var precio = rs.getBigDecimal("precio");
-		var caducidadDate = rs.getDate("caducidad");
+		var id = rs.getLong("p.id");
+		var nombre = rs.getString("p.nombre");
+		var precio = rs.getBigDecimal("p.precio");
+		var caducidadDate = rs.getDate("p.caducidad");
 		var caducidad = caducidadDate == null ? null : caducidadDate.toLocalDate();
-		var descripcion = rs.getString("descripcion");
+		var descripcion = rs.getString("p.descripcion");
 
-		var producto = new Producto(id, nombre, precio, caducidad, descripcion); // TODO NOSONAR
+		var cId = rs.getLong("c.id");
+		var cNombre = rs.getString("c.nombre");
+		var cDescripcion = rs.getString("c.descripcion");
+		
+		var categoria = new Categoria(cId, cNombre, cDescripcion);
+		
+		var producto = new Producto(id, nombre, precio, caducidad, descripcion, categoria); // TODO NOSONAR
 		return producto;
 	}
 
@@ -128,9 +142,10 @@ public class ProductoDao {
 		pst.setBigDecimal(2, producto.getPrecio());
 		pst.setDate(3, producto.getCaducidad() == null ? null : java.sql.Date.valueOf(producto.getCaducidad()));
 		pst.setString(4, producto.getDescripcion());
+		pst.setLong(5, producto.getCategoria().getId());
 
 		if (producto.getId() != null) {
-			pst.setLong(5, producto.getId());
+			pst.setLong(6, producto.getId());
 		}
 	}
 }
