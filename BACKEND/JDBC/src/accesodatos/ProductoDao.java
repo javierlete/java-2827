@@ -17,8 +17,8 @@ public class ProductoDao {
 
 	private static final String SQL_SELECT = """
         SELECT 
-            p.id, p.nombre, p.precio, p.caducidad, p.descripcion, p.categorias_id, 
-            c.id, c.nombre, c.descripcion 
+            p.id AS p_id, p.nombre AS p_nombre, p.precio AS p_precio, p.caducidad AS p_caducidad, p.descripcion AS p_descripcion, p.categorias_id AS p_categorias_id, 
+            c.id AS c_id, c.nombre AS c_nombre, c.descripcion AS c_descripcion 
         FROM productos p
         JOIN categorias c ON categorias_id = c.id
         """;
@@ -120,16 +120,16 @@ public class ProductoDao {
 	}
 
 	private Producto filaAProducto(ResultSet rs) throws SQLException {
-		var id = rs.getLong("p.id");
-		var nombre = rs.getString("p.nombre");
-		var precio = rs.getBigDecimal("p.precio");
-		var caducidadDate = rs.getDate("p.caducidad");
+		var id = rs.getLong("p_id");
+		var nombre = rs.getString("p_nombre");
+		var precio = rs.getBigDecimal("p_precio");
+		var caducidadDate = rs.getDate("p_caducidad");
 		var caducidad = caducidadDate == null ? null : caducidadDate.toLocalDate();
-		var descripcion = rs.getString("p.descripcion");
+		var descripcion = rs.getString("p_descripcion");
 
-		var cId = rs.getLong("c.id");
-		var cNombre = rs.getString("c.nombre");
-		var cDescripcion = rs.getString("c.descripcion");
+		var cId = rs.getLong("c_id");
+		var cNombre = rs.getString("c_nombre");
+		var cDescripcion = rs.getString("c_descripcion");
 		
 		var categoria = new Categoria(cId, cNombre, cDescripcion);
 		
