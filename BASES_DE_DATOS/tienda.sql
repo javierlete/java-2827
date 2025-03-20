@@ -234,6 +234,24 @@ INSERT INTO `productos` VALUES (1,'Modificado',4321.00,'2025-07-20','Prueba',2),
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `productos_con_filas`
+--
+
+DROP TABLE IF EXISTS `productos_con_filas`;
+/*!50001 DROP VIEW IF EXISTS `productos_con_filas`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `productos_con_filas` AS SELECT 
+ 1 AS `id`,
+ 1 AS `nombre`,
+ 1 AS `precio`,
+ 1 AS `caducidad`,
+ 1 AS `descripcion`,
+ 1 AS `categorias_id`,
+ 1 AS `num_fila`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -269,6 +287,24 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database '2827_tienda'
 --
+
+--
+-- Final view structure for view `productos_con_filas`
+--
+
+/*!50001 DROP VIEW IF EXISTS `productos_con_filas`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `productos_con_filas` AS select `productos`.`id` AS `id`,`productos`.`nombre` AS `nombre`,`productos`.`precio` AS `precio`,`productos`.`caducidad` AS `caducidad`,`productos`.`descripcion` AS `descripcion`,`productos`.`categorias_id` AS `categorias_id`,row_number() OVER (ORDER BY `productos`.`id` )  AS `num_fila` from `productos` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -279,4 +315,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-18 11:16:56
+-- Dump completed on 2025-03-20  9:23:56
