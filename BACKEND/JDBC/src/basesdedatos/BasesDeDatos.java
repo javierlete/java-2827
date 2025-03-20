@@ -5,13 +5,44 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class BasesDeDatos {
-	public static void main(String[] args) throws ClassNotFoundException {
+	public static void main(String[] args) throws SQLException {
+//		ejemploCompleto(); // NOSONAR
+		ejemploResultSetMetaData();
+	}
+	
+	public static void ejemploResultSetMetaData() throws SQLException {
+		String url = System.getenv("JDBC_URL");
+		String user = System.getenv("JDBC_USER");
+		String pass = System.getenv("JDBC_PASS");
+		
+		Connection con = DriverManager.getConnection(url, user, pass); // NOSONAR
+		Statement st = con.createStatement();  // NOSONAR
+		ResultSet rs = st.executeQuery("SELECT c.nombre AS c_nombre FROM categorias AS c");
+		
+		ResultSetMetaData rsmd = rs.getMetaData();
+		
+		System.out.println(rsmd.getSchemaName(1));
+		System.out.println(rsmd.getCatalogName(1));
+		System.out.println(rsmd.getTableName(1));
+		
+		for(int i = 1; i <= rsmd.getColumnCount(); i++) {
+			System.out.print(rsmd.getColumnName(i) + " ");
+			System.out.println(rsmd.getColumnLabel(i) + " ");
+		}
+		
+		rs.next();
+		
+		System.out.println(rs.getString("c_nombre"));
+	}
+	
+	public static void ejemploCompleto() throws ClassNotFoundException {
 		Scanner sc = new Scanner(System.in);
 
 		String url = System.getenv("JDBC_URL");
