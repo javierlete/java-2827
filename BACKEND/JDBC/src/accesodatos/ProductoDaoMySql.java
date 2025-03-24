@@ -1,8 +1,6 @@
 package accesodatos;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,11 +10,7 @@ import entidades.Categoria;
 import entidades.Producto;
 import entidades.ProductoPerecedero;
 
-public class ProductoDaoMySql implements ProductoDao {
-	private String jdbcUrl;
-	private String jdbcUsuario;
-	private String jdbcPassword;
-
+public class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 	private static final String SQL_SELECT = """
 			SELECT
 			    p.id AS p_id, p.nombre AS p_nombre, p.precio AS p_precio, p.caducidad AS p_caducidad, p.descripcion AS p_descripcion, p.categorias_id AS p_categorias_id,
@@ -32,19 +26,8 @@ public class ProductoDaoMySql implements ProductoDao {
 	private static final String SQL_UPDATE = "UPDATE productos SET nombre=?, precio=?, caducidad=?, descripcion=?, categorias_id=? WHERE id=?";
 	private static final String SQL_DELETE = "DELETE FROM productos WHERE id=?";
 
-	static {
-		try {
-			Class.forName(System.getenv("JDBC_DRIVER"));
-		} catch (ClassNotFoundException e) {
-			throw new AccesoDatosException("No se ha encontrado el driver de base de datos");
-		}
-	}
-
 	public ProductoDaoMySql(String jdbcUrl, String jdbcUsuario, String jdbcPassword) {
-		super();
-		this.jdbcUrl = jdbcUrl;
-		this.jdbcUsuario = jdbcUsuario;
-		this.jdbcPassword = jdbcPassword;
+		super(jdbcUrl, jdbcUsuario, jdbcPassword, DRIVER_MYSQL);
 	}
 
 	@Override
@@ -53,7 +36,7 @@ public class ProductoDaoMySql implements ProductoDao {
 			var productos = new ArrayList<Producto>();
 
 			while (rs.next()) {
-				var producto = filaAProducto(rs);
+				var producto = filaAObjeto(rs);
 
 				productos.add(producto);
 			}
@@ -74,7 +57,7 @@ public class ProductoDaoMySql implements ProductoDao {
 			Producto producto = null;
 
 			if (rs.next()) {
-				producto = filaAProducto(rs);
+				producto = filaAObjeto(rs);
 			}
 
 			return producto;
@@ -92,7 +75,7 @@ public class ProductoDaoMySql implements ProductoDao {
 			var productos = new ArrayList<Producto>();
 
 			while (rs.next()) {
-				var producto = filaAProducto(rs);
+				var producto = filaAObjeto(rs);
 
 				productos.add(producto);
 			}
@@ -113,7 +96,7 @@ public class ProductoDaoMySql implements ProductoDao {
 			var productos = new ArrayList<Producto>();
 
 			while (rs.next()) {
-				var producto = filaAProducto(rs);
+				var producto = filaAObjeto(rs);
 
 				productos.add(producto);
 			}
@@ -128,7 +111,7 @@ public class ProductoDaoMySql implements ProductoDao {
 	@Override
 	public Producto insertar(Producto producto) {
 		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_INSERT);) {
-			productoAFila(producto, pst);
+			objetoAFila(producto, pst);
 
 			pst.executeUpdate();
 
@@ -141,7 +124,7 @@ public class ProductoDaoMySql implements ProductoDao {
 	@Override
 	public Producto modificar(Producto producto) {
 		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_UPDATE);) {
-			productoAFila(producto, pst);
+			objetoAFila(producto, pst);
 
 			pst.executeUpdate();
 
@@ -162,15 +145,7 @@ public class ProductoDaoMySql implements ProductoDao {
 		}
 	}
 
-	private Connection obtenerConexion() throws SQLException {
-		try {
-			return DriverManager.getConnection(jdbcUrl, jdbcUsuario, jdbcPassword);
-		} catch (SQLException e) {
-			throw new AccesoDatosException("No se ha podido conectar a la base de datos", e);
-		}
-	}
-
-	private Producto filaAProducto(ResultSet rs) throws SQLException {
+	protected Producto filaAObjeto(ResultSet rs) throws SQLException {
 		var id = rs.getLong("p_id");
 		var nombre = rs.getString("p_nombre");
 		var precio = rs.getBigDecimal("p_precio");
@@ -195,7 +170,7 @@ public class ProductoDaoMySql implements ProductoDao {
 		return producto;
 	}
 
-	private void productoAFila(Producto producto, PreparedStatement pst) throws SQLException {
+	protected void objetoAFila(Producto producto, PreparedStatement pst) throws SQLException {
 		pst.setString(1, producto.getNombre());
 		pst.setBigDecimal(2, producto.getPrecio());
 

@@ -1,7 +1,5 @@
 package accesodatos;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,11 +7,7 @@ import java.util.ArrayList;
 
 import entidades.Categoria;
 
-public class CategoriaDaoMySql implements CategoriaDao {
-	private String jdbcUrl;
-	private String jdbcUsuario;
-	private String jdbcPassword;
-
+public class CategoriaDaoMySql extends JdbcDao<Categoria> implements CategoriaDao {
 	private static final String SQL_SELECT = """
 			SELECT
 			    id, nombre, descripcion
@@ -25,19 +19,8 @@ public class CategoriaDaoMySql implements CategoriaDao {
 	private static final String SQL_UPDATE = "UPDATE categorias SET nombre=?, descripcion=? WHERE id=?";
 	private static final String SQL_DELETE = "DELETE FROM categorias WHERE id=?";
 
-	static {
-		try {
-			Class.forName(System.getenv("JDBC_DRIVER"));
-		} catch (ClassNotFoundException e) {
-			throw new AccesoDatosException("No se ha encontrado el driver de base de datos");
-		}
-	}
-
 	public CategoriaDaoMySql(String jdbcUrl, String jdbcUsuario, String jdbcPassword) {
-		super();
-		this.jdbcUrl = jdbcUrl;
-		this.jdbcUsuario = jdbcUsuario;
-		this.jdbcPassword = jdbcPassword;
+		super(jdbcUrl, jdbcUsuario, jdbcPassword, DRIVER_MYSQL);
 	}
 
 	@Override
@@ -46,7 +29,7 @@ public class CategoriaDaoMySql implements CategoriaDao {
 			var categorias = new ArrayList<Categoria>();
 
 			while (rs.next()) {
-				var categoria = filaACategoria(rs);
+				var categoria = filaAObjeto(rs);
 
 				categorias.add(categoria);
 			}
@@ -67,7 +50,7 @@ public class CategoriaDaoMySql implements CategoriaDao {
 			Categoria categoria = null;
 
 			if (rs.next()) {
-				categoria = filaACategoria(rs);
+				categoria = filaAObjeto(rs);
 			}
 
 			return categoria;
@@ -79,7 +62,7 @@ public class CategoriaDaoMySql implements CategoriaDao {
 	@Override
 	public Categoria insertar(Categoria categoria) {
 		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_INSERT);) {
-			categoriaAFila(categoria, pst);
+			objetoAFila(categoria, pst);
 
 			pst.executeUpdate();
 
@@ -92,7 +75,7 @@ public class CategoriaDaoMySql implements CategoriaDao {
 	@Override
 	public Categoria modificar(Categoria categoria) {
 		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_UPDATE);) {
-			categoriaAFila(categoria, pst);
+			objetoAFila(categoria, pst);
 
 			pst.executeUpdate();
 
@@ -113,15 +96,8 @@ public class CategoriaDaoMySql implements CategoriaDao {
 		}
 	}
 
-	private Connection obtenerConexion() throws SQLException {
-		try {
-			return DriverManager.getConnection(jdbcUrl, jdbcUsuario, jdbcPassword);
-		} catch (SQLException e) {
-			throw new AccesoDatosException("No se ha podido conectar a la base de datos", e);
-		}
-	}
-
-	private Categoria filaACategoria(ResultSet rs) throws SQLException {
+	@Override
+	protected Categoria filaAObjeto(ResultSet rs) throws SQLException {
 		var id = rs.getLong("id");
 		var nombre = rs.getString("nombre");
 		var descripcion = rs.getString("descripcion");
@@ -129,7 +105,8 @@ public class CategoriaDaoMySql implements CategoriaDao {
 		return new Categoria(id, nombre, descripcion);
 	}
 
-	private void categoriaAFila(Categoria categoria, PreparedStatement pst) throws SQLException {
+	@Override
+	protected void objetoAFila(Categoria categoria, PreparedStatement pst) throws SQLException {
 		pst.setString(1, categoria.getNombre());
 		pst.setString(2, categoria.getDescripcion());
 
