@@ -1,14 +1,15 @@
-package accesodatos;
+package pruebas;
 
 import java.math.BigDecimal;
 
+import accesodatos.Fabrica;
+import accesodatos.ProductoDao;
 import entidades.Categoria;
 import entidades.Producto;
 
 public class ProductoDaoPrueba {
 	public static void main(String[] args) {
-		ProductoDao dao = new ProductoDaoMySql(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"),
-				System.getenv("JDBC_PASS"));
+		ProductoDao dao = Fabrica.getProductoDao();
 		
 //		dao.insertar(new Producto(null, "Nuevo con categoría", new BigDecimal(1234), null, null, new Categoria(1L, null, null))); // NOSONAR
 //		dao.insertar(new Producto("Patatas", new BigDecimal(12), LocalDate.of(2025, 5, 5))); // NOSONAR
