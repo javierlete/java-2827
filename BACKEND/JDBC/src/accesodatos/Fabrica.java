@@ -1,6 +1,8 @@
 package accesodatos;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 public class Fabrica {
@@ -25,11 +27,13 @@ public class Fabrica {
 	}
 
 	public static ProductoDao getProductoDao() {
-		return switch (productoDao) {
-		case "mysql" ->
-			new ProductoDaoMySql(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"), System.getenv("JDBC_PASS"));
-		case "fake" -> new ProductoDaoFake();
-		default -> null;
-		};
+		try {
+			Class<?> clase = Class.forName(productoDao);
+			Constructor<?> constructor3String = clase.getConstructor(String.class, String.class, String.class);
+			return (ProductoDao)constructor3String.newInstance(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"), System.getenv("JDBC_PASS"));
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			throw new AccesoDatosException("No se ha podido crear el DAO " + productoDao);
+		}
 	}
 }
