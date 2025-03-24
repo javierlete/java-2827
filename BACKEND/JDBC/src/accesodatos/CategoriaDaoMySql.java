@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import entidades.Categoria;
 
-public class CategoriaDaoMySql extends JdbcDao<Categoria> implements CategoriaDao {
+class CategoriaDaoMySql extends JdbcDao<Categoria> implements CategoriaDao {
 	private static final String SQL_SELECT = """
 			SELECT
 			    id, nombre, descripcion

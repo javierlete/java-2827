@@ -10,7 +10,7 @@ import entidades.Categoria;
 import entidades.Producto;
 import entidades.ProductoPerecedero;
 
-public class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
+class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 	private static final String SQL_SELECT = """
 			SELECT
 			    p.id AS p_id, p.nombre AS p_nombre, p.precio AS p_precio, p.caducidad AS p_caducidad, p.descripcion AS p_descripcion, p.categorias_id AS p_categorias_id,
