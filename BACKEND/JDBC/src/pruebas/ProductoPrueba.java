@@ -1,7 +1,10 @@
-package entidades;
+package pruebas;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import entidades.Producto;
+import entidades.ProductoPerecedero;
 
 public class ProductoPrueba {
 	public static void main(String[] args) {

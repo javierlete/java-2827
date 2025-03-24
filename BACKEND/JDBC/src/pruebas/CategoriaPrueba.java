@@ -1,6 +1,10 @@
-package entidades;
+package pruebas;
 
 import java.math.BigDecimal;
+
+import entidades.Categoria;
+import entidades.Producto;
+import entidades.ProductoPerecedero;
 
 public class CategoriaPrueba {
 
