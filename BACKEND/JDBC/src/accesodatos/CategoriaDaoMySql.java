@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import entidades.Categoria;
 
-public class CategoriaDaoMySql {
+public class CategoriaDaoMySql implements CategoriaDao {
 	private String jdbcUrl;
 	private String jdbcUsuario;
 	private String jdbcPassword;
@@ -40,6 +40,7 @@ public class CategoriaDaoMySql {
 		this.jdbcPassword = jdbcPassword;
 	}
 
+	@Override
 	public Iterable<Categoria> obtenerTodos() {
 		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_SELECT); var rs = pst.executeQuery()) {
 			var categorias = new ArrayList<Categoria>();
@@ -56,6 +57,7 @@ public class CategoriaDaoMySql {
 		}
 	}
 
+	@Override
 	public Categoria obtenerPorId(Long id) {
 		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_SELECT_ID);) {
 			pst.setLong(1, id);
@@ -74,6 +76,7 @@ public class CategoriaDaoMySql {
 		}
 	}
 
+	@Override
 	public Categoria insertar(Categoria categoria) {
 		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_INSERT);) {
 			categoriaAFila(categoria, pst);
@@ -86,6 +89,7 @@ public class CategoriaDaoMySql {
 		}
 	}
 
+	@Override
 	public Categoria modificar(Categoria categoria) {
 		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_UPDATE);) {
 			categoriaAFila(categoria, pst);
@@ -98,6 +102,7 @@ public class CategoriaDaoMySql {
 		}
 	}
 
+	@Override
 	public void borrar(Long id) {
 		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_DELETE);) {
 			pst.setLong(1, id);

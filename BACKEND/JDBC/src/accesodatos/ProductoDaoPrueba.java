@@ -7,7 +7,7 @@ import entidades.Producto;
 
 public class ProductoDaoPrueba {
 	public static void main(String[] args) {
-		var dao = new ProductoDaoMySql(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"),
+		ProductoDao dao = new ProductoDaoMySql(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"),
 				System.getenv("JDBC_PASS"));
 		
 //		dao.insertar(new Producto(null, "Nuevo con categoría", new BigDecimal(1234), null, null, new Categoria(1L, null, null))); // NOSONAR
@@ -25,7 +25,7 @@ public class ProductoDaoPrueba {
 		
 //		dao.borrar(2L); // NOSONAR
 		
-		for(Producto producto: dao.obtenerProductos()) {
+		for(Producto producto: dao.obtenerTodos()) {
 			System.out.println(producto);
 		}
 		
