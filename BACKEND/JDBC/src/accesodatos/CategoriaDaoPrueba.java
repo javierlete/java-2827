@@ -4,7 +4,7 @@ import entidades.Categoria;
 
 public class CategoriaDaoPrueba {
 	public static void main(String[] args) {
-		CategoriaDao dao = new CategoriaDao(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"),
+		CategoriaDaoMySql dao = new CategoriaDaoMySql(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"),
 				System.getenv("JDBC_PASS"));
 		System.out.println(System.getenv("JDBC_PASS"));
 		
