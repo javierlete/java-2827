@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import entidades.Categoria;
 import entidades.Producto;
+import entidades.ProductoPerecedero;
 
 public class ProductoDao {
 	private String jdbcUrl;
@@ -133,14 +134,26 @@ public class ProductoDao {
 		
 		var categoria = new Categoria(cId, cNombre, cDescripcion);
 		
-		var producto = new Producto(id, nombre, precio, caducidad, descripcion, categoria); // TODO NOSONAR
+		Producto producto;
+		
+		if(caducidad == null) {
+			producto = new Producto(id, nombre, precio, descripcion, categoria); // TODO NOSONAR
+		} else {
+			producto = new ProductoPerecedero(id, nombre, precio, caducidad, descripcion, categoria); // TODO NOSONAR
+		}
 		return producto;
 	}
 
 	private void productoAFila(Producto producto, PreparedStatement pst) throws SQLException {
 		pst.setString(1, producto.getNombre());
 		pst.setBigDecimal(2, producto.getPrecio());
-		pst.setDate(3, producto.getCaducidad() == null ? null : java.sql.Date.valueOf(producto.getCaducidad()));
+		
+		if(producto instanceof ProductoPerecedero pp) {
+			pst.setDate(3, java.sql.Date.valueOf(pp.getCaducidad()));
+		} else {
+			pst.setDate(3, null);
+		}
+		
 		pst.setString(4, producto.getDescripcion());
 		pst.setLong(5, producto.getCategoria().getId());
 

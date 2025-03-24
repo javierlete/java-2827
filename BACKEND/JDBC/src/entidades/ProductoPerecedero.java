@@ -42,8 +42,8 @@ public class ProductoPerecedero extends Producto {
 	}
 
 	public void setCaducidad(LocalDate caducidad) {
-		if (caducidad != null && caducidad.isBefore(LocalDate.now())) {
-			throw new EntidadesException("No se pueden crear productos caducados");
+		if (caducidad == null || caducidad.isBefore(LocalDate.now())) {
+			throw new EntidadesException("No se pueden crear productos caducados o sin caducidad");
 		}
 
 		this.caducidad = caducidad;

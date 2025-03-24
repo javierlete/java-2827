@@ -9,7 +9,7 @@ public class CategoriaPrueba {
 		
 		System.out.println(informatica);
 		
-		Producto portatil = new Producto(1L, "Portátil", new BigDecimal("1234"), null, null, informatica);
+		Producto portatil = new ProductoPerecedero(1L, "Portátil", new BigDecimal("1234"), null, null, informatica);
 		
 		System.out.println(portatil);
 	}
