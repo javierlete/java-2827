@@ -1,6 +1,7 @@
 package bases;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ForEachTraducido {
 	public static void main(String[] args) {
@@ -13,10 +14,10 @@ public class ForEachTraducido {
 			System.out.println(elemento);
 		}
 		
-		var iterator = lista.iterator();
+		Iterator<String> iterator = lista.iterator();
 		
 		while(iterator.hasNext()) {
-			var elemento = iterator.next();
+			String elemento = iterator.next();
 			System.out.println(elemento);
 		}
 	}
