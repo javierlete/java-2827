@@ -37,6 +37,15 @@ public class ProductoPerecedero extends Producto {
 		this(id, nombre, precio, caducidad, descripcion, null);
 	}
 
+	@Override
+	public String getNombre() {
+		if(isCaducado()) {
+			return super.getNombre() + " CADUCADO";
+		}
+		
+		return super.getNombre();
+	}
+
 	public LocalDate getCaducidad() {
 		return caducidad;
 	}

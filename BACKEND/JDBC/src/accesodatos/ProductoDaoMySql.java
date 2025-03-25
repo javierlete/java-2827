@@ -145,6 +145,7 @@ class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 		}
 	}
 
+	@Override
 	protected Producto filaAObjeto(ResultSet rs) throws SQLException {
 		var id = rs.getLong("p_id");
 		var nombre = rs.getString("p_nombre");
@@ -170,6 +171,7 @@ class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 		return producto;
 	}
 
+	@Override
 	protected void objetoAFila(Producto producto, PreparedStatement pst) throws SQLException {
 		pst.setString(1, producto.getNombre());
 		pst.setBigDecimal(2, producto.getPrecio());
