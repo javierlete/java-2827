@@ -3,7 +3,7 @@ package entidades;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Producto {
+public class Producto implements Formateable {
 	// CONSTANTES
 	protected static final String NOMBRE_POR_DEFECTO = "NO TIENE NOMBRE";
 	protected static final BigDecimal PRECIO_POR_DEFECTO = BigDecimal.ZERO;
@@ -136,6 +136,15 @@ public class Producto {
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", descripcion=" + descripcion
 				+ ", categoria=" + categoria + "]";
+	}
+
+	@Override
+	public String formatear() {
+		return String.format("""
+				%11s: %s
+				%11s: %s
+				%11s: %s
+				""", "Id", id, "Nombre", nombre, "Precio", precio);
 	}
 
 }

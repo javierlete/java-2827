@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Categoria {
+public class Categoria implements Formateable {
 	private Long id;
 	private String nombre;
 	private String descripcion;
@@ -67,6 +67,15 @@ public class Categoria {
 	@Override
 	public String toString() {
 		return "Categoria [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";
+	}
+
+	@Override
+	public String formatear() {
+		return String.format("""
+				%11s: %s
+				%11s: %s
+				%11s: %s
+				""", "Id", id, "Nombre", nombre, "Descripcion", descripcion);
 	}
 
 }

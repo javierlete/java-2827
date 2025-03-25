@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class ProductoPerecedero extends Producto {
+public class ProductoPerecedero extends Producto implements Formateable {
 	private LocalDate caducidad;
 
 	public ProductoPerecedero(Long id, String nombre, BigDecimal precio, LocalDate caducidad, String descripcion,
@@ -92,6 +92,13 @@ public class ProductoPerecedero extends Producto {
 		return String.format(
 				"ProductoPerecedero [id=%s, nombre=%s, precio=%s, caducidad=%s, descripcion=%s, categoria=%s]",
 				getId(), getNombre(), getPrecio(), getCaducidad(), getDescripcion(), getCategoria());
+	}
+
+	@Override
+	public String formatear() {
+		return super.formatear() + String.format("""
+				%11s: %s
+				""", "Caducidad", caducidad);
 	}
 	
 	
