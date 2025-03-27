@@ -3,8 +3,8 @@ package accesodatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
+import bibliotecas.JdbcDao;
 import entidades.Categoria;
 
 class CategoriaDaoMySql extends JdbcDao<Categoria> implements CategoriaDao {
@@ -25,75 +25,27 @@ class CategoriaDaoMySql extends JdbcDao<Categoria> implements CategoriaDao {
 
 	@Override
 	public Iterable<Categoria> obtenerTodos() {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_SELECT); var rs = pst.executeQuery()) {
-			var categorias = new ArrayList<Categoria>();
-
-			while (rs.next()) {
-				var categoria = filaAObjeto(rs);
-
-				categorias.add(categoria);
-			}
-
-			return categorias;
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en la consulta de todos los registros", e);
-		}
+		return consulta(SQL_SELECT);
 	}
 
 	@Override
 	public Categoria obtenerPorId(Long id) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_SELECT_ID);) {
-			pst.setLong(1, id);
-
-			var rs = pst.executeQuery();
-
-			Categoria categoria = null;
-
-			if (rs.next()) {
-				categoria = filaAObjeto(rs);
-			}
-
-			return categoria;
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en la consulta del registro por id " + id, e);
-		}
+		return consultaDeUno(SQL_SELECT_ID, id);
 	}
 
 	@Override
 	public Categoria insertar(Categoria categoria) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_INSERT);) {
-			objetoAFila(categoria, pst);
-
-			pst.executeUpdate();
-
-			return categoria;
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en la inserción del registro " + categoria, e);
-		}
+		return cambio(SQL_INSERT, categoria);
 	}
 
 	@Override
 	public Categoria modificar(Categoria categoria) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_UPDATE);) {
-			objetoAFila(categoria, pst);
-
-			pst.executeUpdate();
-
-			return categoria;
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en la modificación del registro " + categoria, e);
-		}
+		return cambio(SQL_UPDATE, categoria);
 	}
 
 	@Override
 	public void borrar(Long id) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_DELETE);) {
-			pst.setLong(1, id);
-
-			pst.executeUpdate();
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en el borrado del registro id " + id, e);
-		}
+		cambioPorId(SQL_DELETE, id);
 	}
 
 	@Override

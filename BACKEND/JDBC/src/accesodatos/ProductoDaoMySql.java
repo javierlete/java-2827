@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
+import bibliotecas.JdbcDao;
 import entidades.Categoria;
 import entidades.Producto;
 import entidades.ProductoPerecedero;
@@ -32,117 +32,37 @@ class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 
 	@Override
 	public Iterable<Producto> obtenerTodos() {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_SELECT); var rs = pst.executeQuery()) {
-			var productos = new ArrayList<Producto>();
-
-			while (rs.next()) {
-				var producto = filaAObjeto(rs);
-
-				productos.add(producto);
-			}
-
-			return productos;
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en la consulta de todos los productos", e);
-		}
+		return consulta(SQL_SELECT);
 	}
 
 	@Override
 	public Producto obtenerPorId(Long id) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_SELECT_ID);) {
-			pst.setLong(1, id);
-
-			var rs = pst.executeQuery();
-
-			Producto producto = null;
-
-			if (rs.next()) {
-				producto = filaAObjeto(rs);
-			}
-
-			return producto;
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en la consulta del producto por id " + id, e);
-		}
+		return consultaDeUno(SQL_SELECT_ID, id);
 	}
 
 	@Override
 	public Iterable<Producto> buscarPorNombre(String nombre) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_SELECT_NOMBRE);) {
-			pst.setString(1, "%" + nombre + "%");
-
-			var rs = pst.executeQuery();
-			var productos = new ArrayList<Producto>();
-
-			while (rs.next()) {
-				var producto = filaAObjeto(rs);
-
-				productos.add(producto);
-			}
-
-			return productos;
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en la consulta de todos los productos por nombre " + nombre, e);
-		}
+		return consulta(SQL_SELECT_NOMBRE, "%" + nombre + "%");
 	}
 
 	@Override
 	public Iterable<Producto> buscarPorPrecio(BigDecimal minimo, BigDecimal maximo) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_SELECT_PRECIO);) {
-			pst.setBigDecimal(1, minimo);
-			pst.setBigDecimal(2, maximo);
-
-			var rs = pst.executeQuery();
-			var productos = new ArrayList<Producto>();
-
-			while (rs.next()) {
-				var producto = filaAObjeto(rs);
-
-				productos.add(producto);
-			}
-
-			return productos;
-		} catch (SQLException e) {
-			throw new AccesoDatosException(
-					"Error en la consulta de todos los productos por precio entre " + minimo + " y " + maximo, e);
-		}
+		return consulta(SQL_SELECT_PRECIO, minimo, maximo);
 	}
 
 	@Override
 	public Producto insertar(Producto producto) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_INSERT);) {
-			objetoAFila(producto, pst);
-
-			pst.executeUpdate();
-
-			return producto;
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en la inserción de producto " + producto, e);
-		}
+		return cambio(SQL_INSERT, producto);
 	}
 
 	@Override
 	public Producto modificar(Producto producto) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_UPDATE);) {
-			objetoAFila(producto, pst);
-
-			pst.executeUpdate();
-
-			return producto;
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en la modificación del producto " + producto, e);
-		}
+		return cambio(SQL_UPDATE, producto);
 	}
 
 	@Override
 	public void borrar(Long id) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(SQL_DELETE);) {
-			pst.setLong(1, id);
-
-			pst.executeUpdate();
-		} catch (SQLException e) {
-			throw new AccesoDatosException("Error en el borrado del producto id " + id, e);
-		}
+		cambioPorId(SQL_DELETE, id);
 	}
 
 	@Override
