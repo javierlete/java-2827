@@ -1,39 +1,35 @@
-package accesodatos;
+package bibliotecas;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
+import accesodatos.AccesoDatosException;
+
 public class Fabrica {
 	private Fabrica() {
 	}
 
-	private static String productoDao;
-
+	private static Properties props; 
+	
 	static {
 		try {
-			Properties props = new Properties();
+			props = new Properties();
 			props.load(Fabrica.class.getClassLoader().getResourceAsStream("basesdedatos.properties"));
-			
-			productoDao = props.getProperty("dao.producto");
 		} catch (IOException e) {
 			throw new AccesoDatosException("No se ha podido leer el fichero de configuración", e);
 		}
 	}
 
-	public static CategoriaDao getCategoriaDao() {
-		return new CategoriaDaoMySql(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"), System.getenv("JDBC_PASS"));
-	}
-
-	public static ProductoDao getProductoDao() {
+	public static Object getObject(String nombre) {
 		try {
-			Class<?> clase = Class.forName(productoDao);
+			Class<?> clase = Class.forName(props.getProperty(nombre));
 			Constructor<?> constructor3String = clase.getConstructor(String.class, String.class, String.class);
-			return (ProductoDao)constructor3String.newInstance(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"), System.getenv("JDBC_PASS"));
+			return constructor3String.newInstance(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"), System.getenv("JDBC_PASS"));
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
-			throw new AccesoDatosException("No se ha podido crear el DAO " + productoDao);
+			throw new AccesoDatosException("No se ha podido crear el DAO " + nombre);
 		}
 	}
 }

@@ -1,12 +1,12 @@
 package pruebas;
 
 import accesodatos.CategoriaDao;
-import accesodatos.Fabrica;
+import bibliotecas.Fabrica;
 import entidades.Categoria;
 
 public class CategoriaDaoPrueba {
 	public static void main(String[] args) {
-		CategoriaDao dao = Fabrica.getCategoriaDao();
+		CategoriaDao dao = (CategoriaDao) Fabrica.getObject("dao.categoria");
 		
 		System.out.println(System.getenv("JDBC_PASS"));
 		
