@@ -1,4 +1,6 @@
-package accesodatos;
+package bibliotecas;
+
+import accesodatos.AccesoDatosException;
 
 public interface Dao<T> {
 	default Iterable<T> obtenerTodos() {
