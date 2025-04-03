@@ -12,6 +12,7 @@
 
 	<artifactId>entidades</artifactId>
 
-	<name>entidades</name>
+	<name>Entidades</name>
+	<description>POJOs que conforman las clases que vamos a utilizar como datos</description>
 
 </project>
