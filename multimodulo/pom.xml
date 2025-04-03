@@ -14,6 +14,7 @@
 	
 	<modules>
 		<module>entidades</module>
+		<module>accesodatos</module>
 	</modules>
 	
 	<properties>
@@ -45,5 +46,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
 </project>
