@@ -1,4 +1,4 @@
-package com.ipartek.formacion.multimodulo.accesodatos;
+package com.ipartek.formacion.multimodulo.accesodatos.map;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -6,6 +6,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import com.ipartek.formacion.bibliotecas.AccesoDatosException;
+import com.ipartek.formacion.multimodulo.accesodatos.ProductoDao;
 import com.ipartek.formacion.multimodulo.entidades.Producto;
 
 public class ProductoDaoMap implements ProductoDao {

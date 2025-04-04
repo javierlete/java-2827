@@ -9,16 +9,17 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>logicanegocio</artifactId>
+	<artifactId>map</artifactId>
 
-	<name>Lógica de negocio</name>
-	<description>Todas las acciones que se pueden hacer en la aplicación</description>
+	<name>Map</name>
+	<description>Implementación del DAO con un Map en memoria</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.ipartek.formacion</groupId>
-			<artifactId>mysql</artifactId>
+			<artifactId>accesodatos</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+
 </project>

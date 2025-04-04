@@ -11,6 +11,8 @@
     <module>accesodatos</module>
     <module>logicanegocio</module>
     <module>presentacion-consola</module>
+    <module>mysql</module>
+    <module>map</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

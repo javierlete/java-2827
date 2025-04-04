@@ -1,10 +1,11 @@
-package com.ipartek.formacion.multimodulo.accesodatos;
+package com.ipartek.formacion.multimodulo.accesodatos.mysql;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.ipartek.formacion.bibliotecas.JdbcDao;
+import com.ipartek.formacion.multimodulo.accesodatos.CategoriaDao;
 import com.ipartek.formacion.multimodulo.entidades.Categoria;
 
 public class CategoriaDaoMySql extends JdbcDao<Categoria> implements CategoriaDao {

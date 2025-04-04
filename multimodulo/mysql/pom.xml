@@ -9,16 +9,23 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>logicanegocio</artifactId>
+	<artifactId>mysql</artifactId>
 
-	<name>Lógica de negocio</name>
-	<description>Todas las acciones que se pueden hacer en la aplicación</description>
+	<name>MySQL</name>
+	<description>Implementación del acceso a datos con MySQL</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.ipartek.formacion</groupId>
-			<artifactId>mysql</artifactId>
+			<artifactId>accesodatos</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>9.2.0</version>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 </project>
