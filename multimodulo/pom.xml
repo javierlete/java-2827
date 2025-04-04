@@ -10,6 +10,7 @@
     <module>entidades</module>
     <module>accesodatos</module>
     <module>logicanegocio</module>
+    <module>presentacion-consola</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
