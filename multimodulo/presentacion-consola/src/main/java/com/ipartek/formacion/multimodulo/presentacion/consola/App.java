@@ -8,6 +8,7 @@ import com.ipartek.formacion.multimodulo.logicanegocio.AnonimoNegocioImpl;
 
 public class App {
 	private static final AnonimoNegocio NEGOCIO = new AnonimoNegocioImpl();
+	private static final Scanner SC = new Scanner(System.in);
 	
     public static void main(String[] args) {
     	boolean salir = false;
@@ -37,8 +38,8 @@ public class App {
 
 	private static int pedirEntero(String mensaje) {
 		System.out.print(mensaje + ": ");
-		Scanner sc = new Scanner(System.in);
-		return sc.nextInt();
+		
+		return SC.nextInt();
 	}
 
 	private static void procesar(int opcion) {
