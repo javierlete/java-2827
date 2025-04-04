@@ -13,6 +13,7 @@
     <module>presentacion-consola</module>
     <module>mysql</module>
     <module>map</module>
+    <module>presentacion-swing</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -9,15 +9,15 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>logicanegocio</artifactId>
+	<artifactId>presentacion-swing</artifactId>
 
-	<name>Lógica de negocio</name>
-	<description>Todas las acciones que se pueden hacer en la aplicación</description>
+	<name>Swing</name>
+	<description>Presentación utilizando Swing</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.ipartek.formacion</groupId>
-			<artifactId>map</artifactId>
+			<artifactId>logicanegocio</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
