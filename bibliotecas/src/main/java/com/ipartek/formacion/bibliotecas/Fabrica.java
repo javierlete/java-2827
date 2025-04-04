@@ -27,7 +27,7 @@ public class Fabrica {
 			return constructor3String.newInstance(System.getenv("JDBC_URL"), System.getenv("JDBC_USER"), System.getenv("JDBC_PASS"));
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
-			throw new AccesoDatosException("No se ha podido crear el DAO " + nombre);
+			throw new AccesoDatosException("No se ha podido crear el DAO " + nombre, e);
 		}
 	}
 }
