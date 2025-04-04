@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import com.ipartek.formacion.bibliotecas.JdbcDao;
 import com.ipartek.formacion.multimodulo.entidades.Categoria;
 
-class CategoriaDaoMySql extends JdbcDao<Categoria> implements CategoriaDao {
+public class CategoriaDaoMySql extends JdbcDao<Categoria> implements CategoriaDao {
 	private static final String SQL_SELECT = """
 			SELECT
 			    id, nombre, descripcion

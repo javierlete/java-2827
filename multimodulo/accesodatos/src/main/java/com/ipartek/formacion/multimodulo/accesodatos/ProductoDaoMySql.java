@@ -10,7 +10,7 @@ import com.ipartek.formacion.multimodulo.entidades.Categoria;
 import com.ipartek.formacion.multimodulo.entidades.Producto;
 import com.ipartek.formacion.multimodulo.entidades.ProductoPerecedero;
 
-class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
+public class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 	private static final String SQL_SELECT = """
 			SELECT
 			    p.id AS p_id, p.nombre AS p_nombre, p.precio AS p_precio, p.caducidad AS p_caducidad, p.descripcion AS p_descripcion, p.categorias_id AS p_categorias_id,
