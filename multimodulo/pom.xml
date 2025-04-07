@@ -14,7 +14,7 @@
     <module>mysql</module>
     <module>map</module>
     <module>presentacion-swing</module>
-    <module></module>  <module>presentacion-web</module>
+    <module>presentacion-web</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
