@@ -3,6 +3,18 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <dependent-module archiveName="logicanegocio-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/logicanegocio/logicanegocio">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="map-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/map/map">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="accesodatos-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/accesodatos/accesodatos">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="entidades-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/entidades/entidades">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="proyectoweb"/>
         <property name="java-output-path" value="/proyectoweb/build/classes"/>
     </wb-module>
