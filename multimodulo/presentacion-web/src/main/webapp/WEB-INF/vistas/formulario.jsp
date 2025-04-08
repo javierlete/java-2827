@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/vistas/includes/cabecera.jsp" %>
 
+<pre>${producto}</pre>
+
 <form>
-	<input placeholder="Nombre">
-	<input placeholder="Precio">
-	<textarea placeholder="Descripción"></textarea>
+	<input value="${producto.nombre}" placeholder="Nombre">
+	<input value="${producto.precio}" placeholder="Precio">
+	<textarea placeholder="Descripción">${producto.descripcion}</textarea>
 	
 	<button>Guardar</button>
 </form>
