@@ -4,7 +4,7 @@
 	<ul>
 		<c:forEach items="${productos}" var="p">
 			<li>
-				${p.nombre}
+				${p.nombre} (${p.categoria.nombre})
 				
 				<a href="formulario?id=${p.id}">Editar</a>
 			</li>
