@@ -5,6 +5,6 @@
     xmlns:javaee="http://xmlns.jcp.org/xml/ns/javaee"
     xmlns:xml="http://www.w3.org/XML/1998/namespace"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee https://xmlns.jcp.org/xml/ns/javaee/web-app_6_1.xsd">
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd">
   <display-name>Archetype Created Web Application</display-name>
 </web-app>
