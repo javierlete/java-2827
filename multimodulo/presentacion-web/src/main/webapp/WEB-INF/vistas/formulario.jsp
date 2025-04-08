@@ -4,10 +4,11 @@
 
 <pre>${producto}</pre>
 
-<form>
-	<input value="${producto.nombre}" placeholder="Nombre">
-	<input value="${producto.precio}" placeholder="Precio">
-	<textarea placeholder="Descripción">${producto.descripcion}</textarea>
+<form action="formulario" method="post">
+	<input type="hidden" name="id" value="${producto.id}">
+	<input name="nombre" value="${producto.nombre}" placeholder="Nombre">
+	<input name="precio" value="${producto.precio}" placeholder="Precio">
+	<textarea name="descripcion" placeholder="Descripción">${producto.descripcion}</textarea>
 	
 	<button>Guardar</button>
 </form>

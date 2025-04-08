@@ -1,7 +1,9 @@
 package com.ipartek.formacion.multimodulo.presentacionweb.controladores;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
+import com.ipartek.formacion.multimodulo.entidades.Producto;
 import com.ipartek.formacion.multimodulo.logicanegocio.AnonimoNegocio;
 import com.ipartek.formacion.multimodulo.logicanegocio.AnonimoNegocioImpl;
 
@@ -35,19 +37,59 @@ public class FormularioServlet extends HttpServlet {
 			// Empaquetar en modelos
 			// Ejecutar lógica de negocio
 			AnonimoNegocio negocio = new AnonimoNegocioImpl();
-			
+
 			var producto = negocio.buscarPorId(id);
 
 			// Preparar modelo para la siguiente vista
 			request.setAttribute("producto", producto);
 		}
-		
+
 		// Saltar a la siguiente vista
 		try {
 			request.getRequestDispatcher("/WEB-INF/vistas/formulario.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			System.err.println("Error en la petición de formulario");
 			System.err.println(e.getStackTrace());
+		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Recoger información de la petición
+		String sId = request.getParameter("id");
+		String nombre = request.getParameter("nombre");
+		String sPrecio = request.getParameter("precio");
+		String descripcion = request.getParameter("descripcion");
+		
+		Long id = null;
+		
+		try {
+			id = sId.isBlank() ? null: Long.parseLong(sId);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		BigDecimal precio = new BigDecimal(sPrecio);
+		
+		// Empaquetar en modelos
+		var producto = new Producto(id, nombre, precio, descripcion);
+		
+		// Ejecutar lógica de negocio
+		if(id == null) {
+			System.out.println("INSERTAR");
+		} else {
+			System.out.println("MODIFICAR");
+		}
+		
+		System.out.println(producto);
+		
+		// Preparar modelo para la siguiente vista
+		// Saltar a la siguiente vista
+		try {
+			response.sendRedirect("listado");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
