@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/listado")
+@WebServlet("/listadoejemploservlet")
 public class ListadoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,7 +27,8 @@ public class ListadoServlet extends HttpServlet {
 			lista.append("<li>" + producto.getNombre() + "</li>");
 		}
 		
-		response.getWriter().printf("""
+		response.getWriter().printf( // NOSONAR
+				"""
                 <!DOCTYPE html>
                 <html lang="es">
                 <head>
