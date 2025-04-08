@@ -1,9 +1,9 @@
 package com.ipartek.formacion.multimodulo.presentacionweb.controladores;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
-import com.ipartek.formacion.multimodulo.entidades.Producto;
+import com.ipartek.formacion.multimodulo.logicanegocio.AnonimoNegocio;
+import com.ipartek.formacion.multimodulo.logicanegocio.AnonimoNegocioImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -34,8 +34,9 @@ public class FormularioServlet extends HttpServlet {
 
 			// Empaquetar en modelos
 			// Ejecutar lógica de negocio
-			var producto = new Producto(id, "Producto de pruebas " + id, new BigDecimal("1" + id),
-					"Descripción del producto de pruebas " + id);
+			AnonimoNegocio negocio = new AnonimoNegocioImpl();
+			
+			var producto = negocio.buscarPorId(id);
 
 			// Preparar modelo para la siguiente vista
 			request.setAttribute("producto", producto);
