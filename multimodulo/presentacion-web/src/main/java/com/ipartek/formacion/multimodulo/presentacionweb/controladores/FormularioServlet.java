@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 import com.ipartek.formacion.multimodulo.entidades.Producto;
+import com.ipartek.formacion.multimodulo.logicanegocio.AdminNegocio;
+import com.ipartek.formacion.multimodulo.logicanegocio.AdminNegocioImpl;
 import com.ipartek.formacion.multimodulo.logicanegocio.AnonimoNegocio;
 import com.ipartek.formacion.multimodulo.logicanegocio.AnonimoNegocioImpl;
 
@@ -76,13 +78,13 @@ public class FormularioServlet extends HttpServlet {
 		var producto = new Producto(id, nombre, precio, descripcion);
 		
 		// Ejecutar lógica de negocio
-		if(id == null) {
-			System.out.println("INSERTAR");
-		} else {
-			System.out.println("MODIFICAR");
-		}
+		AdminNegocio negocio = new AdminNegocioImpl();
 		
-		System.out.println(producto);
+		if(id == null) {
+			negocio.anyadirProducto(producto);
+		} else {
+			negocio.modificarProducto(producto);
+		}
 		
 		// Preparar modelo para la siguiente vista
 		// Saltar a la siguiente vista
