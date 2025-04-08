@@ -1,10 +1,6 @@
-<%@page import="com.ipartek.formacion.multimodulo.entidades.Producto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-@SuppressWarnings("unchecked")
-Iterable<Producto> productos = (Iterable<Producto>)request.getAttribute("productos");
-%>
+<%@ taglib uri="jakarta.tags.core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,10 +8,10 @@ Iterable<Producto> productos = (Iterable<Producto>)request.getAttribute("product
 <title>Listado</title>
 </head>
 <body>
-	<ul>	
-	<% for (var producto : productos) { %>
-		<li><%=producto.getNombre()%></li>		
-	<% } %>
+	<ul>
+		<c:forEach items="${productos}" var="p">
+			<li>${p.nombre}</li>
+		</c:forEach>
 	</ul>
 </body>
 </html>
