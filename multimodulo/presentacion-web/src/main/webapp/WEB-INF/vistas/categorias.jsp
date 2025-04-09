@@ -3,9 +3,9 @@
 <%@ include file="/WEB-INF/vistas/includes/cabecera.jsp" %>
 
 <ul>
-	<li><a href="#">Categoría 1</a></li>
-	<li><a href="#">Categoría 2</a></li>
-	<li><a href="#">Categoría 3</a></li>
+	<c:forEach items="${categorias}" var="c">
+		<li><a href="categoria?id=${c.id}">${c.nombre}</a></li>
+	</c:forEach>
 </ul>
 
 <%@ include file="/WEB-INF/vistas/includes/pie.jsp" %>

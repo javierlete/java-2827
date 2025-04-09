@@ -1,6 +1,9 @@
 package com.ipartek.formacion.multimodulo.presentacionweb.controladores;
 
 import java.io.IOException;
+import java.util.List;
+
+import com.ipartek.formacion.multimodulo.entidades.Categoria;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,6 +23,12 @@ public class CategoriasServlet extends HttpServlet {
 		// Empaquetar en modelos
 		// Ejecutar lógica de negocio
 		// Preparar modelo para la siguiente vista
+		var categorias = List.of(
+				new Categoria(1L, "Informática", ""),
+				new Categoria(2L, "Electrónica", ""));
+		
+		request.setAttribute("categorias", categorias);
+		
 		// Saltar a la siguiente vista
 		try {
 			request.getRequestDispatcher("/WEB-INF/vistas/categorias.jsp").forward(request, response);
