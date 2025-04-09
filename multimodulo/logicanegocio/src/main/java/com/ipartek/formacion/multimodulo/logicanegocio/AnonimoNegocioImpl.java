@@ -34,4 +34,14 @@ public class AnonimoNegocioImpl implements AnonimoNegocio {
 		throw new LogicaNegocioException("Las categorías no se pueden filtrar por un stream");
 	}
 
+	@Override
+	public Categoria detalleCategoria(Long id) {
+		return categoriaDao.obtenerPorId(id);
+	}
+
+	@Override
+	public Iterable<Producto> productosDeCategoria(Long idCategoria) {
+		return productoDao.buscarPorCategoria(idCategoria);
+	}
+
 }

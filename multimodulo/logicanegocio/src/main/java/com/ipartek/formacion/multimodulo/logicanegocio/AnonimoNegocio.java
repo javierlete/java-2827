@@ -9,4 +9,8 @@ public interface AnonimoNegocio {
 	Producto buscarPorId(Long id);
 
 	Iterable<Categoria> listarCategorias();
+	
+	Categoria detalleCategoria(Long id);
+	
+	Iterable<Producto> productosDeCategoria(Long idCategoria);
 }
