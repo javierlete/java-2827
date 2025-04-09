@@ -1,32 +1,37 @@
 package com.ipartek.formacion.multimodulo.logicanegocio;
 
-import java.util.List;
+import java.util.Collection;
 
 import com.ipartek.formacion.bibliotecas.Fabrica;
+import com.ipartek.formacion.multimodulo.accesodatos.CategoriaDao;
 import com.ipartek.formacion.multimodulo.accesodatos.ProductoDao;
 import com.ipartek.formacion.multimodulo.entidades.Categoria;
 import com.ipartek.formacion.multimodulo.entidades.Producto;
 
 public class AnonimoNegocioImpl implements AnonimoNegocio {
 
-	private static final ProductoDao dao = (ProductoDao) Fabrica.getObject("dao.producto");
+	private static final ProductoDao productoDao = (ProductoDao) Fabrica.getObject("dao.producto");
+	private static final CategoriaDao categoriaDao = (CategoriaDao) Fabrica.getObject("dao.categoria");
 
 	@Override
 	public Iterable<Producto> listarProductos() {
-		return dao.obtenerTodos();
+		return productoDao.obtenerTodos();
 	}
 
 	@Override
 	public Producto buscarPorId(Long id) {
-		return dao.obtenerPorId(id);
+		return productoDao.obtenerPorId(id);
 	}
 
 	@Override
 	public Iterable<Categoria> listarCategorias() {
-		return List.of(
-				new Categoria(1L, "Electrónica", ""),
-				new Categoria(2L, "Informática", "")
-		);
+		var categorias = categoriaDao.obtenerTodos();
+		
+		if(categorias instanceof Collection<Categoria> coleccion) {
+			return coleccion.stream().filter(categoria -> categoria.getId() != 1L).toList();
+		}
+		
+		throw new LogicaNegocioException("Las categorías no se pueden filtrar por un stream");
 	}
 
 }
