@@ -22,6 +22,7 @@ public class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 	private static final String SQL_SELECT_ID = SQL_SELECT + " WHERE p.id=?";
 	private static final String SQL_SELECT_NOMBRE = SQL_SELECT + " WHERE p.nombre LIKE ?";
 	private static final String SQL_SELECT_PRECIO = SQL_SELECT + " WHERE p.precio BETWEEN ? AND ?";
+	private static final String SQL_SELECT_CATEGORIA = SQL_SELECT + " WHERE p.categorias_id = ?";
 
 	private static final String SQL_INSERT = "INSERT INTO productos (nombre, precio, caducidad, descripcion, categorias_id) VALUES (?,?,?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE productos SET nombre=?, precio=?, caducidad=?, descripcion=?, categorias_id=? WHERE id=?";
@@ -49,6 +50,11 @@ public class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 	@Override
 	public Iterable<Producto> buscarPorPrecio(BigDecimal minimo, BigDecimal maximo) {
 		return consulta(SQL_SELECT_PRECIO, minimo, maximo);
+	}
+
+	@Override
+	public Iterable<Producto> buscarPorCategoria(Long idCategoria) {
+		return consulta(SQL_SELECT_CATEGORIA, idCategoria);
 	}
 
 	@Override
