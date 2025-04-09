@@ -1,9 +1,9 @@
 package com.ipartek.formacion.multimodulo.presentacionweb.controladores;
 
 import java.io.IOException;
-import java.util.List;
 
-import com.ipartek.formacion.multimodulo.entidades.Categoria;
+import com.ipartek.formacion.multimodulo.logicanegocio.AnonimoNegocio;
+import com.ipartek.formacion.multimodulo.logicanegocio.AnonimoNegocioImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,11 +22,10 @@ public class CategoriasServlet extends HttpServlet {
 		// Convertir la información recibida
 		// Empaquetar en modelos
 		// Ejecutar lógica de negocio
-		// Preparar modelo para la siguiente vista
-		var categorias = List.of(
-				new Categoria(1L, "Informática", ""),
-				new Categoria(2L, "Electrónica", ""));
+		AnonimoNegocio negocio = new AnonimoNegocioImpl();
+		var categorias = negocio.listarCategorias();
 		
+		// Preparar modelo para la siguiente vista
 		request.setAttribute("categorias", categorias);
 		
 		// Saltar a la siguiente vista
