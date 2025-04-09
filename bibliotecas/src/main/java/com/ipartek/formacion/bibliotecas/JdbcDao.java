@@ -113,6 +113,9 @@ public abstract class JdbcDao<T> implements Dao<T> {
 		ejecutarSql(sql, pst -> {
 			try {
 				pst.setLong(1, id);
+				
+				pst.executeUpdate();
+				
 				return null;
 			} catch (SQLException e) {
 				throw new AccesoDatosException(ERROR_GENERICO);
