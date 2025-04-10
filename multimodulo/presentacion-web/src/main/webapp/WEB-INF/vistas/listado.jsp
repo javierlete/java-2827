@@ -6,12 +6,16 @@
 			<li>
 				${p.nombre} (${p.categoria.nombre})
 				
-				<a href="formulario?id=${p.id}">Editar</a>
+				<c:if test="${usuario != null}">
+					<a href="formulario?id=${p.id}">Editar</a>
+				</c:if>
 			</li>
 		</c:forEach>
 	</ul>
 	
-	<div>
-		<a href="formulario">Añadir</a>
-	</div>
+	<c:if test="${usuario != null}">
+		<div>
+			<a href="formulario">Añadir</a>
+		</div>
+	</c:if>
 <%@ include file="/WEB-INF/vistas/includes/pie.jsp" %>
