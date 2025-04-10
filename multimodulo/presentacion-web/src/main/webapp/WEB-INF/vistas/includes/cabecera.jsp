@@ -13,3 +13,11 @@
 <c:if test="${usuario != null}">
 	<p>Estás logueado con ${usuario}</p>
 </c:if>
+
+<nav>
+	<ul>
+		<li><a href="listado">Listado</a></li>
+		<li><a href="login">Inicio sesión</a></li>
+		<li><a href="logout">Cerrar sesión</a></li>
+	</ul>
+</nav>
