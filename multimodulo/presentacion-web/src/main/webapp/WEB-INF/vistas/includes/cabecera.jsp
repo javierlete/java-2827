@@ -9,3 +9,7 @@
 </head>
 <body>
 <h1>Multimódulo</h1>
+
+<c:if test="${usuario != null}">
+	<p>Estás logueado con ${usuario}</p>
+</c:if>
