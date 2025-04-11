@@ -1,10 +1,13 @@
 package com.ipartek.formacion.multimodulo.entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Categoria implements Formateable {
+public class Categoria implements Serializable, Formateable  {
+	private static final long serialVersionUID = -7383446729198770780L;
+	
 	private Long id;
 	private String nombre;
 	private String descripcion;

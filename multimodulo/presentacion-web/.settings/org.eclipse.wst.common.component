@@ -53,7 +53,7 @@
         
         
         <property name="java-output-path" value="/presentacion-web/target/classes"/>
-        <property name="context-root" value="/"/>
+        <property name="context-root" value="presentacion-web"/>
                             
     
     

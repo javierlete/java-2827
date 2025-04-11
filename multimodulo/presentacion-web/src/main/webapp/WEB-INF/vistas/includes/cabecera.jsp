@@ -28,3 +28,14 @@
 			</c:choose>
 		</ul>
 	</nav>
+	
+	<aside>
+		<h3>Carrito</h3>
+		<ul>
+		<c:forEach items="${carrito}" var="p">
+			<li>
+				${p.nombre} (${p.categoria.nombre})
+			</li>
+		</c:forEach>
+	</ul>
+	</aside>

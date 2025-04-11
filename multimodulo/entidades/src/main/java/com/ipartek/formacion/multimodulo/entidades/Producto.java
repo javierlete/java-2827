@@ -1,9 +1,12 @@
 package com.ipartek.formacion.multimodulo.entidades;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Producto implements Formateable {
+public class Producto implements Serializable, Formateable {
+	private static final long serialVersionUID = 1564087494724474758L;
+	
 	// CONSTANTES
 	protected static final String NOMBRE_POR_DEFECTO = "NO TIENE NOMBRE";
 	protected static final BigDecimal PRECIO_POR_DEFECTO = BigDecimal.ZERO;
