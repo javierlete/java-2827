@@ -45,6 +45,12 @@
 			<artifactId>logicanegocio</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.ipartek.formacion</groupId>
+			<artifactId>presentacion</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 </project>
