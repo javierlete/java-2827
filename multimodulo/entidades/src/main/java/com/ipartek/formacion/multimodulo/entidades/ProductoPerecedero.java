@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class ProductoPerecedero extends Producto implements Formateable {
+	private static final long serialVersionUID = -6065027374776025199L;
+	
 	private LocalDate caducidad;
 
 	public ProductoPerecedero(Long id, String nombre, BigDecimal precio, LocalDate caducidad, String descripcion,
