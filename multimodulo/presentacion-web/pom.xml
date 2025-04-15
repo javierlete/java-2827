@@ -16,6 +16,28 @@
 	<description>Capa de presentación web</description>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator-core -->
+		<!--		
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator-core</artifactId>
+			<version>0.59</version>
+		</dependency>
+-->
+		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>5.3.5</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/bootstrap-icons -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>bootstrap-icons</artifactId>
+			<version>1.11.3</version>
+		</dependency>
+
 		<!--
 		https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
 		<dependency>

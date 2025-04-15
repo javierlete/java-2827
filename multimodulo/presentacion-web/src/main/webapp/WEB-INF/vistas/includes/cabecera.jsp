@@ -11,9 +11,9 @@
 
 <base href="${pageContext.request.contextPath}/">
 
-<link href="css/bootstrap-icons.min.css" rel="stylesheet">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<script defer src="js/bootstrap.bundle.min.js"></script>
+<link href="webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="webjars/bootstrap/5.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script defer src="webjars/bootstrap/5.3.5/js/bootstrap.bundle.min.js"></script>
 <script defer src="js/password-ojo.js"></script>
 </head>
 <body class="h-100 d-flex flex-column justify-content-between">
