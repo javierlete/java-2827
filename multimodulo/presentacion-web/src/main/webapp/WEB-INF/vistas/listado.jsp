@@ -16,8 +16,11 @@
 				<img src="https://picsum.photos/400/300?${p.id}" class="card-img-top" alt="...">
 				<div class="card-body">
 					<h5 class="card-title">${p.nombre}</h5>
-					<p class="card-text">
-						<a class="btn btn-primary" href="carrito?id=${p.id}">Añadir al carrito</a>
+					<p class="card-text text-end">
+						<fmt:formatNumber type="currency" value="${p.precio}"/>
+					</p>
+					<p class="card-text text-end">
+						<a class="btn btn-primary" href="carrito?id=${p.id}"><i class="bi bi-cart"></i></a>
 						<c:if test="${usuario != null}">
 							<a class="btn btn-outline-primary" href="admin/formulario?id=${p.id}">Editar</a>
 						</c:if>
