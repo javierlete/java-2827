@@ -18,11 +18,10 @@ public class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 			    c.id AS c_id, c.nombre AS c_nombre, c.descripcion AS c_descripcion
 			FROM productos p
 			JOIN categorias c ON categorias_id = c.id
-			ORDER BY p.id
 			""";
-	private static final String SQL_SELECT_ID = SQL_SELECT + " WHERE p.id=?";
-	private static final String SQL_SELECT_NOMBRE = SQL_SELECT + " WHERE p.nombre LIKE ?";
-	private static final String SQL_SELECT_PRECIO = SQL_SELECT + " WHERE p.precio BETWEEN ? AND ?";
+	private static final String SQL_SELECT_ID = SQL_SELECT + " WHERE p.id=? ORDER BY p.id";
+	private static final String SQL_SELECT_NOMBRE = SQL_SELECT + " WHERE p.nombre LIKE ? ORDER BY p.nombre";
+	private static final String SQL_SELECT_PRECIO = SQL_SELECT + " WHERE p.precio BETWEEN ? AND ? ORDER BY p.precio";
 	private static final String SQL_SELECT_CATEGORIA = SQL_SELECT + " WHERE p.categorias_id = ?";
 
 	private static final String SQL_INSERT = "INSERT INTO productos (nombre, precio, caducidad, descripcion, categorias_id) VALUES (?,?,?,?,?)";
