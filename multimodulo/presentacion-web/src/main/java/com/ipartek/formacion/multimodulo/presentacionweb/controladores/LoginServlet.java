@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			
 			// Saltar a la siguiente vista
 			try {
-				response.sendRedirect("listado");
+				response.sendRedirect(request.getContextPath() + "/listado");
 				return;
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 		// Preparar modelo para la siguiente vista
 		// Saltar a la siguiente vista
 		try {
-			response.sendRedirect("login");
+			response.sendRedirect(request.getContextPath() + "/login");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

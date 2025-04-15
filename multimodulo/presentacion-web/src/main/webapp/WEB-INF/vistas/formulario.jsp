@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/vistas/includes/cabecera.jsp"%>
 
-<form action="formulario" method="post">
+<form action="admin/formulario" method="post">
 	<input type="hidden" name="id" value="${producto.id}">
 	<div class="row mb-3">
 		<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>

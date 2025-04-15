@@ -27,7 +27,7 @@ public class LogoutServlet extends HttpServlet {
 		// Preparar modelo para la siguiente vista
 		// Saltar a la siguiente vista
 		try {
-			response.sendRedirect("login");
+			response.sendRedirect(request.getContextPath() + "/login");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

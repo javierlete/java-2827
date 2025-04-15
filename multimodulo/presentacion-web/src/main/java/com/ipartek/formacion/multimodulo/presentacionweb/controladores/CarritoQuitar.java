@@ -39,7 +39,7 @@ public class CarritoQuitar extends HttpServlet {
 
 		// Saltar a la siguiente vista
 		try {
-			response.sendRedirect("carrito");
+			response.sendRedirect(request.getContextPath() + "/carrito");
 		} catch (IOException e) {
 			System.err.println("Error en la petición de carrito");
 			System.err.println(e.getStackTrace());

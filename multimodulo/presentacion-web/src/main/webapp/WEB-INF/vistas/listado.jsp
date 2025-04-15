@@ -19,7 +19,7 @@
 					<p class="card-text">
 						<a class="btn btn-primary" href="carrito?id=${p.id}">Añadir al carrito</a>
 						<c:if test="${usuario != null}">
-							<a class="btn btn-outline-primary" href="formulario?id=${p.id}">Editar</a>
+							<a class="btn btn-outline-primary" href="admin/formulario?id=${p.id}">Editar</a>
 						</c:if>
 					</p>
 				</div>

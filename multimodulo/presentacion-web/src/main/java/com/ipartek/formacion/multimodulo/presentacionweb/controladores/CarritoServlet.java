@@ -53,7 +53,7 @@ public class CarritoServlet extends HttpServlet {
 			// Preparar modelo para la siguiente vista
 			// Saltar a la siguiente vista
 			try {
-				response.sendRedirect("carrito");
+				response.sendRedirect(request.getContextPath() + "/carrito");
 				return;
 			} catch (IOException e) {
 				System.err.println("Error en la petición de carrito");
