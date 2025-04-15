@@ -11,9 +11,30 @@
 
 <base href="${pageContext.request.contextPath}/">
 
+<!-- Bootstrap Icons -->
 <link href="webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<!-- Bootstrap -->
 <link href="webjars/bootstrap/5.3.5/css/bootstrap.min.css" rel="stylesheet">
 <script defer src="webjars/bootstrap/5.3.5/js/bootstrap.bundle.min.js"></script>
+
+<!-- Datatables -->
+<link href="webjars/datatables/2.1.8/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+<script defer src="webjars/datatables/2.1.8/js/dataTables.min.js"></script>
+<script defer src="webjars/datatables/2.1.8/js/dataTables.bootstrap5.min.js"></script>
+
+<script defer>
+	$(function() {
+		new DataTable('table', {
+		    language: {
+		        url: 'json/datatables_es-ES.json',
+		    },
+		});
+	});
+</script>
+
+<!-- Scripts propios -->
 <script defer src="js/password-ojo.js"></script>
 </head>
 <body class="h-100 d-flex flex-column justify-content-between">
