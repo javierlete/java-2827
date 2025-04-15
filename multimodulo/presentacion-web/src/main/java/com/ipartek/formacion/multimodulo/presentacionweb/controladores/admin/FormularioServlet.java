@@ -1,4 +1,4 @@
-package com.ipartek.formacion.multimodulo.presentacionweb.controladores;
+package com.ipartek.formacion.multimodulo.presentacionweb.controladores.admin;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -48,7 +48,7 @@ public class FormularioServlet extends HttpServlet {
 
 		// Saltar a la siguiente vista
 		try {
-			request.getRequestDispatcher("/WEB-INF/vistas/formulario.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/vistas/admin/formulario.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			System.err.println("Error en la petición de formulario");
 			System.err.println(e.getStackTrace());

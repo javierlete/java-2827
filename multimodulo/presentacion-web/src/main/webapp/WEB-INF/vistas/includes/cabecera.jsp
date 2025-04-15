@@ -37,6 +37,7 @@
 
 					<c:if test="${usuario != null}">
 						<li class="navbar-text">${usuario}</li>
+						<li class="nav-item"><a class="nav-link" href="admin/listado">Administración</a></li>
 					</c:if>
 
 					<c:choose>
