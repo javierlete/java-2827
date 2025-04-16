@@ -2,6 +2,8 @@ package com.ipartek.formacion.multimodulo.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Producto implements Serializable, Formateable {
@@ -24,6 +26,8 @@ public class Producto implements Serializable, Formateable {
 	private String nombre;
 	private BigDecimal precio;
 	private String descripcion;
+	
+	private Map<String, String> errores = new HashMap<>();
 
 	private Categoria categoria;
 
@@ -60,7 +64,7 @@ public class Producto implements Serializable, Formateable {
 
 	public void setId(Long id) {
 		if (id != null && id < 0) {
-			throw new EntidadesException("No se admiten valores negativos");
+			errores.put("id", "No se admiten valores negativos");
 		}
 
 		this.id = id;
@@ -71,8 +75,8 @@ public class Producto implements Serializable, Formateable {
 	}
 
 	public void setNombre(String nombre) {
-		if (nombre == null || nombre.length() > maximoNombre) {
-			throw new EntidadesException("No se admiten valores superiores a " + maximoNombre + " caracteres ni nulos");
+		if (nombre == null || nombre.isBlank() || nombre.length() > maximoNombre) {
+			errores.put("nombre", "El nombre debe rellenarse y debe tener como máximo " + maximoNombre + " caracteres");
 		}
 
 		this.nombre = nombre;
@@ -83,8 +87,8 @@ public class Producto implements Serializable, Formateable {
 	}
 
 	public void setPrecio(BigDecimal precio) {
-		if (precio == null) {
-			throw new EntidadesException("No se admiten precios nulos");
+		if (precio == null || precio.compareTo(BigDecimal.ZERO) < 0) {
+			errores.put("precio", "El precio es obligatorio y debe ser mayor o igual que 0");
 		}
 
 		this.precio = precio;
@@ -95,6 +99,10 @@ public class Producto implements Serializable, Formateable {
 	}
 
 	public void setDescripcion(String descripcion) {
+		if(descripcion != null && descripcion.length() > 2000) {
+			errores.put("descripcion", "La descripción no puede tener más de 2000 caracteres");
+		}
+		
 		this.descripcion = descripcion;
 	}
 
@@ -104,6 +112,14 @@ public class Producto implements Serializable, Formateable {
 
 	public static void setMaximoNombre(int maximoNombre) {
 		Producto.maximoNombre = maximoNombre;
+	}
+
+	public Map<String, String> getErrores() {
+		return errores;
+	}
+	
+	public boolean hayErrores() {
+		return errores.size() > 0;
 	}
 
 	public Categoria getCategoria() {
@@ -137,8 +153,8 @@ public class Producto implements Serializable, Formateable {
 
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", descripcion=" + descripcion
-				+ ", categoria=" + categoria + "]";
+		return String.format("Producto [id=%s, nombre=%s, precio=%s, descripcion=%s, errores=%s, categoria=%s]", id,
+				nombre, precio, descripcion, errores, categoria);
 	}
 
 	@Override

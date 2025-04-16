@@ -63,33 +63,40 @@ public class FormularioServlet extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String sPrecio = request.getParameter("precio");
 		String descripcion = request.getParameter("descripcion");
-		
+
+		// Convertir la información recibida
 		Long id = null;
-		
+
 		try {
-			id = sId.isBlank() ? null: Long.parseLong(sId);
+			id = sId.isBlank() ? null : Long.parseLong(sId);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-		
-		BigDecimal precio = new BigDecimal(sPrecio);
-		
+
+		BigDecimal precio = sPrecio.isBlank() ? null : new BigDecimal(sPrecio);
+
 		// Empaquetar en modelos
 		var producto = new Producto(id, nombre, precio, descripcion);
-		
+
 		// Ejecutar lógica de negocio
-		AdminNegocio negocio = new AdminNegocioImpl();
+		if(producto.hayErrores()) {
+			request.setAttribute("producto", producto);
+			request.getRequestDispatcher("/WEB-INF/vistas/admin/formulario.jsp").forward(request, response);
+			return;
+		}
 		
-		if(id == null) {
+		AdminNegocio negocio = new AdminNegocioImpl();
+
+		if (id == null) {
 			negocio.anyadirProducto(producto);
 		} else {
 			negocio.modificarProducto(producto);
 		}
-		
+
 		// Preparar modelo para la siguiente vista
 		// Saltar a la siguiente vista
 		try {
-			response.sendRedirect(request.getContextPath() + "/listado");
+			response.sendRedirect(request.getContextPath() + "/admin/listado");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
