@@ -81,7 +81,11 @@ public class FormularioServlet extends HttpServlet {
 		// Ejecutar lógica de negocio
 		if(producto.hayErrores()) {
 			request.setAttribute("producto", producto);
-			request.getRequestDispatcher("/WEB-INF/vistas/admin/formulario.jsp").forward(request, response);
+			try {
+				request.getRequestDispatcher("/WEB-INF/vistas/admin/formulario.jsp").forward(request, response);
+			} catch (ServletException | IOException e) {
+				e.printStackTrace();
+			}
 			return;
 		}
 		
