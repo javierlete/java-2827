@@ -78,6 +78,14 @@
 			<version>3.0.1</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.eclipse/yasson -->
+		<dependency>
+			<groupId>org.eclipse</groupId>
+			<artifactId>yasson</artifactId>
+			<version>3.0.4</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>com.ipartek.formacion</groupId>
 			<artifactId>logicanegocio</artifactId>
