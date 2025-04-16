@@ -29,7 +29,7 @@ public abstract class JdbcDao<T> implements Dao<T> {
 		try {
 			Class.forName(jdbcDriver);
 		} catch (ClassNotFoundException e) {
-			throw new AccesoDatosException("No se ha encontrado el driver de base de datos");
+			throw new AccesoDatosException("No se ha encontrado el driver de base de datos", e);
 		}
 	}
 
@@ -103,7 +103,7 @@ public abstract class JdbcDao<T> implements Dao<T> {
 
 				return List.of(objeto);
 			} catch (SQLException e) {
-				throw new AccesoDatosException(ERROR_GENERICO);
+				throw new AccesoDatosException(ERROR_GENERICO, e);
 			}
 		});
 
@@ -118,7 +118,7 @@ public abstract class JdbcDao<T> implements Dao<T> {
 				
 				return null;
 			} catch (SQLException e) {
-				throw new AccesoDatosException(ERROR_GENERICO);
+				throw new AccesoDatosException(ERROR_GENERICO, e);
 			}
 		});
 	}
