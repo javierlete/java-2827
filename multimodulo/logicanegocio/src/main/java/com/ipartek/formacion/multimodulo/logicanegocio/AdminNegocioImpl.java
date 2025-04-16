@@ -5,7 +5,7 @@ import com.ipartek.formacion.multimodulo.accesodatos.ProductoDao;
 import com.ipartek.formacion.multimodulo.entidades.Categoria;
 import com.ipartek.formacion.multimodulo.entidades.Producto;
 
-public class AdminNegocioImpl implements AdminNegocio {
+public class AdminNegocioImpl extends AnonimoNegocioImpl implements AdminNegocio {
 	private static final ProductoDao dao = (ProductoDao) Fabrica.getObject("dao.producto");
 	
 	@Override
@@ -24,6 +24,11 @@ public class AdminNegocioImpl implements AdminNegocio {
 		}
 		
 		dao.modificar(producto);
+	}
+
+	@Override
+	public void borrarProducto(Long id) {
+		dao.borrar(id);
 	}
 	
 }
