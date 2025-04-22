@@ -2,6 +2,8 @@ import { Servicios } from './servicios.js';
 
 let form;
 let ul;
+let capaListado;
+let capaFormulario;
 
 const formatoEuro = new Intl.NumberFormat('es-ES', {
 	style: 'currency',
@@ -12,26 +14,35 @@ const formatoEuro = new Intl.NumberFormat('es-ES', {
 const servicioProductos = new Servicios('productos');
 
 window.addEventListener('DOMContentLoaded', async () => {
+	capaListado = document.querySelector('#listado');
+	capaFormulario = document.querySelector('#formulario')
+	
 	form = document.querySelector('form');
 	ul = document.querySelector('ul');
+
+	form.addEventListener('submit', guardar);
 
 	listado();
 });
 
 window.editar = async function editar(id) {
-	const producto = await servicioProductos.obtenerPorId(id);
+	if (id) {
+		const producto = await servicioProductos.obtenerPorId(id);
 
-	mostrar(form);
-
-	form.nombre.value = producto.nombre;
-	form.precio.value = producto.precio;
-	form.descripcion.value = producto.descripcion;
+		form.nombre.value = producto.nombre;
+		form.precio.value = producto.precio;
+		form.descripcion.value = producto.descripcion;
+	} else {
+		form.reset();
+	}
+	
+	mostrar(capaFormulario);
 }
 
 window.listado = async function listado() {
 	const productos = await servicioProductos.obtenerTodos();
 
-	mostrar(ul);
+	mostrar(capaListado);
 
 	ul.innerHTML = '';
 
@@ -49,14 +60,28 @@ window.listado = async function listado() {
 
 window.borrar = async function borrar(id) {
 	await servicioProductos.borrar(id);
-	
+
 	listado();
 }
 
 function mostrar(capa) {
-	const capas = document.querySelectorAll('body > *');
+	const capas = document.querySelectorAll('main > *');
 
 	capas.forEach(e => e.style.display = 'none');
 
 	capa.style.display = null;
+}
+
+async function guardar(evento) {
+	evento.preventDefault();
+
+	const producto = {
+		nombre: form.nombre.value,
+		precio: +form.precio.value,
+		descripcion: form.descripcion.value,
+	};
+
+	await servicioProductos.insertar(producto);
+
+	listado();
 }

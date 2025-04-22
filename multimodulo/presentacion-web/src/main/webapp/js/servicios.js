@@ -15,6 +15,17 @@ export class Servicios {
 		return await respuesta.json();
 	}
 	
+	async insertar(producto) {
+		const respuesta = await fetch(`${url}/${this.conjunto}`, {
+			method: 'POST',
+			body: JSON.stringify(producto),
+			headers: {
+				'Content-type': 'application/json'
+			}
+		});
+		return await respuesta.json();
+	}
+	
 	async borrar(id) {
 		const respuesta = await fetch(`${url}/${this.conjunto}/${id}`, { method: 'DELETE' })
 		
