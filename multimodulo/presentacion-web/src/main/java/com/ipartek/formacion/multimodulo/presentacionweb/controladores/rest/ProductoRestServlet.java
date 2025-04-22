@@ -20,6 +20,8 @@ public class ProductoRestServlet extends HttpServlet {
 
 	private static final String CORS_ORIGIN_CLAVE = "Access-Control-Allow-Origin";
 	private static final String CORS_ORIGIN_VALOR = "*";
+	private static final String CORS_METHODS_CLAVE = "Access-Control-Allow-Methods";
+	private static final String CORS_METHODS_VALOR = "GET, POST, PUT, DELETE";
 
 	private static final String APPLICATION_JSON = "application/json";
 
@@ -120,6 +122,13 @@ public class ProductoRestServlet extends HttpServlet {
 
 		response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 	}
+	
+	@Override
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		cors(response);
+		response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+	}
 
 	private Long pedirId(HttpServletRequest request) {
 		String rutaAsterisco = request.getPathInfo();
@@ -130,5 +139,6 @@ public class ProductoRestServlet extends HttpServlet {
 
 	private void cors(HttpServletResponse response) {
 		response.addHeader(CORS_ORIGIN_CLAVE, CORS_ORIGIN_VALOR);
+		response.addHeader(CORS_METHODS_CLAVE, CORS_METHODS_VALOR);
 	}
 }

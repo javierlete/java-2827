@@ -40,10 +40,17 @@ window.listado = async function listado() {
 		li.innerHTML = `
 				${p.nombre}: ${formatoEuro.format(p.precio)}
 				<a href="javascript:editar(${p.id})">[Editar]</a>
+				<a href="javascript:borrar(${p.id})">[Borrar]</a>
 			`;
 
 		ul.appendChild(li);
 	});
+}
+
+window.borrar = async function borrar(id) {
+	await servicioProductos.borrar(id);
+	
+	listado();
 }
 
 function mostrar(capa) {

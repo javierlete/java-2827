@@ -14,4 +14,12 @@ export class Servicios {
 		const respuesta = await fetch(`${url}/${this.conjunto}/${id}`);
 		return await respuesta.json();
 	}
+	
+	async borrar(id) {
+		const respuesta = await fetch(`${url}/${this.conjunto}/${id}`, { method: 'DELETE' })
+		
+		if(!respuesta.ok) {
+			throw respuesta.statusText;
+		}
+	}
 }
