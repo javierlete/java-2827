@@ -1,6 +1,4 @@
-'use strict';
-
-const url = 'http://www.multimodulo.com/api/productos/'
+import { Servicios } from './servicios.js';
 
 let form;
 let ul;
@@ -11,6 +9,8 @@ const formatoEuro = new Intl.NumberFormat('es-ES', {
 	useGrouping: true,
 });
 
+const servicioProductos = new Servicios('productos');
+
 window.addEventListener('DOMContentLoaded', async () => {
 	form = document.querySelector('form');
 	ul = document.querySelector('ul');
@@ -18,20 +18,18 @@ window.addEventListener('DOMContentLoaded', async () => {
 	listado();
 });
 
-async function editar(id) {
-	mostrar(form);
+window.editar = async function editar(id) {
+	const producto = await servicioProductos.obtenerPorId(id);
 
-	const respuesta = await fetch(url + id);
-	const producto = await respuesta.json();
+	mostrar(form);
 
 	form.nombre.value = producto.nombre;
 	form.precio.value = producto.precio;
 	form.descripcion.value = producto.descripcion;
 }
 
-async function listado() {
-	const respuesta = await fetch(url);
-	const productos = await respuesta.json();
+window.listado = async function listado() {
+	const productos = await servicioProductos.obtenerTodos();
 
 	mostrar(ul);
 
