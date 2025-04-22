@@ -16,7 +16,7 @@ const servicioProductos = new Servicios('productos');
 window.addEventListener('DOMContentLoaded', async () => {
 	capaListado = document.querySelector('#listado');
 	capaFormulario = document.querySelector('#formulario')
-	
+
 	form = document.querySelector('form');
 	ul = document.querySelector('ul');
 
@@ -29,13 +29,15 @@ window.editar = async function editar(id) {
 	if (id) {
 		const producto = await servicioProductos.obtenerPorId(id);
 
+		form.idproducto.value = producto.id;
 		form.nombre.value = producto.nombre;
 		form.precio.value = producto.precio;
 		form.descripcion.value = producto.descripcion;
 	} else {
 		form.reset();
+		form.idproducto.value = '';
 	}
-	
+
 	mostrar(capaFormulario);
 }
 
@@ -81,7 +83,13 @@ async function guardar(evento) {
 		descripcion: form.descripcion.value,
 	};
 
-	await servicioProductos.insertar(producto);
+	if (form.idproducto.value) {
+		producto.id = +form.idproducto.value;
+		
+		await servicioProductos.modificar(producto);
+	} else {
+		await servicioProductos.insertar(producto);
+	}
 
 	listado();
 }
