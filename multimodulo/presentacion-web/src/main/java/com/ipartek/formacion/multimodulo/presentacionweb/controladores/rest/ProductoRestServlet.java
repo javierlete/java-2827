@@ -17,6 +17,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/api/productos/*")
 public class ProductoRestServlet extends HttpServlet {
+
+	private static final String CORS_ORIGIN_CLAVE = "Access-Control-Allow-Origin";
+	private static final String CORS_ORIGIN_VALOR = "*";
+
 	private static final String APPLICATION_JSON = "application/json";
 
 	private static final long serialVersionUID = 1L;
@@ -31,6 +35,8 @@ public class ProductoRestServlet extends HttpServlet {
 		response.setContentType(APPLICATION_JSON);
 		PrintWriter out = response.getWriter(); // NOSONAR
 		Long id = pedirId(request);
+		
+		cors(response);
 
 		String json;
 
@@ -58,6 +64,8 @@ public class ProductoRestServlet extends HttpServlet {
 //		response.setCharacterEncoding("utf-8"); // NOSONAR
 		response.setContentType(APPLICATION_JSON);
 		PrintWriter out = response.getWriter(); // NOSONAR
+		
+		cors(response);
 
 		Producto producto = JSONB.fromJson(request.getReader(), Producto.class); // NOSONAR
 
@@ -74,6 +82,8 @@ public class ProductoRestServlet extends HttpServlet {
 		response.setContentType(APPLICATION_JSON);
 		PrintWriter out = response.getWriter(); // NOSONAR
 		Long id = pedirId(request);
+		
+		cors(response);
 
 		var producto = JSONB.fromJson(request.getReader(), Producto.class); // NOSONAR
 
@@ -101,6 +111,8 @@ public class ProductoRestServlet extends HttpServlet {
 		response.setContentType(APPLICATION_JSON);
 
 		Long id = pedirId(request);
+		
+		cors(response);
 
 		AdminNegocio negocio = new AdminNegocioImpl();
 
@@ -112,7 +124,11 @@ public class ProductoRestServlet extends HttpServlet {
 	private Long pedirId(HttpServletRequest request) {
 		String rutaAsterisco = request.getPathInfo();
 
-		Long id = rutaAsterisco == null ? null : Long.parseLong(rutaAsterisco.substring(1)); // NOSONAR
+		Long id = rutaAsterisco == null || rutaAsterisco.length() < 2 ? null : Long.parseLong(rutaAsterisco.substring(1)); // NOSONAR
 		return id;
+	}
+
+	private void cors(HttpServletResponse response) {
+		response.addHeader(CORS_ORIGIN_CLAVE, CORS_ORIGIN_VALOR);
 	}
 }
