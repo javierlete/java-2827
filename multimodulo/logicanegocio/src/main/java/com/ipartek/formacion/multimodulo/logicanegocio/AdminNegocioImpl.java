@@ -11,7 +11,7 @@ public class AdminNegocioImpl extends AnonimoNegocioImpl implements AdminNegocio
 	@Override
 	public void anyadirProducto(Producto producto) {
 		if(producto.getCategoria() == null) {
-			producto.setCategoria(new Categoria(1L, null, null));
+			producto.setCategoria(Categoria.builder().id(1L).build());
 		}
 		
 		dao.insertar(producto);
@@ -20,7 +20,7 @@ public class AdminNegocioImpl extends AnonimoNegocioImpl implements AdminNegocio
 	@Override
 	public void modificarProducto(Producto producto) {
 		if(producto.getCategoria() == null) {
-			producto.setCategoria(new Categoria(1L, null, null));
+			producto.setCategoria(Categoria.builder().id(1L).build());
 		}
 		
 		dao.modificar(producto);

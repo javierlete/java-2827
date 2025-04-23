@@ -55,7 +55,7 @@ public class CategoriaDaoMySql extends JdbcDao<Categoria> implements CategoriaDa
 		var nombre = rs.getString("nombre");
 		var descripcion = rs.getString("descripcion");
 
-		return new Categoria(id, nombre, descripcion);
+		return Categoria.builder().id(id).nombre(nombre).descripcion(descripcion).build();
 	}
 
 	@Override

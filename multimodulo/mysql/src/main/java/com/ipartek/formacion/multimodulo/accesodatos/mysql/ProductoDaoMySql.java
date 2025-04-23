@@ -88,7 +88,7 @@ public class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 		var cNombre = rs.getString("c_nombre");
 		var cDescripcion = rs.getString("c_descripcion");
 
-		var categoria = new Categoria(cId, cNombre, cDescripcion);
+		var categoria = Categoria.builder().id(cId).nombre(cNombre).descripcion(cDescripcion).build();
 
 		Producto producto;
 
