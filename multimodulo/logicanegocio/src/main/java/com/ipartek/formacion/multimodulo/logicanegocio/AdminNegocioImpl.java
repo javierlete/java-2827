@@ -1,17 +1,17 @@
 package com.ipartek.formacion.multimodulo.logicanegocio;
 
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.ipartek.formacion.bibliotecas.Fabrica;
 import com.ipartek.formacion.multimodulo.accesodatos.ProductoDao;
 import com.ipartek.formacion.multimodulo.entidades.Categoria;
 import com.ipartek.formacion.multimodulo.entidades.Producto;
 
+import lombok.extern.java.Log;
+
+@Log
 public class AdminNegocioImpl extends AnonimoNegocioImpl implements AdminNegocio {
 	private static final ProductoDao dao = (ProductoDao) Fabrica.getObject("dao.producto");
-	
-	private static final Logger log = Logger.getLogger(AdminNegocioImpl.class.getName());
 	
 	@Override
 	public void anyadirProducto(Producto producto) {
