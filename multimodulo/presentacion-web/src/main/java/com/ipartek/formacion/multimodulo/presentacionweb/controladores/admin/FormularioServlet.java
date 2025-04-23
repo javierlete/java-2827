@@ -76,7 +76,7 @@ public class FormularioServlet extends HttpServlet {
 		BigDecimal precio = sPrecio.isBlank() ? null : new BigDecimal(sPrecio);
 
 		// Empaquetar en modelos
-		var producto = new Producto(id, nombre, precio, descripcion);
+		var producto = Producto.builder().id(id).nombre(nombre).precio(precio).descripcion(descripcion).build();
 
 		// Ejecutar lógica de negocio
 		if(producto.hayErrores()) {

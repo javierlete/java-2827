@@ -4,10 +4,19 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import com.ipartek.formacion.bibliotecas.Identificable;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Producto implements Identificable, Serializable, Formateable {
 	private static final long serialVersionUID = 1564087494724474758L;
 	
@@ -25,55 +34,32 @@ public class Producto implements Identificable, Serializable, Formateable {
 
 	// VARIABLES DE INSTANCIA / ATRIBUTOS / CAMPOS / FIELDS
 	private Long id;
-	private String nombre;
-	private BigDecimal precio;
+	
+	@Builder.Default
+	private String nombre = NOMBRE_POR_DEFECTO;
+	
+	@Builder.Default
+	private BigDecimal precio = PRECIO_POR_DEFECTO;
+	
 	private String descripcion;
 	
+	@Builder.Default
 	private Map<String, String> errores = new HashMap<>();
 
 	private Categoria categoria;
 
-	// CONSTRUCTORES
-	public Producto(Long id, String nombre, BigDecimal precio, String descripcion,
-			Categoria categoria) {
-		setId(id);
-		setNombre(nombre);
-		setPrecio(precio);
-		setDescripcion(descripcion);
-		setCategoria(categoria);
-	}
-
-	public Producto(Long id, String nombre, BigDecimal precio, String descripcion) {
-		this(id, nombre, precio, descripcion, null);
-	}
-
-	public Producto(String nombre, BigDecimal precio, String descripcion) {
-		this(null, nombre, precio, descripcion, null);
-	}
-
-	public Producto(String nombre, BigDecimal precio) {
-		this(null, nombre, precio, null, null);
-	}
-
-	public Producto() {
-		this(null, NOMBRE_POR_DEFECTO, PRECIO_POR_DEFECTO, null, null);
-	}
-
-	// GETTERS Y SETTERS / PROPIEDADES
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		if (id != null && id < 0) {
 			errores.put("id", "No se admiten valores negativos");
 		}
 
 		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -84,20 +70,12 @@ public class Producto implements Identificable, Serializable, Formateable {
 		this.nombre = nombre;
 	}
 
-	public BigDecimal getPrecio() {
-		return precio;
-	}
-
 	public void setPrecio(BigDecimal precio) {
 		if (precio == null || precio.compareTo(BigDecimal.ZERO) < 0) {
 			errores.put("precio", "El precio es obligatorio y debe ser mayor o igual que 0");
 		}
 
 		this.precio = precio;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
@@ -115,48 +93,9 @@ public class Producto implements Identificable, Serializable, Formateable {
 	public static void setMaximoNombre(int maximoNombre) {
 		Producto.maximoNombre = maximoNombre;
 	}
-
-	public Map<String, String> getErrores() {
-		return errores;
-	}
 	
 	public boolean hayErrores() {
 		return errores.size() > 0;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(categoria, descripcion, id, nombre, precio);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Producto other = (Producto) obj;
-		return Objects.equals(categoria, other.categoria) && Objects.equals(descripcion, other.descripcion)
-				&& Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(precio, other.precio);
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Producto [id=%s, nombre=%s, precio=%s, descripcion=%s, errores=%s, categoria=%s]", id,
-				nombre, precio, descripcion, errores, categoria);
 	}
 
 	@Override

@@ -93,9 +93,9 @@ public class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 		Producto producto;
 
 		if (caducidad == null) {
-			producto = new Producto(id, nombre, precio, descripcion, categoria);
+			producto = Producto.builder().id(id).nombre(nombre).precio(precio).descripcion(descripcion).categoria(categoria).build();
 		} else {
-			producto = new ProductoPerecedero(id, nombre, precio, caducidad, descripcion, categoria);
+			producto = ProductoPerecedero.builder().id(id).nombre(nombre).precio(precio).caducidad(caducidad).descripcion(descripcion).categoria(categoria).build();
 		}
 		
 		return producto;

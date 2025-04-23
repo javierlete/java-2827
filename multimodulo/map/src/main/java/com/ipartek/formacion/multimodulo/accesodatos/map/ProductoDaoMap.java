@@ -11,10 +11,12 @@ import com.ipartek.formacion.multimodulo.entidades.Producto;
 
 public class ProductoDaoMap implements ProductoDao {
 	private static final SortedMap<Long, Producto> productos = new TreeMap<>(
-			Map.of(1L, new Producto(1L, "Producto1", new BigDecimal("1234"), null), 2L,
-					new Producto(2L, "Producto2", new BigDecimal("2234"), null), 3L,
-					new Producto(3L, "Producto3", new BigDecimal("3234"), null), 4L,
-					new Producto(4L, "Producto4", new BigDecimal("4234"), null)));
+			Map.of(
+					1L, Producto.builder().id(1L).nombre("Producto1").precio(new BigDecimal("1234")).build(), 
+					2L,	Producto.builder().id(2L).nombre("Producto2").precio(new BigDecimal("2234")).build(), 
+					3L,	Producto.builder().id(3L).nombre("Producto3").precio(new BigDecimal("3234")).build(), 
+					4L, Producto.builder().id(4L).nombre("Producto4").precio(new BigDecimal("4234")).build()
+			));
 
 	public ProductoDaoMap(String ignorado1, String ignorado2, String ignorado3) {
 
