@@ -3,6 +3,7 @@ package com.ipartek.formacion.multimodulo.presentacionweb.controladores.admin;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+import com.ipartek.formacion.bibliotecas.Validador;
 import com.ipartek.formacion.multimodulo.entidades.Producto;
 import com.ipartek.formacion.multimodulo.logicanegocio.AdminNegocio;
 import com.ipartek.formacion.multimodulo.logicanegocio.AdminNegocioImpl;
@@ -79,8 +80,13 @@ public class FormularioServlet extends HttpServlet {
 		var producto = Producto.builder().id(id).nombre(nombre).precio(precio).descripcion(descripcion).build();
 
 		// Ejecutar lógica de negocio
-		if(producto.hayErrores()) {
+		var errores = Validador.validar(producto);
+
+		if (errores.size() > 0) {
 			request.setAttribute("producto", producto);
+
+			request.setAttribute("errores", errores);
+
 			try {
 				request.getRequestDispatcher("/WEB-INF/vistas/admin/formulario.jsp").forward(request, response);
 			} catch (ServletException | IOException e) {
@@ -88,7 +94,7 @@ public class FormularioServlet extends HttpServlet {
 			}
 			return;
 		}
-		
+
 		AdminNegocio negocio = new AdminNegocioImpl();
 
 		if (id == null) {

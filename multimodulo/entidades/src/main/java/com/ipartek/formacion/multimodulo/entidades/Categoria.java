@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import com.ipartek.formacion.bibliotecas.Identificable;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,8 +20,14 @@ import lombok.NoArgsConstructor;
 public class Categoria implements Identificable, Serializable, Formateable  {
 	private static final long serialVersionUID = -7383446729198770780L;
 	
+	@PositiveOrZero
 	private Long id;
+	
+	@NotBlank
+	@Size(max = 50)
 	private String nombre;
+	
+	@Size(max = 2000)
 	private String descripcion;
 	
 	@Builder.Default
