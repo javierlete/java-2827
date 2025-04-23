@@ -1,6 +1,6 @@
 package com.ipartek.formacion.bibliotecas;
 
-public interface Dao<T> {
+public interface Dao<T extends Identificable> {
 	default Iterable<T> obtenerTodos() {
 		throw new AccesoDatosException("NO IMPLEMENTADO");
 	}

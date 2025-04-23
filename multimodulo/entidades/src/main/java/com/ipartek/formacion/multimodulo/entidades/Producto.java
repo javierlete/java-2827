@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Producto implements Serializable, Formateable {
+import com.ipartek.formacion.bibliotecas.Identificable;
+
+public class Producto implements Identificable, Serializable, Formateable {
 	private static final long serialVersionUID = 1564087494724474758L;
 	
 	// CONSTANTES

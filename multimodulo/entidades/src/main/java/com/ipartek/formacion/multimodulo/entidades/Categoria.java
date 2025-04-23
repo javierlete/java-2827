@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Categoria implements Serializable, Formateable  {
+import com.ipartek.formacion.bibliotecas.Identificable;
+
+public class Categoria implements Identificable, Serializable, Formateable  {
 	private static final long serialVersionUID = -7383446729198770780L;
 	
 	private Long id;

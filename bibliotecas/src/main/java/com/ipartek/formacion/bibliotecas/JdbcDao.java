@@ -5,11 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public abstract class JdbcDao<T> implements Dao<T> {
+public abstract class JdbcDao<T extends Identificable> implements Dao<T> {
 
 	private static final String ERROR_GENERICO = "Error en la consulta";
 
@@ -46,7 +47,7 @@ public abstract class JdbcDao<T> implements Dao<T> {
 	protected abstract void objetoAFila(T objeto, PreparedStatement pst) throws SQLException;
 
 	public Iterable<T> ejecutarSql(String sql, Function<PreparedStatement, Iterable<T>> sentencias) {
-		try (var con = obtenerConexion(); var pst = con.prepareStatement(sql);) {
+		try (var con = obtenerConexion(); var pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			return sentencias.apply(pst);
 		} catch (SQLException e) {
 			throw new AccesoDatosException(ERROR_GENERICO, e);
@@ -100,6 +101,14 @@ public abstract class JdbcDao<T> implements Dao<T> {
 				objetoAFila(objeto, pst);
 
 				pst.executeUpdate();
+				
+				var rsClaves = pst.getGeneratedKeys();
+				
+				if(rsClaves.next()) {
+					Long idAutogenerado = rsClaves.getLong(1);
+					
+					objeto.setId(idAutogenerado);
+				}
 
 				return List.of(objeto);
 			} catch (SQLException e) {

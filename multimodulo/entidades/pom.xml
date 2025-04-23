@@ -15,4 +15,11 @@
 	<name>Entidades</name>
 	<description>POJOs que conforman las clases que vamos a utilizar como datos</description>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.ipartek.formacion</groupId>
+			<artifactId>bibliotecas</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
