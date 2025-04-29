@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.ipartek.formacion</groupId>
-			<artifactId>mysql</artifactId>
+			<artifactId>accesodatos-jpa</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
