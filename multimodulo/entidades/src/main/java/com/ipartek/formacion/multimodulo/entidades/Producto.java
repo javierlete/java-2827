@@ -5,6 +5,13 @@ import java.math.BigDecimal;
 
 import com.ipartek.formacion.bibliotecas.Identificable;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -19,6 +26,9 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
+@Entity
+@Table(name = "productos")
 public class Producto implements Identificable, Serializable, Formateable {
 	private static final long serialVersionUID = 1564087494724474758L;
 	
@@ -28,6 +38,8 @@ public class Producto implements Identificable, Serializable, Formateable {
 	
 	// VARIABLES DE INSTANCIA / ATRIBUTOS / CAMPOS / FIELDS
 	@PositiveOrZero
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotBlank
@@ -41,8 +53,10 @@ public class Producto implements Identificable, Serializable, Formateable {
 	private BigDecimal precio = PRECIO_POR_DEFECTO;
 	
 	@Size(max = 2000)
+	@Lob
 	private String descripcion;
 	
+	@Transient
 	private Categoria categoria;
 
 	@Override
