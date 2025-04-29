@@ -6,10 +6,12 @@ import com.ipartek.formacion.multimodulo.logicanegocio.AdminNegocioImpl;
 
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Response;
 
 @Path("/productos")
 public class ProductoRest {
@@ -23,14 +25,20 @@ public class ProductoRest {
 	@GET
 	@Path("/{id}")
 	public Producto getProducto(@PathParam("id") Long id) {
-		return NEGOCIO.buscarPorId(id);
+		var producto= NEGOCIO.buscarPorId(id);
+		
+		if(producto == null) {
+			throw new NotFoundException("No se ha encontrado el id " + id);
+		}
+		
+		return producto;
 	}
 	
 	@POST
-	public Producto postProducto(Producto producto) {
+	public Response postProducto(Producto producto) {
 		NEGOCIO.anyadirProducto(producto);
 		
-		return producto;
+		return Response.status(Response.Status.CREATED).entity(producto).build();
 	}
 	
 	@PUT
