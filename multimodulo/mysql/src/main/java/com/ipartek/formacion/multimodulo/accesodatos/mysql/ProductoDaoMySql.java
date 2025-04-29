@@ -13,13 +13,13 @@ import com.ipartek.formacion.multimodulo.entidades.ProductoPerecedero;
 
 public class ProductoDaoMySql extends JdbcDao<Producto> implements ProductoDao {
 	private static final String SQL_ANTES = "SELECT * FROM productos_con_categorias ";
-	private static final String SQL_ORDENADO_POR_ID = " ORDER BY p.id";
+	private static final String SQL_ORDENADO_POR_ID = " ORDER BY p_id";
 	
 	private static final String SQL_SELECT = SQL_ANTES;
-	private static final String SQL_SELECT_ID = SQL_ANTES + "WHERE p.id=?" + SQL_ORDENADO_POR_ID;
-	private static final String SQL_SELECT_NOMBRE = SQL_ANTES + "WHERE p.nombre LIKE ? ORDER BY p.nombre";
-	private static final String SQL_SELECT_PRECIO = SQL_ANTES + "WHERE p.precio BETWEEN ? AND ? ORDER BY p.precio";
-	private static final String SQL_SELECT_CATEGORIA = SQL_ANTES + "WHERE p.categorias_id = ?" + SQL_ORDENADO_POR_ID;
+	private static final String SQL_SELECT_ID = SQL_ANTES + "WHERE p_id=?" + SQL_ORDENADO_POR_ID;
+	private static final String SQL_SELECT_NOMBRE = SQL_ANTES + "WHERE p_nombre LIKE ? ORDER BY p_nombre";
+	private static final String SQL_SELECT_PRECIO = SQL_ANTES + "WHERE p_precio BETWEEN ? AND ? ORDER BY p_precio";
+	private static final String SQL_SELECT_CATEGORIA = SQL_ANTES + "WHERE p_categorias_id = ?" + SQL_ORDENADO_POR_ID;
 
 	private static final String SQL_INSERT = "INSERT INTO productos (nombre, precio, caducidad, descripcion, categorias_id) VALUES (?,?,?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE productos SET nombre=?, precio=?, caducidad=?, descripcion=?, categorias_id=? WHERE id=?";
