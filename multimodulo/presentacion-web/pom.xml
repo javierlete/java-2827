@@ -86,6 +86,29 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!--
+		https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-server -->
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>3.1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>3.1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-binding</artifactId>
+			<version>3.1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>3.1.10</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.ipartek.formacion</groupId>
 			<artifactId>logicanegocio</artifactId>
@@ -97,7 +120,7 @@
 			<artifactId>presentacion</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.ipartek.formacion</groupId>
 			<artifactId>bibliotecas</artifactId>

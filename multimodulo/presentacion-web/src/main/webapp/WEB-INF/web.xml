@@ -9,16 +9,31 @@
   <display-name>Archetype Created Web Application</display-name>
   
   <welcome-file-list>
-  	<welcome-file>listado</welcome-file>
+  	  <welcome-file>listado</welcome-file>
   </welcome-file-list>
+    
+  <servlet>
+	  <servlet-name>JerseyServlet</servlet-name>
+	  <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+	  <init-param>
+	     <param-name>jersey.config.server.provider.packages</param-name>
+	     <param-value>com.ipartek.formacion.multimodulo.presentacionweb.rest</param-value>
+	  </init-param>
+	  <load-on-startup>1</load-on-startup>
+  </servlet>
+   
+  <servlet-mapping>
+      <servlet-name>JerseyServlet</servlet-name>
+      <url-pattern>/api/v2/*</url-pattern>
+  </servlet-mapping>
   
   <error-page>
-    <error-code>404</error-code>
-    <location>/WEB-INF/vistas/errores/error-no-encontrado.jsp</location>
+	  <error-code>404</error-code>
+	  <location>/WEB-INF/vistas/errores/error-no-encontrado.jsp</location>
   </error-page>
   
   <error-page>
-    <exception-type>java.lang.Exception</exception-type>
-    <location>/WEB-INF/vistas/errores/error-no-controlado.jsp</location>
+	<exception-type>java.lang.Exception</exception-type>
+	<location>/WEB-INF/vistas/errores/error-no-controlado.jsp</location>
   </error-page>
 </web-app>
