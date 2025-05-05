@@ -21,7 +21,7 @@ public class ProductoDaoJpa implements ProductoDao {
 
 	@Override
 	public Producto obtenerPorId(Long id) {
-		return JPA.buscarPorId(id);
+		return JPA.consultaUno("from Producto p join fetch p.categoria where p.id = ?1", id);
 	}
 
 	@Override

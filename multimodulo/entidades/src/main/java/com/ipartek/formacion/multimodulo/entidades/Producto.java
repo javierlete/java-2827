@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import com.ipartek.formacion.bibliotecas.Identificable;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -56,7 +57,7 @@ public class Producto implements Identificable, Serializable, Formateable {
 	@Lob
 	private String descripcion;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Categoria categoria;
 
 	@Override
