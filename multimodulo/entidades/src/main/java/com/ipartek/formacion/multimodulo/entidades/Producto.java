@@ -10,8 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -56,7 +56,7 @@ public class Producto implements Identificable, Serializable, Formateable {
 	@Lob
 	private String descripcion;
 	
-	@Transient
+	@ManyToOne
 	private Categoria categoria;
 
 	@Override

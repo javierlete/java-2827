@@ -17,7 +17,7 @@ public class ProductoDaoJpa implements ProductoDao {
 
 	@Override
 	public Iterable<Producto> obtenerTodos() {
-		return JPA.buscarTodos();
+		return JPA.consultaVarios("from Producto p join fetch p.categoria");
 	}
 
 	@Override
