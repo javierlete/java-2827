@@ -25,7 +25,7 @@ public class ProductoRest {
 	@GET
 	@Path("/{id}")
 	public Producto getProducto(@PathParam("id") Long id) {
-		var producto= NEGOCIO.buscarPorId(id);
+		var producto= NEGOCIO.buscarProductoPorId(id);
 		
 		if(producto == null) {
 			throw new NotFoundException("No se ha encontrado el id " + id);

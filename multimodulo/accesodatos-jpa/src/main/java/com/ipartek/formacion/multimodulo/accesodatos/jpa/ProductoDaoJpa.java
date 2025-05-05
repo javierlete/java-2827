@@ -2,7 +2,6 @@ package com.ipartek.formacion.multimodulo.accesodatos.jpa;
 
 import java.math.BigDecimal;
 
-import com.ipartek.formacion.bibliotecas.AccesoDatosException;
 import com.ipartek.formacion.bibliotecas.JpaDao;
 import com.ipartek.formacion.multimodulo.accesodatos.ProductoDao;
 import com.ipartek.formacion.multimodulo.entidades.Producto;
@@ -42,7 +41,7 @@ public class ProductoDaoJpa implements ProductoDao {
 
 	@Override
 	public Iterable<Producto> buscarPorCategoria(Long idCategoria) {
-		throw new AccesoDatosException("NO IMPLEMENTADO");
+		return JPA.consultaVarios("from Producto p where p.categoria.id = ?1", idCategoria);
 	}
 
 	@Override

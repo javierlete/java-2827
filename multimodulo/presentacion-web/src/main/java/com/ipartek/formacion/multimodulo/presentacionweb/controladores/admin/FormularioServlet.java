@@ -41,7 +41,7 @@ public class FormularioServlet extends HttpServlet {
 			// Ejecutar lógica de negocio
 			AnonimoNegocio negocio = new AnonimoNegocioImpl();
 
-			var producto = negocio.buscarPorId(id);
+			var producto = negocio.buscarProductoPorId(id);
 
 			// Preparar modelo para la siguiente vista
 			request.setAttribute("producto", producto);

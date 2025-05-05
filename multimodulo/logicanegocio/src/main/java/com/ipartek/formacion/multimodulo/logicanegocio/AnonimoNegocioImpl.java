@@ -19,7 +19,7 @@ public class AnonimoNegocioImpl implements AnonimoNegocio {
 	}
 
 	@Override
-	public Producto buscarPorId(Long id) {
+	public Producto buscarProductoPorId(Long id) {
 		return productoDao.obtenerPorId(id);
 	}
 

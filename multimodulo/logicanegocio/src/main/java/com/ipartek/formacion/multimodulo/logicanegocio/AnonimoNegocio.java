@@ -6,7 +6,7 @@ import com.ipartek.formacion.multimodulo.entidades.Producto;
 public interface AnonimoNegocio {
 	Iterable<Producto> listarProductos();
 
-	Producto buscarPorId(Long id);
+	Producto buscarProductoPorId(Long id);
 
 	Iterable<Categoria> listarCategorias();
 	
