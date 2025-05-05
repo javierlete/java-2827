@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.ipartek.formacion.bibliotecas.Identificable;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -45,6 +46,7 @@ public class Categoria implements Identificable, Serializable, Formateable  {
 	@Lob
 	private String descripcion;
 	
+	@JsonbTransient
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@OneToMany(mappedBy = "categoria")

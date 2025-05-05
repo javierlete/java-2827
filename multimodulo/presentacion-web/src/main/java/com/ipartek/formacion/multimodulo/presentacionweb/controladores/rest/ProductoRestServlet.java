@@ -51,7 +51,7 @@ public class ProductoRestServlet extends HttpServlet {
 
 			json = JSONB.toJson(productos); // NOSONAR
 		} else {
-			var producto = NEGOCIO.buscarPorId(id);
+			var producto = NEGOCIO.buscarProductoPorId(id);
 
 			if(producto == null) {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -93,7 +93,7 @@ public class ProductoRestServlet extends HttpServlet {
 
 		var producto = JSONB.fromJson(request.getReader(), Producto.class); // NOSONAR
 
-		var productoExistente = NEGOCIO.buscarPorId(id);
+		var productoExistente = NEGOCIO.buscarProductoPorId(id);
 
 		if (productoExistente == null) {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
