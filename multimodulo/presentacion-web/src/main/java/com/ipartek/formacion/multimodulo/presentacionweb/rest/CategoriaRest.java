@@ -6,6 +6,8 @@ import com.ipartek.formacion.multimodulo.entidades.Categoria;
 import com.ipartek.formacion.multimodulo.logicanegocio.AdminNegocio;
 import com.ipartek.formacion.multimodulo.logicanegocio.AdminNegocioImpl;
 import com.ipartek.formacion.multimodulo.presentacionweb.dtos.ProductoDto;
+import com.ipartek.formacion.multimodulo.presentacionweb.mappers.ProductoMapper;
+import com.ipartek.formacion.multimodulo.presentacionweb.mappers.ProductoMapperImpl;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
@@ -15,6 +17,7 @@ import jakarta.ws.rs.PathParam;
 @Path("/categorias")
 public class CategoriaRest {
 	private static final AdminNegocio NEGOCIO = new AdminNegocioImpl();
+	private static final ProductoMapper mapeador = new ProductoMapperImpl();
 
 	@GET
 	public Iterable<Categoria> getCategorias() {
@@ -40,9 +43,8 @@ public class CategoriaRest {
 		
 		var resultado = new ArrayList<ProductoDto>();
 		
-		for(var p: productos) {
-			var productoDto = new ProductoDto(p.getId(), p.getNombre(), p.getPrecio(), p.getDescripcion());
-			resultado.add(productoDto);
+		for(var producto: productos) {
+			resultado.add(mapeador.aDto(producto));
 		}
 		
 		return resultado;
