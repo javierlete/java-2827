@@ -2,10 +2,14 @@ package com.ipartek.formacion.multimodulo.entidades;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
@@ -13,9 +17,13 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@Entity
 public class ProductoPerecedero extends Producto implements Formateable {
 	private static final long serialVersionUID = -6065027374776025199L;
 	
+	@NotNull
+	@FutureOrPresent
 	private LocalDate caducidad;
 
 	@Override
@@ -25,14 +33,6 @@ public class ProductoPerecedero extends Producto implements Formateable {
 		}
 		
 		return super.getNombre();
-	}
-
-	public void setCaducidad(LocalDate caducidad) {
-		if (caducidad == null || caducidad.isBefore(LocalDate.now())) {
-			throw new EntidadesException("No se pueden crear productos caducados o sin caducidad");
-		}
-
-		this.caducidad = caducidad;
 	}
 
 	// MÉTODOS DE INSTANCIA
@@ -50,6 +50,4 @@ public class ProductoPerecedero extends Producto implements Formateable {
 				%11s: %s
 				""", "Caducidad", caducidad);
 	}
-	
-	
 }

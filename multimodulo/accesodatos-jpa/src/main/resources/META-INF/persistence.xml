@@ -5,6 +5,7 @@
 
     <persistence-unit name="com.ipartek.formacion.multimodulo.entidades">
     	<class>com.ipartek.formacion.multimodulo.entidades.Producto</class>
+    	<class>com.ipartek.formacion.multimodulo.entidades.ProductoPerecedero</class>
     	<class>com.ipartek.formacion.multimodulo.entidades.Categoria</class>
        
         <properties>    
