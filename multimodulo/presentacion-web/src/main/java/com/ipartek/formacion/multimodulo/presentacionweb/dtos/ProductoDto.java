@@ -2,6 +2,14 @@ package com.ipartek.formacion.multimodulo.presentacionweb.dtos;
 
 import java.math.BigDecimal;
 
-public record ProductoDto(Long id, String nombre, BigDecimal precio, String descripcion) {
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@Data
+public class ProductoDto {
+	private Long id;
+	private String nombre;
+	private BigDecimal precio;
+	private String descripcion;
 }
