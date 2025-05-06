@@ -139,4 +139,8 @@
 			<version>3.2.3</version>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<finalName>presentacion-web</finalName>
+	</build>
 </project>
