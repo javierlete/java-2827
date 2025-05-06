@@ -5,6 +5,7 @@ import java.util.function.Function;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 
 public class JpaDao<T> {
@@ -62,7 +63,11 @@ public class JpaDao<T> {
 				consulta.setParameter(posicion++, argumento);
 			}
 
-			return consulta.getSingleResultOrNull();
+			try {
+				return consulta.getSingleResult();
+			} catch (NoResultException e) {
+				return null;
+			}
 		});
 	}
 
