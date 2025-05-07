@@ -1,0 +1,57 @@
+package com.ipartek.formacion.springapp.entidades;
+
+import java.math.BigDecimal;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+
+@Entity
+@Table(name = "productos")
+public class Producto {
+	// CONSTANTES
+	protected static final String NOMBRE_POR_DEFECTO = "NO TIENE NOMBRE";
+	protected static final BigDecimal PRECIO_POR_DEFECTO = BigDecimal.ZERO;
+	
+	// VARIABLES DE INSTANCIA / ATRIBUTOS / CAMPOS / FIELDS
+	@PositiveOrZero
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@NotBlank
+	@Size(max = 45)
+	@Builder.Default
+	private String nombre = NOMBRE_POR_DEFECTO;
+	
+	@NotNull
+	@PositiveOrZero
+	@Builder.Default
+	private BigDecimal precio = PRECIO_POR_DEFECTO;
+	
+	@Size(max = 2000)
+	@Lob
+	private String descripcion;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Categoria categoria;
+}
