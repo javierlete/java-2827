@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                
+                                    
+    
     
     
     
@@ -7,7 +8,8 @@
     
     
     <wb-module deploy-name="presentacion-web">
-                                                                
+                                                                        
+        
         
         
         
@@ -15,7 +17,8 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-                                                                
+                                                                        
+        
         
         
         
@@ -23,7 +26,8 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-                                                                
+                                                                        
+        
         
         
         
@@ -31,7 +35,8 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-                                                                
+                                                                        
+        
         
         
         
@@ -39,43 +44,23 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-                
         <dependent-module archiveName="logicanegocio-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/logicanegocio/logicanegocio">
-                        
             <dependency-type>uses</dependency-type>
-                    
         </dependent-module>
-                
         <dependent-module archiveName="accesodatos-jpa-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/accesodatos-jpa/accesodatos-jpa">
-                        
             <dependency-type>uses</dependency-type>
-                    
         </dependent-module>
-                
         <dependent-module archiveName="accesodatos-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/accesodatos/accesodatos">
-                        
             <dependency-type>uses</dependency-type>
-                    
         </dependent-module>
-                
         <dependent-module archiveName="presentacion-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/presentacion/presentacion">
-                        
             <dependency-type>uses</dependency-type>
-                    
         </dependent-module>
-                
         <dependent-module archiveName="entidades-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/entidades/entidades">
-                        
             <dependency-type>uses</dependency-type>
-                    
         </dependent-module>
-                
-        <dependent-module archiveName="bibliotecas-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bibliotecas/bibliotecas">
-                        
-            <dependency-type>uses</dependency-type>
-                    
-        </dependent-module>
-                                                                
+                                                                        
+        
         
         
         
@@ -83,8 +68,10 @@
         
         
         <property name="java-output-path" value="/presentacion-web/target/classes"/>
+                
         <property name="context-root" value="presentacion-web"/>
-                                                            
+                                                                    
+    
     
     
     
@@ -92,7 +79,8 @@
     
     
     </wb-module>
-                            
+                                
+
 
 
 
