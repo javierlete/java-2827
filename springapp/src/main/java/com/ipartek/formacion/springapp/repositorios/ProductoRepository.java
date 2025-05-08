@@ -4,10 +4,11 @@ import java.math.BigDecimal;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.ipartek.formacion.springapp.entidades.Producto;
 
-public interface ProductoRepository extends CrudRepository<Producto, Long> {
+public interface ProductoRepository extends CrudRepository<Producto, Long>, PagingAndSortingRepository<Producto, Long> {
 	@EntityGraph(attributePaths = {"categoria"})
 	Iterable<Producto> findAll();
 	
