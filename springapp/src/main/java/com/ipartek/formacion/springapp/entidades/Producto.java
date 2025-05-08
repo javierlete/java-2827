@@ -15,7 +15,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -28,10 +27,6 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "productos")
 public class Producto {
-	// CONSTANTES
-	protected static final String NOMBRE_POR_DEFECTO = "NO TIENE NOMBRE";
-	protected static final BigDecimal PRECIO_POR_DEFECTO = BigDecimal.ZERO;
-	
 	// VARIABLES DE INSTANCIA / ATRIBUTOS / CAMPOS / FIELDS
 	@PositiveOrZero
 	@Id
@@ -40,13 +35,11 @@ public class Producto {
 	
 	@NotBlank
 	@Size(max = 45)
-	@Builder.Default
-	private String nombre = NOMBRE_POR_DEFECTO;
+	private String nombre;
 	
 	@NotNull
 	@PositiveOrZero
-	@Builder.Default
-	private BigDecimal precio = PRECIO_POR_DEFECTO;
+	private BigDecimal precio;
 	
 	@Size(max = 2000)
 	@Lob
