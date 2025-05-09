@@ -2,6 +2,8 @@ package com.ipartek.formacion.springapp.entidades;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,6 +42,7 @@ public class Categoria {
 	@Lob
 	private String descripcion;
 	
+	@JsonIgnore
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@OneToMany(mappedBy = "categoria")
