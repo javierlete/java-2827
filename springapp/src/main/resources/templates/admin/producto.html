@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>SpringApp</title>
+</head>
+<body>
+<h1>Admin</h1>
+
+<form action="productos.html" th:action="@{/admin/producto}" method="post" th:object="${producto}">
+	<input type="hidden" th:field="*{id}">
+	<input th:field="*{nombre}" placeholder="Nombre">
+	<input th:field="*{precio}" placeholder="Precio">
+	<textarea th:field="*{descripcion}" placeholder="Descripción"></textarea>
+	
+	<button>Guardar</button>
+</form>
+
+</body>
+</html>

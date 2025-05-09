@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>SpringApp</title>
+</head>
+<body>
+<h1>SpringApp</h1>
+
+<ul th:each="p: ${productos}">
+	<li><a href="detalle.html" th:href="@{/detalle(id=${p.id})}" th:text="${p.nombre}">Portátil</a>: <span th:text="${p.precio}">1234,00€</span></li>
+</ul>
+
+<p>[[${productos}]]</p>
+
+</body>
+</html>
