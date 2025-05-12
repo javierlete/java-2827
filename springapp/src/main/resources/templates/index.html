@@ -1,11 +1,34 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>SpringApp</title>
 </head>
 <body>
 <h1>SpringApp</h1>
+
+<p sec:authorize="!isAuthenticated()">
+	No estás autenticado
+</p>
+
+<p sec:authorize="isAuthenticated()">
+	<span sec:authentication="name">Usuario</span>:
+	<span sec:authentication="principal.authorities">Roles</span>
+</p>
+
+<ul>
+	<li sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
+		<a href="admin/productos.html" th:href="@{/admin/productos}">Admin Productos</a>
+	</li>
+	<li sec:authorize="!isAuthenticated()">
+		<a href="login.html" th:href="@{/login}">Inicio sesión</a>
+	</li>
+	<li sec:authorize="isAuthenticated()">
+		<form action="index.html" th:action="@{/logout}" method="post">
+			<button>Cierre de sesión</button>
+		</form>
+	</li>
+</ul>
 
 <ul th:each="p: ${productos}">
 	<li><a href="detalle.html" th:href="@{/detalle(id=${p.id})}" th:text="${p.nombre}">Portátil</a>: <span th:text="${p.precio}">1234,00€</span></li>
