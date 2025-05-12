@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>SpringApp</title>
+</head>
+<body>
+<h1>SpringApp</h1>
+
+<p th:if="${param.error}">Error en el usuario o contraseña</p>
+<p th:if="${param.logout}">Has cerrado la sesión</p>
+
+<form action="index.html" th:action="@{/login}" method="post">
+	<input name="username" placeholder="Usuario">
+	<input name="password" placeholder="Contraseña" type="password">
+	
+	<button>Aceptar</button>
+</form>
+
+</body>
+</html>

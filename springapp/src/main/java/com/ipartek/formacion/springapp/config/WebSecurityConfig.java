@@ -26,11 +26,11 @@ public class WebSecurityConfig {
 				.build();
 		
 		UserDetails pepe =
-				 User.withDefaultPasswordEncoder()
-					.username("pepe")
-					.password("perez")
-					.roles("USUARIO")
-					.build();
+			 User.withDefaultPasswordEncoder()
+				.username("pepe")
+				.password("perez")
+				.roles("USUARIO")
+				.build();
 			
 		return new InMemoryUserDetailsManager(admin, pepe);
 	}
@@ -44,7 +44,10 @@ public class WebSecurityConfig {
 				.requestMatchers("/detalle").authenticated() //hasAnyRole("USUARIO", "ADMINISTRADOR")
 				.anyRequest().permitAll()
 			)
-			.formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+			.formLogin(form -> form
+				.loginPage("/login")
+				.permitAll()
+			)
 			.logout(LogoutConfigurer::permitAll);
 
 		return http.build();
