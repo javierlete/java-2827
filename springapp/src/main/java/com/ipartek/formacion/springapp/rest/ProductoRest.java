@@ -1,6 +1,5 @@
 package com.ipartek.formacion.springapp.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +15,13 @@ import org.springframework.web.server.ResponseStatusException;
 import com.ipartek.formacion.springapp.entidades.Producto;
 import com.ipartek.formacion.springapp.servicios.AdminService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+
 @RestController
 @RequestMapping("/api/v2/productos")
 public class ProductoRest {
-	@Autowired
 	private AdminService servicio;
 	
 	@GetMapping

@@ -2,7 +2,6 @@ package com.ipartek.formacion.springapp.servicios;
 
 import java.util.Collection;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +10,13 @@ import com.ipartek.formacion.springapp.entidades.Producto;
 import com.ipartek.formacion.springapp.repositorios.CategoriaRepository;
 import com.ipartek.formacion.springapp.repositorios.ProductoRepository;
 
+import lombok.AllArgsConstructor;
+
 @Primary
 @Service
+@AllArgsConstructor
 public class AnonimoServiceImpl implements AnonimoService {
-
-	@Autowired
-	private ProductoRepository productoRepo;
-	
-	@Autowired
+	protected ProductoRepository productoRepo;
 	private CategoriaRepository categoriaRepo;
 	
 	@Override
