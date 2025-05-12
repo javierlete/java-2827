@@ -9,9 +9,15 @@
 
 <form action="productos.html" th:action="@{/admin/producto}" method="post" th:object="${producto}">
 	<input type="hidden" th:field="*{id}">
+	
 	<input th:field="*{nombre}" placeholder="Nombre">
+	<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">El nombre debe estar rellenado y tener como máximo 45 caracteres</div>
+	
 	<input th:field="*{precio}" placeholder="Precio">
+	<div th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}">El precio es obligatorio y debe ser positivo</div>
+	
 	<textarea th:field="*{descripcion}" placeholder="Descripción"></textarea>
+	<div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">La descripción no puede superar los 2000 caracteres</div>
 	
 	<button>Guardar</button>
 </form>
