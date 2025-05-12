@@ -41,7 +41,7 @@ class ProductoRepositoryTest {
 		
 		System.out.println("Buscar por precio entre 2000 y 3000");
 		
-		for(var p: repo.findByPrecioBetween(new BigDecimal("2000"), new BigDecimal("3000"))) {//repo.findAll()) {
+		for(var p: repo.findByPrecioBetween(new BigDecimal("2000"), new BigDecimal("3000"))) {
 			System.out.println(p);
 		}
 		
