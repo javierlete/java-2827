@@ -25,7 +25,20 @@ public class WebSecurityConfig {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth)
 	  throws Exception {
-	    auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder);
+	    auth
+	    	.jdbcAuthentication()
+	    	.dataSource(dataSource)
+	    	.passwordEncoder(passwordEncoder)
+	    	.usersByUsernameQuery("""
+	    			SELECT email, password, 1
+	    			FROM usuarios
+	    			WHERE email=?
+			""")
+	    	.authoritiesByUsernameQuery("""
+	    			SELECT email, CONCAT('ROLE_', rol)
+	    			FROM usuarios
+	    			WHERE email=? 
+			""");
 	}
 	
 	// AUTORIZACIÓN
