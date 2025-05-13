@@ -47,5 +47,9 @@ public class AdminServiceImpl extends AnonimoServiceImpl implements AdminService
 	public void borrarProducto(Long id) {
 		productoRepo.deleteById(id);
 	}
-	
+
+	@Override
+	public Iterable<Categoria> listarCategorias() {
+		return categoriaRepo.findAll();
+	}
 }

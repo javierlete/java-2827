@@ -1,26 +1,30 @@
-<!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>SpringApp</title>
-</head>
-<body>
-<h1>Admin</h1>
+<html th:replace="~{_global :: global(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
 
-<form action="productos.html" th:action="@{/admin/producto}" method="post" th:object="${producto}">
-	<input type="hidden" th:field="*{id}">
-	
-	<input th:field="*{nombre}" placeholder="Nombre">
-	<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">El nombre debe estar rellenado y tener como máximo 45 caracteres</div>
-	
-	<input th:field="*{precio}" placeholder="Precio">
-	<div th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}">El precio es obligatorio y debe ser positivo</div>
-	
-	<textarea th:field="*{descripcion}" placeholder="Descripción"></textarea>
-	<div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">La descripción no puede superar los 2000 caracteres</div>
-	
-	<button>Guardar</button>
-</form>
+<title>Formulario de producto</title>
 
-</body>
-</html>
+<main>
+	<form action="productos.html" th:action="@{/admin/producto}"
+		method="post" th:object="${producto}">
+		<input type="hidden" th:field="*{id}"> <input
+			th:field="*{nombre}" placeholder="Nombre">
+		<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">El
+			nombre debe estar rellenado y tener como máximo 45 caracteres</div>
+
+		<input th:field="*{precio}" placeholder="Precio">
+		<div th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}">El
+			precio es obligatorio y debe ser positivo</div>
+
+		<textarea th:field="*{descripcion}" placeholder="Descripción"></textarea>
+		<div th:if="${#fields.hasErrors('descripcion')}"
+			th:errors="*{descripcion}">La descripción no puede superar los
+			2000 caracteres</div>
+
+		<select th:field="*{categoria}">
+			<option th:each="categoria: ${categorias}" th:value="${categoria.id}"
+				th:text="${categoria.nombre}">Categoría 1</option>
+		</select>
+
+		<button>Guardar</button>
+	</form>
+</main>

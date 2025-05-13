@@ -36,14 +36,16 @@ public class AdminController {
 	}
 
 	@GetMapping("/producto")
-	public String producto(Producto producto) {
+	public String producto(Producto producto, Model modelo) {
+		modelo.addAttribute("categorias", servicio.listarCategorias());
 		return ADMIN_PRODUCTO;
 	}
 
 	@GetMapping("/producto/{id}")
 	public String productoPorId(@PathVariable Long id, Model modelo) {
 		modelo.addAttribute("producto", servicio.buscarProductoPorId(id));
-
+		modelo.addAttribute("categorias", servicio.listarCategorias());
+		
 		return ADMIN_PRODUCTO;
 	}
 

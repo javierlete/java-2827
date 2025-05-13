@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" th:fragment="global(titulo, contenido)"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title th:replace="${titulo}">Spring App</title>
+<meta charset="UTF-8">
+</head>
+<body>
+	<h1>Spring App</h1>
+
+	<p sec:authorize="!isAuthenticated()">No estás autenticado</p>
+
+	<p sec:authorize="isAuthenticated()">
+		<span sec:authentication="name">Usuario</span>: <span
+			sec:authentication="principal.authorities">Roles</span>
+	</p>
+
+	<ul>
+		<li sec:authorize="hasRole('ROLE_ADMINISTRADOR')"><a
+			href="admin/productos.html" th:href="@{/admin/productos}">Admin
+				Productos</a></li>
+		<li sec:authorize="!isAuthenticated()"><a href="login.html"
+			th:href="@{/login}">Inicio sesión</a></li>
+		<li sec:authorize="isAuthenticated()">
+			<form action="index.html" th:action="@{/logout}" method="post">
+				<button>Cierre de sesión</button>
+			</form>
+		</li>
+	</ul>
+
+	<main th:replace="${contenido}">
+		<p>#CONTENIDO#</p>
+	</main>
+
+	<footer> &copy;2025 Javier Lete </footer>
+</body>
+</html>

@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>SpringApp</title>
-</head>
-<body>
-<h1>SpringApp</h1>
+<html th:replace="~{_global :: global(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
 
-<dl th:object="${producto}">
-	<dt>Nombre</dt>
-	<dd th:text="*{nombre}">Portátil</dd>
-	<dt>Precio</dt>
-	<dd th:text="*{precio}">1234,12€</dd>
-	<dt>Descripción</dt>
-	<dd th:text="*{descripcion}">Bla bla bla bla</dd>
-	<dt>Categoría</dt>
-	<dd th:text="*{categoria.nombre}">Informática</dd>
-</dl>
+<title>Detalle de producto</title>
 
-<p>[[${producto}]]</p>
-
-</body>
-</html>
+<main>
+	<dl th:object="${producto}">
+		<dt>Nombre</dt>
+		<dd th:text="*{nombre}">Portátil</dd>
+		<dt>Precio</dt>
+		<dd th:text="*{precio}">1234,12€</dd>
+		<dt>Descripción</dt>
+		<dd th:text="*{descripcion}">Bla bla bla bla</dd>
+		<dt>Categoría</dt>
+		<dd th:text="*{categoria.nombre}">Informática</dd>
+	</dl>
+</main>

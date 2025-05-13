@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AnonimoServiceImpl implements AnonimoService {
 	protected ProductoRepository productoRepo;
-	private CategoriaRepository categoriaRepo;
+	protected CategoriaRepository categoriaRepo;
 	
 	@Override
 	public Iterable<Producto> listarProductos() {

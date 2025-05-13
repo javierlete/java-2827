@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>SpringApp</title>
-</head>
-<body>
-<h1>Admin</h1>
+<html th:replace="~{_global :: global(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
 
-<p>
-	<a href="producto.html" th:href="@{/admin/producto}">Añadir</a>
-</p>
+<title>Listado de mantenimiento de productos</title>
 
-<ul th:each="p: ${productos}">
-	<li>
-		<a href="producto.html" th:href="@{/admin/producto/{id}(id=${p.id})}" th:text="${p.nombre}">Portátil</a>
-		: 
-		<span th:text="${p.precio}">1234,00€</span>
-		
-		<a href="productos.html" th:href="@{/admin/producto/{id}/borrar(id=${p.id})}">Borrar</a>
-	</li>
-</ul>
+<main>
+	<p>
+		<a href="producto.html" th:href="@{/admin/producto}">Añadir</a>
+	</p>
 
-</body>
-</html>
+	<ul th:each="p: ${productos}">
+		<li><a href="producto.html"
+			th:href="@{/admin/producto/{id}(id=${p.id})}" th:text="${p.nombre}">Portátil</a>
+			: <span th:text="${p.precio}">1234,00€</span> <a
+			href="productos.html"
+			th:href="@{/admin/producto/{id}/borrar(id=${p.id})}">Borrar</a></li>
+	</ul>
+</main>
