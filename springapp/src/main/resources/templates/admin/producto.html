@@ -6,25 +6,53 @@
 <main>
 	<form action="productos.html" th:action="@{/admin/producto}"
 		method="post" th:object="${producto}">
-		<input type="hidden" th:field="*{id}"> <input
-			th:field="*{nombre}" placeholder="Nombre">
-		<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">El
+		<input type="hidden" th:field="*{id}">
+
+		<div class="row mb-3">
+			<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+			<div class="col-sm">
+				<input type="text" class="form-control" th:field="*{nombre}">
+				<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+					class="invalid-feedback">El
 			nombre debe estar rellenado y tener como máximo 45 caracteres</div>
-
-		<input th:field="*{precio}" placeholder="Precio">
-		<div th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}">El
-			precio es obligatorio y debe ser positivo</div>
-
-		<textarea th:field="*{descripcion}" placeholder="Descripción"></textarea>
-		<div th:if="${#fields.hasErrors('descripcion')}"
-			th:errors="*{descripcion}">La descripción no puede superar los
-			2000 caracteres</div>
-
-		<select th:field="*{categoria}">
-			<option th:each="categoria: ${categorias}" th:value="${categoria.id}"
+			</div>
+		</div>
+		
+		<div class="row mb-3">
+			<label for="precio" class="col-sm-2 col-form-label">Precio</label>
+			<div class="col-sm">
+				<input type="number" step=".01" class="form-control" th:field="*{precio}">
+				<div th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"
+					class="invalid-feedback"></div>
+			</div>
+		</div>
+		
+		<div class="row mb-3">
+			<label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+			<div class="col-sm">
+				<textarea class="form-control" th:field="*{descripcion}"></textarea>
+				<div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"
+					class="invalid-feedback"></div>
+			</div>
+		</div>
+		
+		<div class="row mb-3">
+			<label for="categoria" class="col-sm-2 col-form-label">Categoría</label>
+			<div class="col-sm">
+				<select class="form-select" th:field="*{categoria}">
+					<option th:each="categoria: ${categorias}" th:value="${categoria.id}"
 				th:text="${categoria.nombre}">Categoría 1</option>
-		</select>
-
-		<button>Guardar</button>
+				</select>
+				<div th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"
+					class="invalid-feedback"></div>
+			</div>
+		</div>
+		
+		<div class="row mb-3">
+			<div class="col-sm offset-sm-2">
+				<button class="btn btn-primary">Guardar</button>
+			</div>
+		</div>
 	</form>
+
 </main>

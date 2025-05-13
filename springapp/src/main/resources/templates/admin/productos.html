@@ -4,15 +4,36 @@
 <title>Listado de mantenimiento de productos</title>
 
 <main>
-	<p>
-		<a href="producto.html" th:href="@{/admin/producto}">Añadir</a>
-	</p>
 
-	<ul th:each="p: ${productos}">
-		<li><a href="producto.html"
-			th:href="@{/admin/producto/{id}(id=${p.id})}" th:text="${p.nombre}">Portátil</a>
-			: <span th:text="${p.precio}">1234,00€</span> <a
-			href="productos.html"
-			th:href="@{/admin/producto/{id}/borrar(id=${p.id})}">Borrar</a></li>
-	</ul>
+	<table class="table table-hover table-striped table-bordered">
+		<thead class="table-secondary">
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Precio</th>
+				<th>Opciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p: ${productos}">
+				<td th:text="${p.id}">Id</td>
+				<td th:text="${p.nombre}">Nombre</td>
+				<td th:text="${p.precioFormateado}">Precio</td>
+				<td><a class="btn btn-sm btn-primary" href="producto.html"
+					th:href="@{/admin/producto/{id}(id=${p.id})}">Editar</a>
+					<a class="btn btn-sm btn-danger"
+					href="productos.html"
+					th:href="@{/admin/producto/{id}/borrar(id=${p.id})}">Borrar</a>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot class="table-secondary">
+			<tr>
+				<td colspan=3></td>
+				<td>
+					<a class="btn btn-sm btn-primary" href="producto.html" th:href="@{/admin/producto}">Añadir</a>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
 </main>

@@ -1,6 +1,8 @@
 package com.ipartek.formacion.springapp.entidades;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,4 +49,9 @@ public class Producto {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Categoria categoria;
+	
+	public String getPrecioFormateado() {
+		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.of("es", "ES"));
+	    return currencyFormatter.format(precio);
+	}
 }

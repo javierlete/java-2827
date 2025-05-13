@@ -1,11 +1,24 @@
-<html th:replace="~{_global :: global(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{_global :: global(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
 <title>Productos</title>
 
 <main>
-	<ul th:each="p: ${productos}">
-		<li><a href="detalle.html" th:href="@{/detalle(id=${p.id})}"
-			th:text="${p.nombre}">Portátil</a>: <span th:text="${p.precio}">1234,00€</span>
-		</li>
-	</ul>
+	<div class="row row-cols-1 row-cols-md-3 g-4">
+		<div class="col" th:each="p: ${productos}">
+			<div class="card h-100">
+				<img src="https://picsum.photos/400/300?[[${p.id}]]" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title" th:text="${p.nombre}">Card title</h5>
+					<p class="card-text">
+						<a class="btn btn-primary" th:href="@{/detalle(id=${p.id})}">Ver detalle</a>
+					</p>
+				</div>
+				<div class="card-footer">
+					<small class="text-body-secondary" th:text="${p.precioFormateado}">Last updated 3 mins ago</small>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </main>
 </html>
