@@ -64,7 +64,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/producto")
-	public String guardarProducto(@Valid Producto producto, BindingResult bindingResult, MultipartFile imagen) {
+	public String guardarProducto(@Valid Producto producto, BindingResult bindingResult, MultipartFile imagen) throws IOException {
 		if(bindingResult.hasErrors()) {
 			log.log(Level.FINE, "El producto introducido estaba mal: {0}", bindingResult);
 			return ADMIN_PRODUCTO;
@@ -76,17 +76,13 @@ public class AdminController {
 			servicio.modificarProducto(producto);
 		}
 
-		try {
-			var pathImagenes = java.nio.file.Path.of(rutaImagenes);
-			
-			if (!Files.exists(pathImagenes)) {
-	            Files.createDirectories(pathImagenes);
-	        }
-			
-			Files.copy(imagen.getInputStream(), java.nio.file.Path.of(rutaImagenes, producto.getId() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			throw new RuntimeException("No se ha podido guardar", e);
-		}
+		var pathImagenes = java.nio.file.Path.of(rutaImagenes);
+		
+		if (!Files.exists(pathImagenes)) {
+            Files.createDirectories(pathImagenes);
+        }
+		
+		Files.copy(imagen.getInputStream(), java.nio.file.Path.of(rutaImagenes, producto.getId() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
 		
 		return REDIRECT_ADMIN_PRODUCTOS;
 	}

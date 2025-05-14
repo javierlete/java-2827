@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootTest
-public class CodificacionesConfigurationTest {
+class CodificacionesConfigurationTest {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
