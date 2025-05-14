@@ -1,7 +1,11 @@
 package com.ipartek.formacion.springapp.controladores;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,25 +13,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ipartek.formacion.springapp.entidades.Producto;
 import com.ipartek.formacion.springapp.servicios.AdminService;
 
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 
-@AllArgsConstructor
 @Log
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
+	@Value("${rutas.imagenes.url}")
+	private String urlImagenes;
+	
+	@Value("${rutas.imagenes.fisica}")
+	private String rutaImagenes;
+	
 	private static final String REDIRECT_ADMIN_PRODUCTOS = "redirect:/admin/productos";
 	private static final String ADMIN_PRODUCTOS = "admin/productos";
 	private static final String ADMIN_PRODUCTO = "admin/producto";
 	
 	private AdminService servicio;
 
+	public AdminController(AdminService servicio) {
+		this.servicio = servicio;
+	}
+	
 	@GetMapping("/productos")
 	public String productos(Model modelo) {
 		modelo.addAttribute("productos", servicio.listarProductos());
@@ -50,7 +64,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/producto")
-	public String guardarProducto(@Valid Producto producto, BindingResult bindingResult) {
+	public String guardarProducto(@Valid Producto producto, BindingResult bindingResult, MultipartFile imagen) {
 		if(bindingResult.hasErrors()) {
 			log.log(Level.FINE, "El producto introducido estaba mal: {0}", bindingResult);
 			return ADMIN_PRODUCTO;
@@ -62,6 +76,18 @@ public class AdminController {
 			servicio.modificarProducto(producto);
 		}
 
+		try {
+			var pathImagenes = java.nio.file.Path.of(rutaImagenes);
+			
+			if (!Files.exists(pathImagenes)) {
+	            Files.createDirectories(pathImagenes);
+	        }
+			
+			Files.copy(imagen.getInputStream(), java.nio.file.Path.of(rutaImagenes, producto.getId() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			throw new RuntimeException("No se ha podido guardar", e);
+		}
+		
 		return REDIRECT_ADMIN_PRODUCTOS;
 	}
 	

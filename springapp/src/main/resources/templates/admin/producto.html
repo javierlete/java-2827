@@ -5,7 +5,7 @@
 
 <main>
 	<form action="productos.html" th:action="@{/admin/producto}"
-		method="post" th:object="${producto}">
+		method="post" th:object="${producto}" enctype="multipart/form-data">
 		<input type="hidden" th:field="*{id}">
 
 		<div class="row mb-3">
@@ -45,6 +45,13 @@
 				</select>
 				<div th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"
 					class="invalid-feedback"></div>
+			</div>
+		</div>
+		
+		<div class="row mb-3">
+			<label for="precio" class="col-sm-2 col-form-label">Fichero</label>
+			<div class="col-sm">
+				<input type="file" name="imagen" accept="image/jpeg" class="form-control">
 			</div>
 		</div>
 		

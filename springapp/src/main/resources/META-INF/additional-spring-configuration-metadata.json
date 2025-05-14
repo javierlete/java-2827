@@ -1,0 +1,12 @@
+{
+	"properties": [
+		{
+			"name": "rutas.imagenes.url",
+			"type": "java.lang.String"
+		},
+		{
+			"name": "rutas.imagenes.fisica",
+			"type": "java.lang.String"
+		}
+	]
+}
