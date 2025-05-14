@@ -19,15 +19,15 @@ class ProductoRepositoryTest {
 	@Autowired
 	private CategoriaRepository repoCategoria;
 	
-	@Test
+	@Test	
 	void basicas() {
 		System.out.println("INICIO DE PRUEBAS");
 		
-		repo.save(Producto.builder().id(1L).nombre("Prueba1").precio(new BigDecimal("1234")).build());
+		repo.save(Producto.builder().nombre("Prueba1").precio(new BigDecimal("1234")).build());
 		
-		var categoria = repoCategoria.save(Categoria.builder().id(1L).nombre("Categoría 1").build());
+		var categoria = repoCategoria.save(Categoria.builder().nombre("Categoría 1").build());
 		
-		var producto = Producto.builder().id(2L).nombre("Prueba2").precio(new BigDecimal("2234")).build();
+		var producto = Producto.builder().nombre("Prueba2").precio(new BigDecimal("2234")).build();
 
 		producto.setCategoria(categoria);
 		
