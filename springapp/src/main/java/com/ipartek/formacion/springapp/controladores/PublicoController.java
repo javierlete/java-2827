@@ -24,7 +24,6 @@ public class PublicoController {
 	public String inicio(Model modelo) {
 		var productos = servicio.listarProductos();
 		
-		modelo.addAttribute("imagenes", imagenes);		
 		modelo.addAttribute("productos", productos);
 		
 		return "index";

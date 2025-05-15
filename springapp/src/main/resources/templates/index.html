@@ -9,7 +9,7 @@
 	<div class="row row-cols-1 row-cols-md-3 g-4">
 		<div class="col" th:each="p: ${productos}">
 			<div class="card h-100">
-				<img src="https://picsum.photos/400/300" th:src="@{{imagenes}/{id}.jpg(imagenes=${imagenes},id=${p.id})}" class="card-img-top" alt="...">
+				<img src="https://picsum.photos/400/300" th:src="@{{imagenes}/{id}.jpg(imagenes=${imagenes},id=${p.id})}" class="card-img-top" alt="${p.nombre}">
 				<div class="card-body">
 					<h5 class="card-title" th:text="${p.nombre}">Card title</h5>
 					<p class="card-text">
