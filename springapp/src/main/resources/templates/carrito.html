@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" th:replace="~{_global :: global(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Listado de mantenimiento de productos</title>
+</head>
+
+<main>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Precio</th>
+				<th>Cantidad</th>
+				<th>Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="l: ${carrito.lineas}">
+				<td th:text="${l.producto.nombre}">Nombre</td>
+				<td th:text="${l.producto.precioFormateado}">Precio</td>
+				<td th:text="${l.cantidad}">Cantidad</td>
+				<td th:text="${l.total}">Total</td>
+			</tr>
+		</tbody>
+		<tfoot class="table-secondary">
+			<tr>
+				<td colspan=3></td>
+				<td th:text="${carrito.total}">Total</td>
+			</tr>
+		</tfoot>
+	</table>
+</main>

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ipartek.formacion.springapp.modelos.Carrito;
 import com.ipartek.formacion.springapp.servicios.AnonimoService;
 
 @Controller
@@ -36,5 +37,18 @@ public class PublicoController {
 		modelo.addAttribute("producto", producto);
 		
 		return "detalle";
+	}
+	
+	@GetMapping("carrito")
+	public String carrito(Long id, Carrito carrito) {
+		if(id != null) {
+			var producto = servicio.buscarProductoPorId(id);
+			
+			carrito.ponerLinea(Carrito.LineaCarrito.builder().producto(producto).cantidad(1).build());
+			
+			return "redirect:/carrito";
+		}
+		
+		return "carrito";
 	}
 }

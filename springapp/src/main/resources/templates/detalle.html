@@ -18,6 +18,9 @@
 						below as a natural lead-in to additional content. This content is
 						a little bit longer.</p>
 					<p th:text="*{categoria.nombre}">Categoría</p>
+					<div class="card-text">
+						<a class="btn btn-primary" href="carrito.html" th:href="@{/carrito(id=${producto.id})}">Añadir al carrito</a>
+					</div>
 					<p class="card-text">
 						<small class="text-body-secondary" th:text="*{precioFormateado}">Last updated 3 mins ago</small>
 					</p>
