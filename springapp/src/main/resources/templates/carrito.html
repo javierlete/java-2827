@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Listado de mantenimiento de productos</title>
+<title>Listado de mantenimiento de productos</title>
 </head>
 
 <main>
@@ -21,16 +21,43 @@
 			<tr th:each="l: ${carrito.lineas}">
 				<td th:text="${l.producto.nombre}">Nombre</td>
 				<td class="text-end" th:text="${l.producto.precioFormateado}">Precio</td>
-				<td class="text-end" th:text="${l.cantidad}">Cantidad</td>
-				<td class="text-end fw-bold" th:text="${@texto.formatoEuro(l.total)}">Total</td>
+				<td>
+					<form th:action="@{/carrito}" method="post">
+						<input type="hidden" name="id" th:value="${l.producto.id}">
+
+						<div class="input-group ms-auto" style="width: 9rem">
+							<button class="btn btn-outline-secondary" name="menos">-</button>
+
+							<input class="form-control" type="number" name="cantidad"
+								th:value="${l.cantidad}" placeholder="Cantidad">
+
+							<button class="btn btn-outline-secondary" name="mas">+</button>
+						</div>
+					</form>
+				</td>
+				<td class="text-end fw-bold"
+					th:text="${@texto.formatoEuro(l.total)}">Total</td>
 			</tr>
 		</tbody>
 		<tfoot class="table-secondary">
 			<tr>
 				<td colspan=2></td>
 				<td class="text-end fw-bold">Total:</td>
-				<td class="text-end fw-bold" th:text="${@texto.formatoEuro(carrito.total)}">Total</td>
+				<td class="text-end fw-bold"
+					th:text="${@texto.formatoEuro(carrito.total)}">Total</td>
 			</tr>
 		</tfoot>
 	</table>
+
+	<script>
+		document.querySelectorAll('input[name="cantidad"]').forEach(input => input.addEventListener(
+				"keydown", function(event) {
+					if (event.key === "Enter") {
+						event.preventDefault(); // Evita el comportamiento por defecto
+						this.form.submit(); // Envía el formulario manualmente
+					}
+				}));
+	</script>
+	
+	<!-- <script src="js/inputNumber.js" th:src="@{/js/inputNumber.js}"></script> -->
 </main>
