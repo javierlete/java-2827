@@ -5,12 +5,18 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
+
 import com.ipartek.formacion.springapp.entidades.Producto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+@Component
+@SessionScope
 public class Carrito {
 	private Map<Long, LineaCarrito> lineas = new LinkedHashMap<>();
 
