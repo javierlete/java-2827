@@ -13,18 +13,25 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.ipartek.formacion.springapp.modelos.Carrito;
+
 import lombok.extern.java.Log;
 
 @Log
 @Configuration
 @ControllerAdvice
 public class WebConfig implements WebMvcConfigurer {
-
 	@Value("${rutas.imagenes.url}")
 	private String urlImagenes;
 	
 	@Value("${rutas.imagenes.fisica}")
 	private String rutaImagenes;
+	
+	private Carrito carrito;
+	
+	public WebConfig(Carrito carrito) {
+		this.carrito = carrito;
+	}
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -35,6 +42,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@ModelAttribute
     public void addAttributes(Model model) {
         model.addAttribute("imagenes", urlImagenes);
+        model.addAttribute("carrito", carrito);
     }
 	
 	@ExceptionHandler(Exception.class)
