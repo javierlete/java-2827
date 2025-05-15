@@ -26,7 +26,13 @@ public class AnonimoServiceImpl implements AnonimoService {
 
 	@Override
 	public Producto buscarProductoPorId(Long id) {
-		return productoRepo.findById(id).orElse(null);
+		var productoOptional = productoRepo.findById(id);
+		
+		if(productoOptional.isEmpty()) {
+			throw new ServicioException("Producto no encontrado. Id=" + id);
+		}
+		
+		return productoOptional.get();
 	}
 
 	@Override
