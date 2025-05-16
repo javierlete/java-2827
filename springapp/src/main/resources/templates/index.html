@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="es" th:replace="~{_global :: global(~{::title}, ~{::main})}"
+<html lang="es" th:lang="${#locale.language}" th:replace="~{_global :: global(~{::title}, ~{::main})}"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Productos</title>
+	<title th:text="#{productos}">Productos</title>
 </head>
 
 <main>
