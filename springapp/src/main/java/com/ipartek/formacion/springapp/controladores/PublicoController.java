@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ipartek.formacion.springapp.modelos.Carrito;
 import com.ipartek.formacion.springapp.servicios.AnonimoService;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/")
 public class PublicoController {
@@ -66,5 +69,12 @@ public class PublicoController {
 		}
 		
 		return "redirect:/carrito";
+	}
+	
+	@GetMapping("idioma")
+	public String idioma(String codigo, HttpServletResponse response) {
+		response.addCookie(new Cookie("idioma", codigo));
+		
+		return "redirect:/";
 	}
 }
