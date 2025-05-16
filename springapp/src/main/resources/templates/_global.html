@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-100" lang="es" th:fragment="global(titulo, contenido)"
+<html class="h-100" lang="es" th:lang="${#locale.language}" th:fragment="global(titulo, contenido)"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
@@ -50,6 +50,12 @@
 							th:action="@{/logout}" method="post">
 							<button class="nav-link">Cierre de sesión</button>
 						</form>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" th:href="@{/idioma?codigo=es}">es</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" th:href="@{/idioma?codigo=en}">en</a>
 					</li>
 				</ul>
 			</div>
