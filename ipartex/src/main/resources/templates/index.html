@@ -7,12 +7,12 @@
 </head>
 
 <main>
-	<form class="card mb-5">
+	<form class="card mb-5 border-primary">
 		<div class="card-body">
 			<div class="d-flex">
 				<div class="pe-3">
 					<img class="border rounded rounded-circle"
-						src="https://picsum.photos/40/40">
+						src="https://picsum.photos/40/40" alt="">
 				</div>
 				<div>
 					<h5 class="card-title">Usuario</h5>
@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<p class="card-text">
-				<textarea class="form-control"></textarea>
+				<textarea class="form-control" placeholder="Cuenta lo que piensas..."></textarea>
 			</p>
 			<div class="d-flex justify-content-end">
 				<button class="btn btn-primary">
@@ -31,19 +31,19 @@
 		</div>
 	</form>
 
-	<div class="card">
+	<div class="card mb-3" th:each="mensaje: ${mensajes}" th:object="${mensaje}">
 		<div class="card-body">
 			<div class="d-flex">
 				<div class="pe-3">
 					<img class="border rounded rounded-circle"
-						src="https://picsum.photos/40/40">
+						src="https://picsum.photos/40/40" alt="">
 				</div>
 				<div>
-					<h5 class="card-title">Usuario</h5>
-					<h6 class="card-subtitle mb-2 text-body-secondary">Fecha</h6>
+					<h5 class="card-title" th:text="*{autor.nombre}">Usuario</h5>
+					<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${#temporals.format(mensaje.fecha, 'dd/MMM/yyyy HH:mm')}">Fecha</h6>
 				</div>
 			</div>
-			<p class="card-text">Some quick example text to build on the card
+			<p class="card-text" th:text="*{texto}">Some quick example text to build on the card
 				title and make up the bulk of the card’s content.</p>
 			<ul class="nav">
 				<li class="nav-item">
