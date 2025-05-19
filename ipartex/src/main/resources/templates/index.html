@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" th:lang="${#locale.language}"
+	th:replace="~{_global :: global(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Mensajes</title>
+</head>
+
+<main>
+	<form class="card mb-5">
+		<div class="card-body">
+			<div class="d-flex">
+				<div class="pe-3">
+					<img class="border rounded rounded-circle"
+						src="https://picsum.photos/40/40">
+				</div>
+				<div>
+					<h5 class="card-title">Usuario</h5>
+					<h6 class="card-subtitle mb-2 text-body-secondary"
+						th:text="${#dates.format(#dates.createNow(), 'dd/MMM/yyyy HH:mm')}">Fecha</h6>
+				</div>
+			</div>
+			<p class="card-text">
+				<textarea class="form-control"></textarea>
+			</p>
+			<div class="d-flex justify-content-end">
+				<button class="btn btn-primary">
+					<i class="bi bi-send"></i>
+				</button>
+			</div>
+		</div>
+	</form>
+
+	<div class="card">
+		<div class="card-body">
+			<div class="d-flex">
+				<div class="pe-3">
+					<img class="border rounded rounded-circle"
+						src="https://picsum.photos/40/40">
+				</div>
+				<div>
+					<h5 class="card-title">Usuario</h5>
+					<h6 class="card-subtitle mb-2 text-body-secondary">Fecha</h6>
+				</div>
+			</div>
+			<p class="card-text">Some quick example text to build on the card
+				title and make up the bulk of the card’s content.</p>
+			<ul class="nav">
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<i class="bi bi-heart"></i> 5
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<i class="bi bi-reply"></i> 5
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<i class="bi bi-forward"></i> 5
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</main>
+</html>

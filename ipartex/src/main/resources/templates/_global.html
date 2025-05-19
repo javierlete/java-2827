@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html class="h-100" lang="es" th:lang="${#locale.language}" th:fragment="global(titulo, contenido)"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title th:replace="${titulo}">Spring App</title>
+<meta charset="UTF-8">
+
+<link rel="icon" href="favicon.ico" th:href="@{/favicon.ico}"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+	th:href="@{/webjars/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css}">
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/5.3.5/css/bootstrap.min.css}"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+	th:src="@{/webjars/bootstrap/5.3.5/js/bootstrap.bundle.min.js}"></script>
+
+<link href="chat-square-text.svg" th:href="@{/chat-square-text.svg}" rel="icon">
+
+</head>
+<body class="h-100 d-flex flex-column">
+	<nav class="navbar navbar-expand-md bg-dark" data-bs-theme="dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">IparteX</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-md-0">
+					<li class="nav-item"><a class="nav-link" href="index.html" th:href="@{/}">Principal</a></li>
+				</ul>
+				<ul class="navbar-nav mb-2 mb-sm-0">
+					<li class="navbar-text" sec:authorize="!isAuthenticated()">No
+						estás autenticado</li>
+					<li class="navbar-text" sec:authorize="isAuthenticated()"
+						sec:authentication="name">Usuario</li>
+					<li class="nav-item" sec:authorize="!isAuthenticated()"><a
+						href="login.html" class="nav-link" th:href="@{/login}">Inicio
+							sesión</a></li>
+					<li class="nav-item">
+						<form class="d-flex mb-0" action="index.html"
+							th:action="@{/logout}" method="post">
+							<button class="nav-link">Cierre de sesión</button>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container my-5">
+		<main th:replace="${contenido}">
+			<p>#CONTENIDO#</p>
+		</main>
+	</div>
+
+	<footer class="text-bg-dark p-2 mt-auto"> &copy;2025 Javier Lete </footer>
+</body>
+</html>
