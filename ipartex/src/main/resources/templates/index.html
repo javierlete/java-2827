@@ -31,7 +31,7 @@
 		</div>
 	</form>
 
-	<div class="card mb-3" th:each="mensaje: ${mensajes}" th:object="${mensaje}">
+	<div th:id="'m-' + ${iteracion.count}" class="card mb-3" th:each="mensaje, iteracion: ${mensajes}" th:object="${mensaje}">
 		<div class="card-body">
 			<div class="d-flex">
 				<div class="pe-3">
@@ -63,6 +63,10 @@
 				</li>
 			</ul>
 		</div>
+	</div>
+	
+	<div>
+		<a href="#" th:href="@{'/' + '?tamano=' + ${tamano_mas} + '#m-' + ${tamano}}">Más mensajes</a>
 	</div>
 </main>
 </html>
