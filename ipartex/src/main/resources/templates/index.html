@@ -8,7 +8,7 @@
 </head>
 
 <main>
-	<form class="card mb-5 border-primary" sec:authorize="isAuthenticated()">
+	<form th:action="@{/mensaje}" method="post" class="card mb-5 border-primary" sec:authorize="isAuthenticated()">
 		<div class="card-body">
 			<div class="d-flex">
 				<div class="pe-3">
@@ -16,13 +16,13 @@
 						src="https://picsum.photos/40/40" alt="">
 				</div>
 				<div>
-					<h5 class="card-title" th:text="${session.usuario.nombre}">Usuario</h5>
+					<h5 class="card-title" th:if="${session.usuario != null}" th:text="${session.usuario.nombre}">Usuario</h5>
 					<h6 class="card-subtitle mb-2 text-body-secondary"
 						th:text="${#dates.format(#dates.createNow(), 'dd/MMM/yyyy HH:mm')}">Fecha</h6>
 				</div>
 			</div>
 			<p class="card-text">
-				<textarea class="form-control" placeholder="Cuenta lo que piensas..."></textarea>
+				<textarea name="texto" class="form-control" placeholder="Cuenta lo que piensas..."></textarea>
 			</p>
 			<div class="d-flex justify-content-end">
 				<button class="btn btn-primary">
