@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" th:replace="~{_global :: global(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Registro de usuario</title>
+</head>
+
+<main>
+	<form action="index.html" th:action="@{/registro}" method="post" th:object="${usuario}">
+		<div class="row mb-3">
+			<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+			<div class="col-sm">
+				<input type="text" class="form-control" th:field="*{nombre}">
+			</div>
+		</div>
+		
+		<div class="row mb-3">
+			<label for="email" class="col-sm-2 col-form-label">Email</label>
+			<div class="col-sm">
+				<input type="email" class="form-control" th:field="*{email}">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+			<div class="col-sm">
+				<input type="password" class="form-control" th:field="*{password}">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-sm offset-sm-2">
+				<button class="btn btn-primary">Crear usuario</button>
+			</div>
+		</div>
+
+	</form>
+</main>
+
+</html>

@@ -56,6 +56,8 @@
 					<li class="nav-item" sec:authorize="!isAuthenticated()"><a
 						href="login.html" class="nav-link" th:href="@{/login}">Inicio
 							sesión</a></li>
+					<li class="nav-item" sec:authorize="!isAuthenticated()"><a
+						href="registro.html" class="nav-link" th:href="@{/registro}">Registro</a></li>
 					<li class="nav-item" sec:authorize="isAuthenticated()">
 						<form class="d-flex mb-0" action="index.html"
 							th:action="@{/logout}" method="post">
