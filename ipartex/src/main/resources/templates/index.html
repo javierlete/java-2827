@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="es" th:lang="${#locale.language}"
 	th:replace="~{_global :: global(~{::title}, ~{::main})}"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <title>Mensajes</title>
 </head>
 
 <main>
-	<form class="card mb-5 border-primary">
+	<form class="card mb-5 border-primary" sec:authorize="isAuthenticated()">
 		<div class="card-body">
 			<div class="d-flex">
 				<div class="pe-3">
@@ -15,7 +16,7 @@
 						src="https://picsum.photos/40/40" alt="">
 				</div>
 				<div>
-					<h5 class="card-title">Usuario</h5>
+					<h5 class="card-title" th:text="${session.usuario.nombre}">Usuario</h5>
 					<h6 class="card-subtitle mb-2 text-body-secondary"
 						th:text="${#dates.format(#dates.createNow(), 'dd/MMM/yyyy HH:mm')}">Fecha</h6>
 				</div>
@@ -30,6 +31,15 @@
 			</div>
 		</div>
 	</form>
+
+	<div class="card mb-3 border-primary" sec:authorize="!isAuthenticated()">
+		<div class="card-body">
+			<h5 class="card-title">
+				No has iniciado sesión
+			</h5>
+			<p class="card-text">Para poder escribir mensajes en esta red necesitas registrarte</p>
+		</div>
+	</div>
 
 	<div th:id="'m-' + ${iteracion.count}" class="card mb-3" th:each="mensaje, iteracion: ${mensajes}" th:object="${mensaje}">
 		<div class="card-body">
