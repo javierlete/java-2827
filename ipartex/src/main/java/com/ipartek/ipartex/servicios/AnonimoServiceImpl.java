@@ -1,5 +1,6 @@
 package com.ipartek.ipartex.servicios;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ipartek.ipartex.dtos.MensajeDto;
 import com.ipartek.ipartex.entidades.Mensaje;
 import com.ipartek.ipartex.entidades.Usuario;
 import com.ipartek.ipartex.repositorios.MensajesRepository;
@@ -14,11 +16,12 @@ import com.ipartek.ipartex.repositorios.UsuariosRepository;
 
 import lombok.AllArgsConstructor;
 
+@Primary
 @Service
 @AllArgsConstructor
 public class AnonimoServiceImpl implements AnonimoService {
-	private MensajesRepository mensajesRepository;
-	private UsuariosRepository usuariosRepository;
+	protected MensajesRepository mensajesRepository;
+	protected UsuariosRepository usuariosRepository;
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
@@ -35,6 +38,11 @@ public class AnonimoServiceImpl implements AnonimoService {
 		usuario.setPassword(passwordCodificada);
 		
 		return usuariosRepository.save(usuario);
+	}
+
+	@Override
+	public Page<MensajeDto> listarMensajesPaginados(Pageable pageable) {
+		return mensajesRepository.listadoMensajesDto(pageable);
 	}
 
 }

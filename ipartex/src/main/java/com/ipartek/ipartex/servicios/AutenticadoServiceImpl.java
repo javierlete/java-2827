@@ -1,22 +1,20 @@
 package com.ipartek.ipartex.servicios;
 
-import com.ipartek.ipartex.repositorios.MensajesRepository;
-import com.ipartek.ipartex.repositorios.UsuariosRepository;
-
-import lombok.AllArgsConstructor;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ipartek.ipartex.entidades.Mensaje;
 import com.ipartek.ipartex.entidades.Usuario;
+import com.ipartek.ipartex.repositorios.MensajesRepository;
+import com.ipartek.ipartex.repositorios.UsuariosRepository;
 
 @Service
+public class AutenticadoServiceImpl extends AnonimoServiceImpl implements AutenticadoService {
 
-@AllArgsConstructor
-public class AutenticadoServiceImpl implements AutenticadoService {
-
-	private final MensajesRepository mensajesRepository;
-	private final UsuariosRepository usuariosRepository;
+	public AutenticadoServiceImpl(MensajesRepository mensajesRepository, UsuariosRepository usuariosRepository,
+			PasswordEncoder passwordEncoder) {
+		super(mensajesRepository, usuariosRepository, passwordEncoder);
+	}
 
 	@Override
 	public Usuario buscarPorEmail(String email) {
