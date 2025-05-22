@@ -2,6 +2,8 @@ package com.ipartek.ipartex.entidades;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "usuarios")
+@JsonIgnoreProperties(value = {"password"}, allowSetters = true)
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 5516703573026975230L;
 
