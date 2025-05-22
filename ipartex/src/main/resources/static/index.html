@@ -8,14 +8,32 @@
 
 </head>
 <body>
+	<nav>
+		<ul>
+			<li><a href="javascript:mostrar('registro')">Registrarse</a></li>
+		</ul>
+	</nav>
 
-	<ul id="mensajes">
-		<li>Usuario, Fecha, Mensaje</li>
-	</ul>
+	<main>
+		<section id="registro">
+			<form action="javascript:registrarse()">
+				<input name="nombre" placeholder="nombre">
+				<input name="email" placeholder="email">
+				<input name="password" placeholder="password">
+				
+				<button>Registrarse</button>
+			</form>
+		</section>
+		
+		<section id="mensajes">
+			<ul>
+				<li>Usuario, Fecha, Mensaje</li>
+			</ul>
 
-	<div>
-		<a id="mas-mensajes" href="#">Más mensajes</a>
-	</div>
-
+			<div>
+				<a id="mas-mensajes" href="#">Más mensajes</a>
+			</div>
+		</section>
+	</main>
 </body>
 </html>
