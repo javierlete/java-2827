@@ -8,6 +8,7 @@ let numero_pagina = 0;
 let ultima = false;
 
 let ul;
+let masMensajes;
 
 window.addEventListener('DOMContentLoaded', async () => {
 	ul = document.querySelector('#mensajes');
@@ -15,7 +16,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 	await cargarMensajes();
 
-	const masMensajes = document.querySelector('#mas-mensajes');
+	masMensajes = document.querySelector('#mas-mensajes');
 
 	masMensajes.addEventListener('click', evento => {
 		evento.preventDefault();
@@ -35,6 +36,10 @@ async function cargarMensajes() {
 	const resultado = await respuesta.json();
 
 	ultima = resultado.last;
+
+	if (ultima) {
+		masMensajes.remove();
+	}
 
 	resultado.content.forEach(mensaje => {
 		const li = document.createElement('li');
