@@ -1,1 +1,31 @@
-<p>admin-listado works!</p>
+<table class="table table-hover table-striped table-bordered">
+    <thead class="table-secondary">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(producto of [1, 2, 3, 4]; track producto) {
+        <tr>
+            <td>Id</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>
+                <a class="btn btn-sm btn-primary" href="producto.html">Editar</a>
+                <a class="btn btn-sm btn-danger" href="productos.html">Borrar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+    <tfoot class="table-secondary">
+        <tr>
+            <td colspan=3></td>
+            <td>
+                <a class="btn btn-sm btn-primary" href="producto.html">Añadir</a>
+            </td>
+        </tr>
+    </tfoot>
+</table>
