@@ -95,28 +95,36 @@
   },
   "schematics": {
     "@schematics/angular:component": {
-      "type": "component"
+      "type": "component",
+      "path": "src/app/componentes"
     },
     "@schematics/angular:directive": {
-      "type": "directive"
+      "type": "directive",
+      "path": "src/app/directivas"
     },
     "@schematics/angular:service": {
-      "type": "service"
+      "type": "service",
+      "path": "src/app/servicios"
     },
     "@schematics/angular:guard": {
-      "typeSeparator": "."
+      "typeSeparator": ".",
+      "path": "src/app/guards"
     },
     "@schematics/angular:interceptor": {
-      "typeSeparator": "."
+      "typeSeparator": ".",
+      "path": "src/app/interceptores"
     },
     "@schematics/angular:module": {
-      "typeSeparator": "."
+      "typeSeparator": ".",
+      "path": "src/app/modulos"
     },
     "@schematics/angular:pipe": {
-      "typeSeparator": "."
+      "typeSeparator": ".",
+      "path": "src/app/pipes"
     },
     "@schematics/angular:resolver": {
-      "typeSeparator": "."
+      "typeSeparator": ".",
+      "path": "src/app/resolvers"
     }
   }
 }
