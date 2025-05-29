@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Error en el usuario o contraseña
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    Has cerrado la sesión
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<form action="index.html" method="post">
+    <div class="row mb-3">
+        <label for="username" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm">
+            <input type="email" class="form-control" name="username">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+        <div class="col-sm">
+            <input type="password" class="form-control" name="password">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm offset-sm-2">
+            <button class="btn btn-primary">Iniciar sesión</button>
+        </div>
+    </div>
+
+</form>
