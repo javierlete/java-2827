@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-label-input',
+  selector: 'jl-label-input',
   imports: [RouterLink],
   templateUrl: './label-input.component.html',
   styleUrl: './label-input.component.css'
