@@ -1,1 +1,7 @@
-<p>mas-menos works!</p>
+<div class="input-group ms-auto" [style]="'width: ' + ancho + 'rem'">
+    <button class="btn btn-outline-secondary" (click)="menos()">-</button>
+
+    <input class="form-control" type="number" placeholder="Cantidad" [(ngModel)] = "cantidad">
+
+    <button class="btn btn-outline-secondary" (click)="mas()">+</button>
+</div>

@@ -13,17 +13,7 @@
             <td>Nombre</td>
             <td class="text-end">Precio</td>
             <td>
-                <form method="post">
-                    <input type="hidden" name="id">
-
-                    <div class="input-group ms-auto" style="width: 9rem">
-                        <button class="btn btn-outline-secondary" name="menos">-</button>
-
-                        <input class="form-control" type="number" name="cantidad" placeholder="Cantidad" value="1">
-
-                        <button class="btn btn-outline-secondary" name="mas">+</button>
-                    </div>
-                </form>
+                <jl-mas-menos [valorPorDefecto]="5" [max]="10" [min]="1" />
             </td>
             <td class="text-end fw-bold">Total</td>
         </tr>
