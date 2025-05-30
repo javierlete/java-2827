@@ -1,1 +1,25 @@
-<p>label-input works!</p>
+<div class="row mb-3">
+    @if(tipo != 'boton') {
+    <label for="nombre" class="col-sm-2 col-form-label">{{etiqueta}}</label>
+    }
+    <div class="col-sm" [class.offset-sm-2]="tipo == 'boton'">
+        @switch(tipo) {
+        @case('boton') {
+        <button type="button" class="btn btn-primary" routerLink="{{enlace}}">{{etiqueta}}</button>
+        }
+        @case('select') {
+        <select class="form-select">
+            <option>OPCION</option>
+        </select>
+        }
+        @case('textarea') {
+        <textarea class="form-control"></textarea>
+        }
+        @default {
+        <input type="{{tipo}}" [attr.accept]="tipoFichero" [attr.step]="decimales ? 1/(10 ** decimales): null"
+            class="form-control">
+        }
+        }
+        <div class="invalid-feedback">{{error}}</div>
+    </div>
+</div>

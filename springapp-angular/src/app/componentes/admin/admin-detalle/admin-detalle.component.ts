@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { LabelInputComponent } from "../../biblioteca/label-input/label-input.component";
 
 @Component({
   selector: 'app-admin-detalle',
-  imports: [RouterLink],
+  imports: [LabelInputComponent],
   templateUrl: './admin-detalle.component.html',
   styleUrl: './admin-detalle.component.css'
 })

@@ -1,50 +1,10 @@
 <form action="productos.html" method="post" enctype="multipart/form-data">
     <input type="hidden">
 
-    <div class="row mb-3">
-        <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-        <div class="col-sm">
-            <input type="text" class="form-control">
-            <div class="invalid-feedback">El nombre debe estar rellenado y tener como máximo 45 caracteres</div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label for="precio" class="col-sm-2 col-form-label">Precio</label>
-        <div class="col-sm">
-            <input type="number" step=".01" class="form-control">
-            <div class="invalid-feedback"></div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
-        <div class="col-sm">
-            <textarea class="form-control"></textarea>
-            <div class="invalid-feedback"></div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label for="categoria" class="col-sm-2 col-form-label">Categoría</label>
-        <div class="col-sm">
-            <select class="form-select">
-                <option>Categoría 1</option>
-            </select>
-            <div class="invalid-feedback"></div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label for="precio" class="col-sm-2 col-form-label">Fichero</label>
-        <div class="col-sm">
-            <input type="file" name="imagen" accept="image/jpeg" class="form-control">
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col-sm offset-sm-2">
-            <button type="button" routerLink="/admin/listado" class="btn btn-primary">Guardar</button>
-        </div>
-    </div>
+    <app-label-input etiqueta="Nombre" tipo="text" error="El nombre debe estar rellenado y tener como máximo 45 caracteres"></app-label-input>
+    <app-label-input etiqueta="Precio" tipo="number" [decimales]="2"></app-label-input>
+    <app-label-input etiqueta="Descripción" tipo="textarea"></app-label-input>
+    <app-label-input etiqueta="Categoría" tipo="select"></app-label-input>
+    <app-label-input etiqueta="Fichero" tipo="file" tipoFichero="image/jpeg"></app-label-input>
+    <app-label-input etiqueta="Guardar" tipo="boton" enlace="/admin/listado"></app-label-input>
 </form>

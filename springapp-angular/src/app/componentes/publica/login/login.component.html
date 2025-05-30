@@ -9,24 +9,7 @@
 </div>
 
 <form action="index.html" method="post">
-    <div class="row mb-3">
-        <label for="username" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm">
-            <input type="email" class="form-control" name="username">
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
-        <div class="col-sm">
-            <input type="password" class="form-control" name="password">
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col-sm offset-sm-2">
-            <button class="btn btn-primary">Iniciar sesión</button>
-        </div>
-    </div>
-
+    <app-label-input etiqueta="Email" tipo="email"></app-label-input>
+    <app-label-input etiqueta="Contraseña" tipo="password"></app-label-input>
+    <app-label-input etiqueta="Iniciar sesión" tipo="boton" enlace="/listado"></app-label-input>
 </form>
