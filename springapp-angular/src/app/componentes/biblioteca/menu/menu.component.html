@@ -1,1 +1,29 @@
-<p>menu works!</p>
+<nav class="navbar navbar-expand-{{expansion}} bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">{{titulo}}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-{{expansion}}-0">
+                @for(enlace of enlacesPosicion(); track enlace) {
+                @if(enlace.link) {
+                <li class="nav-item"><a class="nav-link" routerLink="{{enlace.link}}">{{enlace.texto}}</a></li>
+                } @else {
+                <li class="navbar-text px-1">{{enlace.texto}}</li>
+                }
+                }
+            </ul>
+            <ul class="navbar-nav mb-2 mb-sm-0">
+                @for(enlace of enlacesPosicion('derecha'); track enlace) {
+                @if(enlace.link) {
+                <li class="nav-item"><a class="nav-link" routerLink="{{enlace.link}}">{{enlace.texto}}</a></li>
+                } @else {
+                <li class="navbar-text px-1">{{enlace.texto}}</li>
+                }
+                }
+            </ul>
+        </div>
+    </div>
+</nav>
