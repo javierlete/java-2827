@@ -1,1 +1,4 @@
-<p>boton works!</p>
+<button class="btn btn-{{tipo}}" [class.btn-sm]="tamano == 'sm'" [class.btn-lg]="tamano == 'lg'" routerLink="{{enlace}}">
+    {{etiqueta}}
+</button>
+

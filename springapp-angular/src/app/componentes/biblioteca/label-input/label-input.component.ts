@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { BotonComponent } from "../boton/boton.component";
 
 @Component({
   selector: 'jl-label-input',
-  imports: [RouterLink],
+  imports: [RouterLink, BotonComponent],
   templateUrl: './label-input.component.html',
   styleUrl: './label-input.component.css'
 })

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BotonComponent } from "../../biblioteca/boton/boton.component";
 
 @Component({
   selector: 'app-carrito',

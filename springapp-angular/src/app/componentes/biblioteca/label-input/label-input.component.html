@@ -5,7 +5,7 @@
     <div class="col-sm" [class.offset-sm-2]="tipo == 'boton'">
         @switch(tipo) {
         @case('boton') {
-        <button type="button" class="btn btn-primary" routerLink="{{enlace}}">{{etiqueta}}</button>
+            <jl-boton enlace="{{enlace}}" etiqueta="{{etiqueta}}"></jl-boton>
         }
         @case('select') {
         <select class="form-select">
