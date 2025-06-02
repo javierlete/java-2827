@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -50,6 +52,7 @@ public class Producto {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Categoria categoria;
 	
+	@JsonIgnore
 	public String getPrecioFormateado() {
 		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.of("es", "ES"));
 	    return currencyFormatter.format(precio);
