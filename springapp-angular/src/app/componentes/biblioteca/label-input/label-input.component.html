@@ -9,7 +9,9 @@
         }
         @case('select') {
         <select class="form-select">
-            <option>OPCION</option>
+            @for(opcion of opciones; track opcion.id) {
+            <option value="{{opcion.id}}" [selected]="opcion.id == valor">{{opcion.texto}}</option>
+            }
         </select>
         }
         @case('textarea') {

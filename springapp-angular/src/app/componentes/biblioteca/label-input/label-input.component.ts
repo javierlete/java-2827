@@ -9,10 +9,16 @@ import { BotonComponent } from "../boton/boton.component";
 })
 export class LabelInputComponent {
   @Input() valor: any;
+  @Input() opciones?: Opcion[];
   @Input() etiqueta?: string;
   @Input() tipo = 'text';
   @Input() error?: string;
   @Input() decimales?: number;
   @Input() tipoFichero?: string;
   @Input() enlace?: string;
+}
+
+export interface Opcion {
+  id: number;
+  texto: string;
 }

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { LabelInputComponent } from "../../biblioteca/label-input/label-input.component";
+import { LabelInputComponent, Opcion } from "../../biblioteca/label-input/label-input.component";
 import { Producto } from '../../../modelos/producto';
 import { ActivatedRoute } from '@angular/router';
 import { PRODUCTOS } from '../../mocks/mock-productos';
+import { CATEGORIAS } from '../../mocks/mock-categorias';
+import { Categoria } from '../../../modelos/categoria';
 
 @Component({
   selector: 'app-admin-detalle',
@@ -12,10 +14,13 @@ import { PRODUCTOS } from '../../mocks/mock-productos';
 })
 export class AdminDetalleComponent {
   producto?: Producto;
+  opciones!: Opcion[];
 
   constructor(private readonly route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.opciones = CATEGORIAS.map<Opcion>((c: Categoria) => ({ id: c.id, texto: c.nombre }));
+
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     if (id) {
