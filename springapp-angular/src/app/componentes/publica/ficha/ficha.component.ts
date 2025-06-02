@@ -3,7 +3,7 @@ import { Producto } from '../../../modelos/producto';
 import { BotonComponent } from "../../biblioteca/boton/boton.component";
 import { CurrencyPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { PRODUCTOS } from '../../mocks/mock-productos';
+import { ProductoService } from '../../../servicios/producto.service';
 
 @Component({
   selector: 'app-ficha',
@@ -26,13 +26,19 @@ export class FichaComponent implements OnInit {
     }
   };
 
-  constructor(private readonly route: ActivatedRoute) { }
+  constructor(private readonly route: ActivatedRoute, private readonly productoService: ProductoService) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     if (id) {
-      this.producto = PRODUCTOS.find(p => p.id === id) as Producto;
+      this.productoService.getById(id).subscribe((producto: Producto | undefined) => {
+        if (producto) {
+          this.producto = producto;
+        } else {
+          console.error(`Producto con ID ${id} no encontrado.`);
+        }
+      });
     }
   }
 }

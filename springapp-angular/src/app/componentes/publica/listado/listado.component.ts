@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FichaComponent } from "../ficha/ficha.component";
 import { Producto } from '../../../modelos/producto';
-import { PRODUCTOS } from '../../mocks/mock-productos';
-
+import { ProductoService } from '../../../servicios/producto.service';
 
 @Component({
   selector: 'app-listado',
@@ -11,5 +10,13 @@ import { PRODUCTOS } from '../../mocks/mock-productos';
   styleUrl: './listado.component.css'
 })
 export class ListadoComponent {
-  productos: Producto[] = PRODUCTOS;
+  productos: Producto[] = [];
+
+  constructor(private readonly productoService: ProductoService) { }
+
+  ngOnInit(): void {
+    this.productoService.getAll().subscribe((productos: Producto[]) => {
+      this.productos = productos;
+    });
+  }
 }

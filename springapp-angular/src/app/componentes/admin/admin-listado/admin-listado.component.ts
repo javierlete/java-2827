@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { BotonComponent } from "../../biblioteca/boton/boton.component";
-import { PRODUCTOS } from '../../mocks/mock-productos';
 import { Producto } from '../../../modelos/producto';
 import { CurrencyPipe } from '@angular/common';
+import { ProductoService } from '../../../servicios/producto.service';
 
 @Component({
   selector: 'app-admin-listado',
@@ -11,5 +11,13 @@ import { CurrencyPipe } from '@angular/common';
   styleUrl: './admin-listado.component.css'
 })
 export class AdminListadoComponent {
-  productos: Producto[] = PRODUCTOS;
+  productos: Producto[] = [];
+
+  constructor(private readonly productoService: ProductoService) { }
+  
+    ngOnInit(): void {
+      this.productoService.getAll().subscribe((productos: Producto[]) => {
+        this.productos = productos;
+      });
+    }
 }
