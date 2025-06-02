@@ -21,4 +21,5 @@ export const routes: Routes = [
     // Administración
     { path: 'admin/listado', component: AdminListadoComponent },
     { path: 'admin/detalle', component: AdminDetalleComponent },
+    { path: 'admin/detalle/:id', component: AdminDetalleComponent },
 ];

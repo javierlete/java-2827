@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { BotonComponent } from "../boton/boton.component";
 
 @Component({
   selector: 'jl-label-input',
-  imports: [RouterLink, BotonComponent],
+  imports: [BotonComponent],
   templateUrl: './label-input.component.html',
   styleUrl: './label-input.component.css'
 })
 export class LabelInputComponent {
+  @Input() valor: any;
   @Input() etiqueta?: string;
   @Input() tipo = 'text';
   @Input() error?: string;

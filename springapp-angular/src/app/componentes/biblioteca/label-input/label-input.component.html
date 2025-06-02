@@ -13,10 +13,10 @@
         </select>
         }
         @case('textarea') {
-        <textarea class="form-control"></textarea>
+        <textarea class="form-control">{{valor}}</textarea>
         }
         @default {
-        <input type="{{tipo}}" [attr.accept]="tipoFichero" [attr.step]="decimales ? 1/(10 ** decimales): null"
+        <input value="{{valor}}" type="{{tipo}}" [attr.accept]="tipoFichero" [attr.step]="decimales ? 1/(10 ** decimales): null"
             class="form-control">
         }
         }

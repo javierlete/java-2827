@@ -8,13 +8,13 @@
         </tr>
     </thead>
     <tbody>
-        @for(producto of [1, 2, 3, 4]; track producto) {
+        @for(producto of productos; track producto.id) {
         <tr>
-            <td>Id</td>
-            <td>Nombre</td>
-            <td>Precio</td>
+            <td>{{producto.id}}</td>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.precio | currency: 'EUR': 'symbol': '1.2-2': 'es'}}</td>
             <td>
-                <jl-boton enlace="/admin/detalle" etiqueta="Editar" tamano="sm"/>
+                <jl-boton enlace="/admin/detalle/{{producto.id}}" etiqueta="Editar" tamano="sm"/>
                 <jl-boton enlace="/admin/listado" etiqueta="Borrar" tamano="sm" tipo="danger"/>
             </td>
         </tr>
