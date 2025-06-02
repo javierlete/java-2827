@@ -3,6 +3,7 @@ import { Producto } from '../../../modelos/producto';
 import { BotonComponent } from "../../biblioteca/boton/boton.component";
 import { CurrencyPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { PRODUCTOS } from '../../mocks/mock-productos';
 
 @Component({
   selector: 'app-ficha',
@@ -31,9 +32,7 @@ export class FichaComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     if (id) {
-      this.producto.id = id;
-      this.producto.nombre += id;
-      this.producto.precio = id * 1.11;
+      this.producto = PRODUCTOS.find(p => p.id === id) as Producto;
     }
   }
 }
