@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Categoria } from '../modelos/categoria';
-import { CATEGORIAS } from '../componentes/mocks/mock-categorias';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
+  URL = '/json/categorias.json';
+
+  constructor(private readonly http: HttpClient) { }
 
   getAll(): Observable<Categoria[]> {
-    return of(CATEGORIAS);
+    return this.http.get<Categoria[]>(this.URL);
   }
 }

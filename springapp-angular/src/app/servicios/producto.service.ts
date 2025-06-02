@@ -1,20 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Producto } from '../modelos/producto';
-import { PRODUCTOS } from '../componentes/mocks/mock-productos';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
+  URL = '/json/productos.json';
+
+  constructor(private readonly http: HttpClient) { }
 
   getAll(): Observable<Producto[]> {
-    return of(PRODUCTOS);
+    return this.http.get<Producto[]>(this.URL);
   }
 
   getById(id: number): Observable<Producto | undefined> {
-    const producto = PRODUCTOS.find(p => p.id === id);
-    return of(producto);
+    return this.getAll().pipe(
+      map((productos: Producto[]) => {
+        const producto = productos.find(p => p.id === id);
+        if (!producto) {
+          console.error(`Producto con ID ${id} no encontrado.`);
+        }
+        return producto;
+      })
+    );
   }
 }

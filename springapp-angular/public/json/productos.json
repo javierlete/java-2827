@@ -1,6 +1,4 @@
-import { Producto } from "../../modelos/producto";
-
-export const PRODUCTOS: Producto[] = [
+[
     { "id": 2, "nombre": "Portátil", "precio": 1234.00, "descripcion": "Portátil chuperchuli", 
       "categoria": { "id": 2, "nombre": "Informática", "descripcion": null }
     }, 
@@ -8,3 +6,4 @@ export const PRODUCTOS: Producto[] = [
       "categoria": { "id": 3, "nombre": "Electrónica", "descripcion": null } 
     }
   ]
+  
