@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { LabelInputComponent, Opcion } from "../../biblioteca/label-input/label-input.component";
 import { Producto } from '../../../modelos/producto';
 import { ActivatedRoute } from '@angular/router';
-import { CATEGORIAS } from '../../mocks/mock-categorias';
 import { Categoria } from '../../../modelos/categoria';
 import { ProductoService } from '../../../servicios/producto.service';
+import { CategoriaService } from '../../../servicios/categoria.service';
 
 @Component({
   selector: 'app-admin-detalle',
@@ -16,10 +16,12 @@ export class AdminDetalleComponent {
   producto?: Producto;
   opciones!: Opcion[];
 
-  constructor(private readonly route: ActivatedRoute, private readonly productoService: ProductoService) { }
+  constructor(private readonly route: ActivatedRoute, private readonly productoService: ProductoService, private readonly categoriaService: CategoriaService) { }
 
   ngOnInit(): void {
-    this.opciones = CATEGORIAS.map<Opcion>((c: Categoria) => ({ id: c.id, texto: c.nombre }));
+    this.categoriaService.getAll().subscribe((categorias: Categoria[]) => {
+      this.opciones = categorias.map<Opcion>((c: Categoria) => ({ id: c.id, texto: c.nombre }))
+    });
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
