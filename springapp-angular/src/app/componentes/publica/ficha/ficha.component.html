@@ -8,7 +8,7 @@
         </p>
     </div>
     <div class="card-footer">
-        <small class="text-body-secondary">{{producto.precio}}</small>
+        <small class="text-body-secondary">{{producto.precio | currency: 'EUR': 'symbol' : '1.2-2' : 'es'}}</small>
     </div>
 </div>
 }
@@ -28,7 +28,7 @@
                     <jl-boton enlace="/carrito" etiqueta="Añadir al carrito"/>
                 </div>
                 <p class="card-text">
-                    <small class="text-body-secondary">{{producto.precio | currency: 'EUR': 'symbol' : '4.2-2' : 'es'}}</small>
+                    <small class="text-body-secondary">{{producto.precio | currency: 'EUR': 'symbol' : '1.2-2' : 'es'}}</small>
                 </p>
             </div>
         </div>

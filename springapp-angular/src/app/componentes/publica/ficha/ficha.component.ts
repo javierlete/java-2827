@@ -12,7 +12,7 @@ import { CurrencyPipe } from '@angular/common';
 export class FichaComponent {
   @Input() horizontal = false;
 
-  producto: Producto = {
+  @Input() producto: Producto = {
     id: 5,
     nombre: 'Producto de prueba',
     precio: 1234.56,

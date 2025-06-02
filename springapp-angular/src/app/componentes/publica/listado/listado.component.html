@@ -1,7 +1,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
-    @for(producto of [1, 2, 3, 4]; track producto) {
+    @for(producto of productos; track producto.id) {
     <div class="col">
-        <app-ficha />
+        <app-ficha [producto]="producto"/>
     </div>
     }
 </div>
