@@ -15,7 +15,7 @@ export const routes: Routes = [
     
     // Público
     { path: 'listado', component: ListadoComponent },
-    { path: 'detalle', component: DetalleComponent },
+    { path: 'detalle/:id', component: DetalleComponent },
     { path: 'carrito', component: CarritoComponent },
 
     // Administración
