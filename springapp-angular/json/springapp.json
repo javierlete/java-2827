@@ -1,0 +1,36 @@
+{
+    "productos": [
+        {
+            "id": 2,
+            "nombre": "Portátil",
+            "precio": 1234.00,
+            "descripcion": "Portátil chuperchuli",
+            "categoria": {
+                "id": 2,
+                "nombre": "Informática",
+                "descripcion": null
+            }
+        },
+        {
+            "id": 3,
+            "nombre": "Nevera",
+            "precio": 345.00,
+            "descripcion": "",
+            "categoria": {
+                "id": 3,
+                "nombre": "Electrónica",
+                "descripcion": null
+            }
+        }
+    ],
+    "categorias": [
+        {
+            "id": 2,
+            "nombre": "Informática"
+        },
+        {
+            "id": 3,
+            "nombre": "Electrónica"
+        }
+    ]
+}
