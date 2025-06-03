@@ -1,4 +1,10 @@
-<button class="btn btn-{{tipo}}" [class.btn-sm]="tamano == 'sm'" [class.btn-lg]="tamano == 'lg'" routerLink="{{enlace}}">
+@if(enlace) {
+<button type="button" class="btn btn-{{tipo}}" [class.btn-sm]="tamano == 'sm'" [class.btn-lg]="tamano == 'lg'"
+    [routerLink]="enlace">
     {{etiqueta}}
 </button>
-
+} @else {
+<button type="button" class="btn btn-{{tipo}}" [class.btn-sm]="tamano == 'sm'" [class.btn-lg]="tamano == 'lg'">
+    {{etiqueta}}
+</button>
+}

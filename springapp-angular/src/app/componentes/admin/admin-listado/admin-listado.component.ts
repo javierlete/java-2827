@@ -20,4 +20,10 @@ export class AdminListadoComponent {
         this.productos = productos;
       });
     }
+
+    borrar(id: number): void {
+      this.productoService.delete(id).subscribe(() => {
+        this.productos = this.productos.filter(producto => producto.id !== id);
+      });
+    }
 }
