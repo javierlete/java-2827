@@ -16,14 +16,6 @@ export class ProductoService {
   }
 
   getById(id: number): Observable<Producto | undefined> {
-    return this.getAll().pipe(
-      map((productos: Producto[]) => {
-        const producto = productos.find(p => p.id === id);
-        if (!producto) {
-          console.error(`Producto con ID ${id} no encontrado.`);
-        }
-        return producto;
-      })
-    );
+    return this.http.get<Producto>(this.URL + '/' + id);
   }
 }
