@@ -7,7 +7,7 @@ import { Producto } from '../modelos/producto';
   providedIn: 'root'
 })
 export class ProductoService {
-  URL = 'http://localhost:3000/productos';
+  URL = 'https://json-server-eoy6.onrender.com/productos';
 
   constructor(private readonly http: HttpClient) { }
 

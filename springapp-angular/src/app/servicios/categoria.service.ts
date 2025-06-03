@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CategoriaService {
-  URL = 'http://localhost:3000/categorias';
+  URL = 'https://json-server-eoy6.onrender.com/categorias';
 
   constructor(private readonly http: HttpClient) { }
 
