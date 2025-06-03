@@ -1,10 +1,11 @@
 <form action="productos.html" method="post" enctype="multipart/form-data">
     <input type="hidden">
 
-    <jl-label-input [valor]="producto?.nombre" etiqueta="Nombre" tipo="text" error="El nombre debe estar rellenado y tener como máximo 45 caracteres"></jl-label-input>
-    <jl-label-input [valor]="producto?.precio" etiqueta="Precio" tipo="number" [decimales]="2"></jl-label-input>
-    <jl-label-input [valor]="producto?.descripcion" etiqueta="Descripción" tipo="textarea"></jl-label-input>
-    <jl-label-input [valor]="producto?.id" [opciones]="opciones" etiqueta="Categoría" tipo="select"></jl-label-input>
+    <jl-label-input [(valor)]="producto.nombre" etiqueta="Nombre" tipo="text" error="El nombre debe estar rellenado y tener como máximo 45 caracteres"></jl-label-input>
+    <jl-label-input [(valor)]="producto.precio" etiqueta="Precio" tipo="number" [decimales]="2"></jl-label-input>
+    <jl-label-input [(valor)]="producto.descripcion" etiqueta="Descripción" tipo="textarea"></jl-label-input>
+    <jl-label-input [(valor)]="producto.categoria.id" [opciones]="opciones" etiqueta="Categoría" tipo="select"></jl-label-input>
     <jl-label-input etiqueta="Fichero" tipo="file" tipoFichero="image/jpeg"></jl-label-input>
-    <jl-label-input etiqueta="Guardar" tipo="boton" enlace="/admin/listado"></jl-label-input>
+
+    <jl-label-input (click)="guardar()" (keyPress)="guardar()" etiqueta="Guardar" tipo="boton"></jl-label-input>
 </form>
