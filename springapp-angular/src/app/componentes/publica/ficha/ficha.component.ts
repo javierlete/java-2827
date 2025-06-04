@@ -4,10 +4,13 @@ import { BotonComponent } from "../../biblioteca/boton/boton.component";
 import { CurrencyPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from '../../../servicios/producto.service';
+import { CloudinaryImage } from '@cloudinary/url-gen/index';
+import { ImagenService } from '../../../servicios/imagen.service';
+import { CloudinaryModule } from '@cloudinary/ng';
 
 @Component({
   selector: 'app-ficha',
-  imports: [BotonComponent, CurrencyPipe],
+  imports: [BotonComponent, CurrencyPipe, CloudinaryModule],
   templateUrl: './ficha.component.html',
   styleUrl: './ficha.component.css'
 })
@@ -26,12 +29,18 @@ export class FichaComponent implements OnInit {
     }
   };
 
-  constructor(private readonly route: ActivatedRoute, private readonly productoService: ProductoService) { }
+  imagen!: CloudinaryImage;
+
+  constructor(private readonly route: ActivatedRoute, private readonly productoService: ProductoService, private readonly imagenService: ImagenService) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     if (id) {
+      this.imagenService.obtenerImagen(id, 400, 500).subscribe((img: CloudinaryImage) => {
+        this.imagen = img;
+      });
+      
       this.productoService.getById(id).subscribe((producto: Producto | undefined) => {
         if (producto) {
           this.producto = producto;
