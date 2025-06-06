@@ -5,7 +5,7 @@
     <jl-label-input [(valor)]="producto.precio" etiqueta="Precio" tipo="number" [decimales]="2"></jl-label-input>
     <jl-label-input [(valor)]="producto.descripcion" etiqueta="Descripción" tipo="textarea"></jl-label-input>
     <jl-label-input [(valor)]="producto.categoria.id" [opciones]="opciones" etiqueta="Categoría" tipo="select"></jl-label-input>
-    <jl-label-input etiqueta="Fichero" tipo="file" tipoFichero="image/jpeg"></jl-label-input>
+    <jl-label-input (ficherosChange)="imagen = $event[0]" etiqueta="Fichero" tipo="file" tipoFichero="image/jpeg"></jl-label-input>
 
     <jl-label-input (click)="guardar()" (keyPress)="guardar()" etiqueta="Guardar" tipo="boton"></jl-label-input>
 </form>

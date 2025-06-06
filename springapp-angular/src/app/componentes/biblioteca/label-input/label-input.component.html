@@ -8,17 +8,17 @@
             <jl-boton enlace="{{enlace}}" etiqueta="{{etiqueta}}"></jl-boton>
         }
         @case('select') {
-        <select #caja (change)="cambiado(caja.value)" class="form-select">
+        <select #caja (change)="cambiado(caja)" class="form-select">
             @for(opcion of opciones; track opcion.id) {
             <option value="{{opcion.id}}" [selected]="opcion.id == valor">{{opcion.texto}}</option>
             }
         </select>
         }
         @case('textarea') {
-        <textarea #caja (input)="cambiado(caja.value)" class="form-control">{{valor}}</textarea>
+        <textarea #caja (input)="cambiado(caja)" class="form-control">{{valor}}</textarea>
         }
         @default {
-        <input #caja value="{{valor}}" (input)="cambiado(caja.value)" type="{{tipo}}" [attr.accept]="tipoFichero" [attr.step]="decimales ? 1/(10 ** decimales): null"
+        <input #caja value="{{valor}}" (input)="cambiado(caja)" type="{{tipo}}" [attr.accept]="tipoFichero" [attr.step]="decimales ? 1/(10 ** decimales): null"
             class="form-control">
         }
         }

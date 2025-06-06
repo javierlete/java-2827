@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { LabelInputComponent, Opcion } from "../../biblioteca/label-input/label-input.component";
-import { Producto } from '../../../modelos/producto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from '../../../modelos/categoria';
-import { ProductoService } from '../../../servicios/producto.service';
+import { Producto } from '../../../modelos/producto';
 import { CategoriaService } from '../../../servicios/categoria.service';
-import { Location } from '@angular/common';
+import { ImagenService } from '../../../servicios/imagen.service';
+import { ProductoService } from '../../../servicios/producto.service';
+import { LabelInputComponent, Opcion } from "../../biblioteca/label-input/label-input.component";
 
 @Component({
   selector: 'app-admin-detalle',
@@ -14,6 +14,8 @@ import { Location } from '@angular/common';
   styleUrl: './admin-detalle.component.css'
 })
 export class AdminDetalleComponent {
+  imagen?: File;
+
   producto: Producto = {
     id: 0,
     nombre: '',
@@ -26,7 +28,7 @@ export class AdminDetalleComponent {
   };
   opciones!: Opcion[];
 
-  constructor(private readonly route: ActivatedRoute, private readonly router: Router, private readonly productoService: ProductoService, private readonly categoriaService: CategoriaService) { }
+  constructor(private readonly route: ActivatedRoute, private readonly router: Router, private readonly productoService: ProductoService, private readonly categoriaService: CategoriaService, private readonly imagenService: ImagenService) { }
 
   ngOnInit(): void {
     this.categoriaService.getAll().subscribe((categorias: Categoria[]) => {
@@ -47,6 +49,14 @@ export class AdminDetalleComponent {
   }
 
   guardar(): void {
+    if (this.imagen) {
+      console.log('Subiendo imagen:', this.imagen);
+      
+      this.imagenService.subirImagen(this.imagen).subscribe((algo: any) => {
+        console.log('Respuesta de cloudinary', algo);
+      });
+    }
+
     if (this.producto.id) {
       this.productoService.put(this.producto).subscribe(() => {
         this.router.navigate(['/admin/listado']);
