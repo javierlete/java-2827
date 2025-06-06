@@ -1,12 +1,22 @@
-{
-	"properties": [
-		{
-			"name": "rutas.imagenes.url",
-			"type": "java.lang.String"
-		},
-		{
-			"name": "rutas.imagenes.fisica",
-			"type": "java.lang.String"
-		}
-	]
-}
+{"properties": [
+  {
+    "name": "rutas.imagenes.url",
+    "type": "java.lang.String"
+  },
+  {
+    "name": "rutas.imagenes.fisica",
+    "type": "java.lang.String"
+  },
+  {
+    "name": "cloudinary.url",
+    "type": "java.lang.String"
+  },
+  {
+    "name": "cloudinary.api.key",
+    "type": "java.lang.String"
+  },
+  {
+    "name": "cloudinary.api.secret",
+    "type": "java.lang.String"
+  }
+]}

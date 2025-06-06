@@ -44,8 +44,18 @@ WHERE email=?
 	// AUTORIZACIÓN
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-			.authorizeHttpRequests(requests -> requests
+		// TODO: Configurar CSRF y CORS
+		http.csrf(c -> c.disable());
+		
+		http.cors(cors -> cors.configurationSource(request -> {
+			var config = new org.springframework.web.cors.CorsConfiguration();
+			config.setAllowedOrigins(java.util.List.of("*"));
+			config.setAllowedMethods(java.util.List.of("*"));
+			config.setAllowedHeaders(java.util.List.of("*"));
+			return config;
+		}));
+
+		http.authorizeHttpRequests(requests -> requests
 				.requestMatchers("/admin/**").hasRole("ADMINISTRADOR")
 				.requestMatchers("/detalle").authenticated() //hasAnyRole("USUARIO", "ADMINISTRADOR")
 				.anyRequest().permitAll()

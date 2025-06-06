@@ -50,4 +50,8 @@ export class FichaComponent implements OnInit {
       });
     }
   }
+
+  timestamp(): number {
+    return Math.floor(Date.now() / 1000);
+  }
 }

@@ -1,0 +1,107 @@
+[
+  {
+    "v": 8,
+    "name": "Cloudinary",
+    "folders": [],
+    "requests": [
+      {
+        "v": "13",
+        "name": "firma",
+        "method": "GET",
+        "endpoint": "http://localhost:8080/api/v2/cloudinary/firma",
+        "params": [
+          {
+            "key": "timestamp",
+            "value": "12342354624567",
+            "active": true,
+            "description": ""
+          },
+          {
+            "key": "public_id",
+            "value": "1234",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "13",
+        "name": "cloudinary-upload-signed",
+        "method": "POST",
+        "endpoint": "https://api.cloudinary.com/v1_1/dsn31vddg/upload",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "multipart/form-data",
+          "body": [
+            {
+              "key": "file",
+              "value": [
+                {}
+              ],
+              "active": true,
+              "isFile": true
+            },
+            {
+              "key": "api_key",
+              "value": "783165747115854",
+              "active": true,
+              "isFile": false
+            },
+            {
+              "key": "signature",
+              "value": "ac23ad75a24ef08d7fa46177d4680c72dcf57c0e",
+              "active": true,
+              "isFile": false
+            },
+            {
+              "key": "timestamp",
+              "value": "12342354624567",
+              "active": true,
+              "isFile": false
+            },
+            {
+              "key": "upload_preset",
+              "value": "springapp-seguro",
+              "active": true,
+              "isFile": false
+            },
+            {
+              "key": "public_id",
+              "value": "1234",
+              "active": true,
+              "isFile": false
+            }
+          ]
+        },
+        "requestVariables": [],
+        "responses": {}
+      }
+    ],
+    "headers": [],
+    "auth": {
+      "authType": "none",
+      "authActive": true
+    },
+    "_ref_id": "coll_mbklwzoo_cb0bb686-3bfd-4630-9f79-28174954b196"
+  }
+]

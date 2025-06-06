@@ -31,13 +31,41 @@ export class ImagenService {
     return of(img);
   }
 
-  subirImagen(file: File): Observable<any> {
-    const fd = new FormData();
+  subirImagen(id:number, file: File): Observable<any> {
+    return new Observable<any>(observer => {
+      const timestamp = Math.floor(Date.now() / 1000);
+      const public_id = String(id);
 
-    fd.append('file', file);
-    fd.append('upload_preset', 'springapp-seguro');
-    fd.append('resource_type', 'image');
+      this.http.get<string>('http://localhost:8080/api/v2/cloudinary/firma?timestamp=' + timestamp + '&public_id=' + public_id).subscribe(
+        firma => {
+          console.log('Firma obtenida:', firma);
 
-    return this.http.post<any>('https://api.cloudinary.com/v1_1/dsn31vddg/upload', fd);
+          const fd = new FormData();
+
+          fd.append('file', file);
+          fd.append('resource_type', 'image');
+          fd.append('api_key', '783165747115854');
+          
+          fd.append('timestamp', timestamp.toString());
+          fd.append('public_id', public_id);
+          fd.append('upload_preset', 'springapp-seguro');
+
+          fd.append('signature', firma);
+
+          this.http.post<any>('https://api.cloudinary.com/v1_1/dsn31vddg/upload', fd).subscribe(
+            res => {
+              observer.next(res);
+              observer.complete();
+            },
+            err => {
+              observer.error(err);
+            }
+          );
+        },
+        error => {
+          observer.error(error);
+        }
+      );
+    });
   }
 }

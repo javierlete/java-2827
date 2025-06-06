@@ -49,22 +49,29 @@ export class AdminDetalleComponent {
   }
 
   guardar(): void {
+    if (this.producto.id) {
+      this.productoService.put(this.producto).subscribe(() => {
+        this.subirImagenYVolverAListado()
+      });
+    } else {
+      this.productoService.post(this.producto).subscribe(producto => {
+        this.producto = producto;
+        
+        this.subirImagenYVolverAListado();
+      });
+    }
+
+  }
+
+  private subirImagenYVolverAListado() {
     if (this.imagen) {
       console.log('Subiendo imagen:', this.imagen);
-      
-      this.imagenService.subirImagen(this.imagen).subscribe((algo: any) => {
+
+      this.imagenService.subirImagen(this.producto.id, this.imagen).subscribe((algo: any) => {
         console.log('Respuesta de cloudinary', algo);
       });
     }
 
-    if (this.producto.id) {
-      this.productoService.put(this.producto).subscribe(() => {
-        this.router.navigate(['/admin/listado']);
-      });
-    } else {
-      this.productoService.post(this.producto).subscribe(() => {
-        this.router.navigate(['/admin/listado']);
-      });
-    }
+    this.router.navigate(['/admin/listado']);
   }
 }
