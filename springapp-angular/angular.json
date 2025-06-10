@@ -129,5 +129,8 @@
       "typeSeparator": ".",
       "path": "src/app/resolvers"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
