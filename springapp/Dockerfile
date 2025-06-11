@@ -1,4 +1,5 @@
-FROM eclipse-temurin:21-alpine
+FROM bellsoft/liberica-runtime-container:jre-21-musl
+EXPOSE 8080
 ARG JAR_FILE=target/*.war
 ARG JDBC_DRIVER
 ARG JDBC_URL
