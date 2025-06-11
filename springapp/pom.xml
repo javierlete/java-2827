@@ -110,6 +110,11 @@
 			<artifactId>cloudinary-http5</artifactId>
 			<version>2.2.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -152,5 +157,4 @@
 
 		</plugins>
 	</build>
-
 </project>
