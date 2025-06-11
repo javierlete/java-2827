@@ -36,7 +36,7 @@ export class ImagenService {
       const timestamp = Math.floor(Date.now() / 1000);
       const public_id = String(id);
 
-      this.http.get<string>('http://localhost:8080/api/v2/cloudinary/firma?timestamp=' + timestamp + '&public_id=' + public_id).subscribe(
+      this.http.get<string>('https://docker-springapp.onrender.com/api/v2/cloudinary/firma?timestamp=' + timestamp + '&public_id=' + public_id).subscribe(
         firma => {
           console.log('Firma obtenida:', firma);
 

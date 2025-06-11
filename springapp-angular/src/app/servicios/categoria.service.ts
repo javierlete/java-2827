@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CategoriaService {
-  URL = 'https://json-server-eoy6.onrender.com/categorias';
+  URL = 'https://docker-springapp.onrender.com/api/v2/categorias';
 
   constructor(private readonly http: HttpClient) { }
 

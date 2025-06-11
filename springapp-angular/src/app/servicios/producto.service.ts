@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Producto } from '../modelos/producto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
-  URL = 'https://json-server-eoy6.onrender.com/productos';
+  URL = 'https://docker-springapp.onrender.com/api/v2/productos';
 
   constructor(private readonly http: HttpClient) { }
 
