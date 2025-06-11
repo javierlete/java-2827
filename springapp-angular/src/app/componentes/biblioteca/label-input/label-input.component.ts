@@ -23,8 +23,6 @@ export class LabelInputComponent {
   @Output() ficherosChange = new EventEmitter<FileList>();
 
   cambiado(caja: any): void {
-    console.log('Valor cambiado:', caja.value);
-
     if (this.tipo === 'file') {
       this.ficheros = caja.files;
       this.ficherosChange.emit(caja.files);
