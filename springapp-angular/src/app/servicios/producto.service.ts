@@ -21,6 +21,7 @@ export class ProductoService {
   }
 
   post(producto: Producto): Observable<Producto> {
+    delete producto.id; // Aseguramos que el ID no se envíe al crear un nuevo producto
     return this.http.post<Producto>(this.URL, producto);
   }
 

@@ -15,7 +15,7 @@
             <td>{{producto.precio | currency: 'EUR': 'symbol': '1.2-2': 'es'}}</td>
             <td>
                 <jl-boton enlace="/admin/detalle/{{producto.id}}" etiqueta="Editar" tamano="sm"/>
-                <jl-boton (click)="borrar(producto.id)" (keyPress)="borrar(producto.id)" etiqueta="Borrar" tamano="sm" tipo="danger"/>
+                <jl-boton (click)="borrar(producto.id!)" (keyPress)="borrar(producto.id!)" etiqueta="Borrar" tamano="sm" tipo="danger"/>
             </td>
         </tr>
         }

@@ -67,7 +67,7 @@ export class AdminDetalleComponent {
     if (this.imagen) {
       console.log('Subiendo imagen:', this.imagen);
 
-      this.imagenService.subirImagen(this.producto.id, this.imagen).subscribe((algo: any) => {
+      this.imagenService.subirImagen(this.producto.id!, this.imagen).subscribe((algo: any) => {
         console.log('Respuesta de cloudinary', algo);
       });
     }
