@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.springapp.entidades.Categoria;
-import com.ipartek.formacion.springapp.servicios.AnonimoService;
+import com.ipartek.formacion.springapp.servicios.AdminService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v2/categorias")
 public class CategoriaRest {
-    private final AnonimoService servicio;
+    private final AdminService servicio;
 
     @GetMapping
     public Iterable<Categoria> getCategorias() {
