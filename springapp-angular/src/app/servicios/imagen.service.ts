@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { fill } from '@cloudinary/url-gen/actions/resize';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen/index';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +37,7 @@ export class ImagenService {
       const timestamp = Math.floor(Date.now() / 1000);
       const public_id = String(id);
 
-      this.http.get<string>('https://docker-springapp.onrender.com/api/v2/cloudinary/firma?timestamp=' + timestamp + '&public_id=' + public_id).subscribe(
+      this.http.get<string>(`${environment.apiUrl}/cloudinary/firma?timestamp=${timestamp}&public_id=${public_id}`).subscribe(
         firma => {
           console.log('Firma obtenida:', firma);
 
