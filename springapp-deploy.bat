@@ -1,4 +1,5 @@
 git push && ^
+ng build && ^
 cd springapp && ^
 mvnw package -Dmaven.test.skip=true && ^
 docker build -t javierlete/springapp . && ^
