@@ -1,12 +1,25 @@
 import { Component } from '@angular/core';
+import { AppService } from './app.service';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.html',
+  imports: [RouterOutlet],
   styleUrl: './app.css'
 })
 export class App {
-  protected title = 'cliente';
+  protected title = 'Demo';
+  protected greeting = { 'id': 'XXX', 'content': 'Hello World' };
+
+  constructor(private readonly app: AppService) {
+    this.app.getGreeting().subscribe({
+      next: (data) => {
+        this.greeting = data;
+      },
+      error: (err) => {
+        console.error('Error fetching greeting:', err);
+      }
+    });
+  }
 }
