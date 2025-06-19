@@ -2,7 +2,7 @@
 <jl-alerta tipo="success" mensaje="Has cerrado la sesión"/>
 
 <form action="index.html" method="post">
-    <jl-label-input etiqueta="Email" tipo="email"></jl-label-input>
-    <jl-label-input etiqueta="Contraseña" tipo="password"></jl-label-input>
-    <jl-label-input etiqueta="Iniciar sesión" tipo="boton" enlace="/listado"></jl-label-input>
+    <jl-label-input [(valor)]="login.email" etiqueta="Email" tipo="email"></jl-label-input>
+    <jl-label-input [(valor)]="login.password" etiqueta="Contraseña" tipo="password"></jl-label-input>
+    <jl-label-input (click)="autenticar()" (keyDown)="autenticar()" etiqueta="Iniciar sesión" tipo="boton"></jl-label-input>
 </form>
