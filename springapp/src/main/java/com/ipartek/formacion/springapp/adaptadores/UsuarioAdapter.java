@@ -16,7 +16,7 @@ public class UsuarioAdapter extends Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(getRol()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + getRol()));
     }
 
     @Override
