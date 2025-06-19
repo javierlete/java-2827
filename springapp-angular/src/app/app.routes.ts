@@ -5,6 +5,7 @@ import { AdminListadoComponent } from './componentes/admin/admin-listado/admin-l
 import { AdminDetalleComponent } from './componentes/admin/admin-detalle/admin-detalle.component';
 import { LoginComponent } from './componentes/publica/login/login.component';
 import { CarritoComponent } from './componentes/publica/carrito/carrito.component';
+import { logoutResolver } from './resolvers/logout.resolver';
 
 export const routes: Routes = [
     // Entrada inicial
@@ -12,6 +13,7 @@ export const routes: Routes = [
     
     // Login
     { path: 'login', component: LoginComponent },
+    { path: 'logout', component: LoginComponent, resolve: { logout: logoutResolver }  },
     
     // Público
     { path: 'listado', component: ListadoComponent },
