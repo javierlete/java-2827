@@ -21,22 +21,20 @@ export class AutenticacionService {
     localStorage.removeItem('token');
   }
 
-  usuarioAutenticado(): string | null {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      return null; // Si no hay token, no hay usuario autenticado
-    }
-    
-    return JSON.parse(atob(token.split('.')[1])).sub;
-  }
-
   autenticado(): boolean {
     const token = localStorage.getItem('token');
     return !!token; // Devuelve true si hay un token, false si no
   }
-
-  rol(): string | null {
-    return 'ADMINISTRADOR';
+  
+  getClaim(claim: string): any {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      return null; // Si no hay token, no hay claim
+    }
+    
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    
+    return payload[claim];
   }
 }

@@ -11,7 +11,7 @@ import com.ipartek.formacion.springapp.entidades.Usuario;
 
 public class UsuarioAdapter extends Usuario implements UserDetails {
     public UsuarioAdapter(Usuario usuario) {
-        super(usuario.getId(), usuario.getEmail(), usuario.getPassword(), usuario.getRol());
+        super(usuario.getId(), usuario.getNombre(), usuario.getEmail(), usuario.getPassword(), usuario.getRol());
     }
 
     @Override

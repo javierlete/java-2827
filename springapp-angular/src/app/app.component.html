@@ -1,4 +1,4 @@
-<jl-menu titulo="Spring App Angular" expansion="md" [enlaces]="enlaces(this.autenticacionService.usuarioAutenticado(), this.autenticacionService.rol())"/>
+<jl-menu titulo="Spring App Angular" expansion="md" [enlaces]="enlaces(this.autenticacionService.getClaim('nombre'), this.autenticacionService.getClaim('rol'))"/>
 
 <main class="container my-5">
   <router-outlet />

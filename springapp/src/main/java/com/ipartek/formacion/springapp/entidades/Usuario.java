@@ -27,10 +27,14 @@ public class Usuario {
 	private Long id;
 	
 	@NotBlank
+	@Size(max = 50)
+	private String nombre;
+	
+	@NotBlank
 	@Email
 	@Size(max = 50)
 	private String email;
-	
+
 	@NotBlank
 	@Pattern(regexp = "^(?=.*[a-z])\\S{3,}$")
 	@Size(max = 100)

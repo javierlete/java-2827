@@ -9,6 +9,8 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.ipartek.formacion.springapp.entidades.Usuario;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,6 +23,16 @@ public class JwtService {
     private static final String SECRET_KEY = "586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
 
     public String getToken(UserDetails user) {
+        if(user instanceof Usuario usuario) {
+            var extraClaims = new HashMap<String, Object>();
+
+            extraClaims.put("id", usuario.getId());
+            extraClaims.put("nombre", usuario.getNombre());
+            extraClaims.put("email", usuario.getEmail());
+            extraClaims.put("rol", usuario.getRol());
+            
+            return getToken(extraClaims, user);
+        }
         return getToken(new HashMap<>(), user);
     }
 
