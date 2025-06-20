@@ -1,8 +1,10 @@
-<jl-alerta tipo="danger" mensaje="Error en el usuario o contraseña"/>
-<jl-alerta tipo="success" mensaje="Has cerrado la sesión"/>
+@if(alerta) {
+<jl-alerta tipo="{{alerta.tipo}}" mensaje="{{alerta.mensaje}}" />
+}
 
 <form action="index.html" method="post">
     <jl-label-input [(valor)]="login.email" etiqueta="Email" tipo="email"></jl-label-input>
     <jl-label-input [(valor)]="login.password" etiqueta="Contraseña" tipo="password"></jl-label-input>
-    <jl-label-input (click)="autenticar()" (keyDown)="autenticar()" etiqueta="Iniciar sesión" tipo="boton"></jl-label-input>
+    <jl-label-input (click)="autenticar()" (keyDown)="autenticar()" etiqueta="Iniciar sesión"
+        tipo="boton"></jl-label-input>
 </form>
